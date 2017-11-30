@@ -359,8 +359,8 @@ namespace OffLineMap
                     int intCurY = intLastY - this.picMap.Height / 2;
                     PointD p = mapMain.MoveMap(pointCurrentMapCenter, new Point(intCurX, intCurY), intCurrentMapLevel);
                     PublicClassCurrency.MapPointInfo m = new PublicClassCurrency.MapPointInfo();
-                    m.
-                    PointMove();
+                    //m.
+                    //PointMove();
                     if (e.Button == MouseButtons.Left && (e.X + e.Y) % 2 == 0)
                     {
                         int MoveX = e.X - pointMouseBeginMovePoint.X;
