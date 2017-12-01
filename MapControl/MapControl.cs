@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using PublicClassCurrency;
 
 namespace MapControl
 {
@@ -24,7 +25,7 @@ namespace MapControl
         /// </summary>
         public string g_strSougouOffLineMapFileBin = "";
         /// <summary>
-        /// 地图Infow文件
+        /// 地图Info文件
         /// </summary>
         public string g_strSougouOffLineMapFileInfo = "";
         /// <summary>
@@ -37,8 +38,7 @@ namespace MapControl
         #endregion
 
         #region 回调与事件
-        //public void MapControlDispInfo()
-        //    }
+        #region 地图显示事件
         public delegate void MapControl_DisplayMapEventHandler(MapType mtType, double dblLon, double dblLat, int intMapLevel, string strTag = "");
         public event MapControl_DisplayMapEventHandler MapDisplayEvent;
 
@@ -49,10 +49,24 @@ namespace MapControl
                 MapDisplayEvent(mtType, dblLon, dblLat, intMapLevel, strTag = "");
             }
         }
-        
+        #endregion
+
+        #region 选中地图点
+        public delegate void SelectedMapPointDelegate(object sender, PublicClassCurrency.MapPointInfo MapPointInfo);
+
+        public event SelectedMapPointDelegate SelectedMapPointEvent;
+
+        public void SelectedMapPoint(PublicClassCurrency.MapPointInfo MapPointInfo)
+        {
+            if (SelectedMapPointEvent != null)
+            {
+                SelectedMapPointEvent(this, MapPointInfo);
+            }
+        }
         #endregion
 
 
+        #endregion
 
         #region 自定义属性
 
@@ -86,13 +100,15 @@ namespace MapControl
         }
 
         #endregion
-        
-       
-        
+
+
+
 
         private void MapControl_Load(object sender, EventArgs e)
         {
             sogouOfflineMap1.OfflineMapDisplay += SogouMapDisplay;
+            baiduOnlineMap1.SelectedMapPointEvent += SelectedMapPoint;
+            sogouOfflineMap1.SelectedMapPointEvent += SelectedMapPoint;
         }
         public void SogouMapDisplay(double dblLon, double dblLat, int intMapLevel, string strTag = "")
         {
@@ -119,6 +135,18 @@ namespace MapControl
         public void Init_BaiduOnlineMap()
         {
             baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
+        }
+
+        #region 百度地图事件
+        public void BaiduOnlineMap_SelectedMapPointEvent(object sender, MapPointInfo mappointInfo)
+        {
+            SelectedMapPoint(mappointInfo);
+        }
+        #endregion
+
+        public void SelectedMapPoint(object sender, MapPointInfo mappointInfo)
+        {
+            SelectedMapPoint(mappointInfo);
         }
     }
     public enum MapType

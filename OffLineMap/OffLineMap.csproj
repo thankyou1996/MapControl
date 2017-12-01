@@ -23,32 +23,37 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\OffLineMap.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ini">
-      <HintPath>..\..\Library_dll\Ini.dll</HintPath>
+      <HintPath>..\File_Libary\dll_Libary\Ini.dll</HintPath>
     </Reference>
-    <Reference Include="PublicClassCurrency">
-      <HintPath>..\..\..\CommonMethod\CommonMethod\PublicClassCurrency\bin\Release\PublicClassCurrency.dll</HintPath>
+    <Reference Include="PublicClassCurrency, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\File_Libary\dll_Libary\PublicClassCurrency.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ZYB_GIS_Base">
-      <HintPath>..\..\Library_dll\ZYB_GIS_Base.dll</HintPath>
+    <Reference Include="ZYB_GIS_Base, Version=1.0.12.18, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\File_Libary\dll_Libary\ZYB_GIS_Base.dll</HintPath>
     </Reference>
-    <Reference Include="Zyb_MapData">
-      <HintPath>..\..\Library_dll\Zyb_MapData.dll</HintPath>
+    <Reference Include="Zyb_MapData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\File_Libary\dll_Libary\Zyb_MapData.dll</HintPath>
     </Reference>
-    <Reference Include="ZYB_PC_Common">
-      <HintPath>..\..\Library_dll\ZYB_PC_Common.dll</HintPath>
+    <Reference Include="ZYB_PC_Common, Version=1.0.8.906, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\File_Libary\dll_Libary\ZYB_PC_Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

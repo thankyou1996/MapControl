@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using ZYB.GIS;
+using PublicClassCurrency;
 
 namespace OffLineMap
 {
@@ -220,6 +221,24 @@ namespace OffLineMap
 
         #endregion
 
+        #region 地图选中事件
+        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo SelectedMapPointValue);
+
+        public event SelectedMapPointDelegate SelectedMapPointEvent;
+
+        public void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
+        {
+            if (SelectedMapPointEvent != null)
+            {
+                SelectedMapPointEvent(this, SelectedMapPointValue);
+            }
+        }
+        #endregion
+
+        #region 
+
+        #endregion
+
         #endregion
         public SogouOfflineMap()
         {
@@ -354,30 +373,26 @@ namespace OffLineMap
             {
                 if (mapMain != null)
                 {
-                    intLastX = e.X; intLastY = e.Y;
-                    int intCurX = intLastX - this.picMap.Width / 2;
-                    int intCurY = intLastY - this.picMap.Height / 2;
-                    PointD p = mapMain.MoveMap(pointCurrentMapCenter, new Point(intCurX, intCurY), intCurrentMapLevel);
-                    PublicClassCurrency.MapPointInfo m = new PublicClassCurrency.MapPointInfo();
-                    //m.
-                    //PointMove();
                     if (e.Button == MouseButtons.Left && (e.X + e.Y) % 2 == 0)
                     {
+                        
+                        //m.
+                        //PointMove();
+                    
                         int MoveX = e.X - pointMouseBeginMovePoint.X;
                         int MoveY = e.Y - pointMouseBeginMovePoint.Y;
                         picMap.Image = MoveImage(bmpMapImageBuff, -MoveX, -MoveY);
                     }
-                }   
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Error(ex, "picMap_MouseMove");
             }
         }
 
         #endregion
-
-
+        
         #region 公用事件
 
         #region 地图显示
@@ -779,6 +794,23 @@ namespace OffLineMap
             public int intMapLevel;
         }
 
+        private void picMap_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                //左键点击
+                intLastX = e.X; intLastY = e.Y;
+                int intCurX = intLastX - this.picMap.Width / 2;
+                int intCurY = intLastY - this.picMap.Height / 2;
+                PointD p = mapMain.MoveMap(pointCurrentMapCenter, new Point(intCurX, intCurY), intCurrentMapLevel);
+                PublicClassCurrency.MapPointInfo m = new PublicClassCurrency.MapPointInfo();
+                m.dblLon = p.X;
+                m.dblLat = p.Y;
+                m.intMapLevel = intCurrentMapLevel;
+                m.cordinateSyatem = PublicClassCurrency.Enum_CordinateSystem.WGS_84;
+                SelectedMapPoint(m);
+            }
+        }
     }
 
 

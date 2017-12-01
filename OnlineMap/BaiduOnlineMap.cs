@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using PublicClassCurrency;
 
 namespace OnlineMap
 {
@@ -47,7 +48,7 @@ namespace OnlineMap
             InitializeComponent();
         }
 
-        #region 百度图接口160728
+        #region 百度图接口
         /// <summary>
         /// 地址信息
         /// </summary>
@@ -82,14 +83,6 @@ namespace OnlineMap
         }
 
         #region  页面调用后台事件
-        //JS脚本调用用于显示标注的经纬度 160728
-        public void Setlnglat(string lng, string lat, string level)
-        {
-            //strlng = lng;
-            //strlat = lat;
-            //strlevel = level;
-        }
-
         /// <summary>
         /// 地图加载完成返回
         /// </summary>
@@ -97,6 +90,20 @@ namespace OnlineMap
         {
             OnlineMapLoadEnd();
         }
+
+        //JS脚本调用用于显示标注的经纬度 160728
+        public void Setlnglat(string lng, string lat, string level)
+        {
+            MapPointInfo mappointInfo = new MapPointInfo();
+            mappointInfo.dblLon = Convert.ToDouble(lng);
+            mappointInfo.dblLat = Convert.ToDouble(lat);
+            mappointInfo.intMapLevel = Convert.ToInt32(level);
+            mappointInfo.cordinateSyatem = Enum_CordinateSystem.BD_09;
+            SelectedMapPoint(mappointInfo);
+        }
+
+        
+      
 
         public void MapLaodError()
         {
@@ -463,9 +470,9 @@ namespace OnlineMap
 
 
         #endregion
-
-
+        
         #region 委托及事件
+
         #region 地图加载完成
         /// <summary>
         /// 地图加载完成委托
@@ -488,11 +495,28 @@ namespace OnlineMap
             }
         }
         #endregion
+
+        #region 地图选中事件
+        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo SelectedMapPointValue);
+
+        public event SelectedMapPointDelegate SelectedMapPointEvent;
+
+        public void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
+        {
+            if (SelectedMapPointEvent != null)
+            {
+                SelectedMapPointEvent(this, SelectedMapPointValue);
+            }
+        }
         #endregion
+
+        #endregion
+
         private void OnlineMap_Load(object sender, EventArgs e)
         {
 
         }
+
         #region 初始化
         /// <summary>
         /// 初始化

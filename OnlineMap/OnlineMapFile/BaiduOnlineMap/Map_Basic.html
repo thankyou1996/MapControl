@@ -730,7 +730,7 @@
     //鼠标地图上单击显示点信息
 	function showInfo(e) {
 	    try {
-	        //移除所以标注点
+            //移除所以标注点
 	        map.removeOverlay(marker2);
 	        var marker2Icon = new BMap.Icon("http://api.map.baidu.com/library/MarkerTool/1.2/src/images/us_mk_icon.png", new BMap.Size(23, 25), { anchor: new BMap.Size(9, 25), imageOffset: new BMap.Size(0, -21) });
 	        var point = new BMap.Point(e.point.lng, e.point.lat);
@@ -742,9 +742,6 @@
 	            var label = new BMap.Label(addComp, { offset: new BMap.Size(20, -10) });
 	            marker2.setLabel(label);
 	        });
-	        setTimeout(function () {
-	            map.removeOverlay(marker2);
-	        }, 2000)
 	        //调用后台设置经纬度方法
 	        window.external.Setlnglat(e.point.lng, e.point.lat, map.getZoom());
 	    }

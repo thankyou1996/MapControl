@@ -42,17 +42,18 @@
             this.picMap.TabIndex = 0;
             this.picMap.TabStop = false;
             this.picMap.SizeChanged += new System.EventHandler(this.picMap_SizeChanged);
+            this.picMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseClick);
             this.picMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseDown);
             this.picMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseMove);
             this.picMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseUp);
             // 
-            // OfflineMap
+            // SogouOfflineMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.picMap);
-            this.Name = "OfflineMap";
+            this.Name = "SogouOfflineMap";
             this.Size = new System.Drawing.Size(400, 300);
             this.Load += new System.EventHandler(this.OfflineMap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picMap)).EndInit();

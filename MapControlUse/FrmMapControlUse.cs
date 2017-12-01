@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PublicClassCurrency;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,12 +28,12 @@ namespace MapControlUse
             //cmbMapType.Items.Add("BaiduOnLineMap");
             //cmbMapType.Items.Add("SogouOffLineMap");
             mapControl1.MapDisplayEvent += MapDisplay;
-
+            mapControl1.SelectedMapPointEvent += SelectedMapPoint;
 
         }
         public void Test()
         {
-            mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\Map_Basic.html";
+            mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
             mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath+ "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
@@ -62,5 +63,18 @@ namespace MapControlUse
             mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
             mapControl1.Init();
         }
+
+        #region　地图控件事件
+        public void SelectedMapPoint(object sender,MapPointInfo MapPointInfo)
+        {
+            MapPointInfo test = MapPointInfo.ToGCJ_02();
+            txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
+            txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
+            txtSelectedMapPointLon.Text= MapPointInfo.dblLon.ToString();
+            txtSelectedMapPointLat.Text = MapPointInfo.dblLat.ToString();
+        }
+
+        #endregion
+
     }
 }
