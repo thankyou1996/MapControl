@@ -18,32 +18,32 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3uwgqBxf4cGBzS8vGQGKnPDkkvOEidSt"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool.js"></script>
     <script type="text/javascript">
-    /**
-     * @fileoverview Marker Manager 标注管理器
-    * 主入口类是<a href="symbols/BMapLib.MarkerManager.html">MarkerManager</a>，
-    * 基于Baidu Map API 1.2。*
-    * @author Baidu Map Api Group
-    * @version 1.2
-    */
+        /**
+         * @fileoverview Marker Manager 标注管理器
+        * 主入口类是<a href="symbols/BMapLib.MarkerManager.html">MarkerManager</a>，
+        * 基于Baidu Map API 1.2。*
+        * @author Baidu Map Api Group
+        * @version 1.2
+        */
         /** @namespace BMap的所有library类均放在BMapLib命名空间下**/
         var BMapLib = window.BMapLib = BMapLib || {};
         (function () {
             var T,
-            baidu = T = baidu || { version: "1.5.1" };
+                baidu = T = baidu || { version: "1.5.1" };
             baidu.guid = "$BAIDU$";
             (function () {
                 window[baidu.guid] = window[baidu.guid] || {};
                 baidu.object = baidu.object || {};
                 baidu.extend =
-                baidu.object.extend = function (target, source) {
-                    for (var p in source) {
-                        if (source.hasOwnProperty(p)) {
-                            target[p] = source[p];
+                    baidu.object.extend = function (target, source) {
+                        for (var p in source) {
+                            if (source.hasOwnProperty(p)) {
+                                target[p] = source[p];
+                            }
                         }
-                    }
 
-                    return target;
-                };
+                        return target;
+                    };
                 T.undope = true;
             })();
             /**
@@ -51,52 +51,52 @@
              */
 
             var MarkerManager =
-            /**
-             * MarkerManger类的构造函数
-             * @class MarkerManager <b>入口</b>。
-             * 实例化该类后，可调用addMarkers,show,hide等方法，控制marker。
-             * 请注意，此类比较适用于以下情况：
-             * 大量marker分布到不同的zoom级别中，比如：18级的时候显示100个marker，15级的时候显示另外的100个marker
-             * @constructor
-                 * @param {Map} map Baidu map的实例对象.
-                 * @param {Json Object} opts 可选的输入参数，非必填项。可输入选项包括：<br />
-                 * {<br />"<b>borderPadding</b>" : {Number} 当前viewport额外的padding，落在这个padding中的marker会被添加到地图上，即使他们不是完全可见的。
-                 * <br />"<b>maxZoom</b>" : {Number} 设置需要marker manager需要监视的最大的zoom，如果没有给出，默认为地图的最大的zoom。.
-                 *<br />
-                 * }<br />.
-                 * @example <b>参考示例：</b><br />
-                 * var mgr = new BMapLib.MarkerManager(map,{borderPadding: padding,maxZoom: 18,trackMarkers: true});
-             */
-            BMapLib.MarkerManager = function (map, opts) {
-                this._opts = opts || {};
-                this._map = map;
-                this._zoom = map.getZoom();
-                //用于存放添加的marker数组
-                this._numMarkers = [];
+                /**
+                 * MarkerManger类的构造函数
+                 * @class MarkerManager <b>入口</b>。
+                 * 实例化该类后，可调用addMarkers,show,hide等方法，控制marker。
+                 * 请注意，此类比较适用于以下情况：
+                 * 大量marker分布到不同的zoom级别中，比如：18级的时候显示100个marker，15级的时候显示另外的100个marker
+                 * @constructor
+                     * @param {Map} map Baidu map的实例对象.
+                     * @param {Json Object} opts 可选的输入参数，非必填项。可输入选项包括：<br />
+                     * {<br />"<b>borderPadding</b>" : {Number} 当前viewport额外的padding，落在这个padding中的marker会被添加到地图上，即使他们不是完全可见的。
+                     * <br />"<b>maxZoom</b>" : {Number} 设置需要marker manager需要监视的最大的zoom，如果没有给出，默认为地图的最大的zoom。.
+                     *<br />
+                     * }<br />.
+                     * @example <b>参考示例：</b><br />
+                     * var mgr = new BMapLib.MarkerManager(map,{borderPadding: padding,maxZoom: 18,trackMarkers: true});
+                 */
+                BMapLib.MarkerManager = function (map, opts) {
+                    this._opts = opts || {};
+                    this._map = map;
+                    this._zoom = map.getZoom();
+                    //用于存放添加的marker数组
+                    this._numMarkers = [];
 
-                if (typeof opts.maxZoom === 'number') {
-                    this._opts.maxZoom = this._opts.maxZoom;
-                } else {
-                    this._opts.maxZoom = 19;
-                }
-                if (typeof opts.borderPadding === 'number') {
-                    this._opts.borderPadding = opts.borderPadding;
-                } else {
-                    this._opts.borderPadding = 0;
-                }
+                    if (typeof opts.maxZoom === 'number') {
+                        this._opts.maxZoom = this._opts.maxZoom;
+                    } else {
+                        this._opts.maxZoom = 19;
+                    }
+                    if (typeof opts.borderPadding === 'number') {
+                        this._opts.borderPadding = opts.borderPadding;
+                    } else {
+                        this._opts.borderPadding = 0;
+                    }
 
-                var me = this;
-                //绑定zoomend事件
-                this._map.addEventListener("zoomend", function () {
-                    //me._visible && me._showMarkers();
-                    me._showMarkers();
-                });
-                //绑定dragend事件
-                this._map.addEventListener("dragend", function () {
-                    //me._visible && me._showMarkers();
-                    me._showMarkers();
-                });
-            }
+                    var me = this;
+                    //绑定zoomend事件
+                    this._map.addEventListener("zoomend", function () {
+                        //me._visible && me._showMarkers();
+                        me._showMarkers();
+                    });
+                    //绑定dragend事件
+                    this._map.addEventListener("dragend", function () {
+                        //me._visible && me._showMarkers();
+                        me._showMarkers();
+                    });
+                }
             /**
              * 添加单个marker
              * @param {Marker} marker 要添加的marker
@@ -107,7 +107,7 @@
              * @example <b>参考示例：</b><br />
              * mgr.addMarker(marker,4,15);
              */
-            MarkerManager.prototype.addMarker = function (marker,markinfo, minZoom, maxZoom) {
+            MarkerManager.prototype.addMarker = function (marker, markinfo, minZoom, maxZoom) {
                 minZoom = minZoom && minZoom > 0 ? minZoom : 1;
                 maxZoom = maxZoom && maxZoom <= 19 ? maxZoom : this._opts.maxZoom;
                 marker.minZoom = minZoom;
@@ -126,7 +126,7 @@
              * @example <b>参考示例：</b><br />
              * mgr.addMarker(markers,4,15);
              */
-            MarkerManager.prototype.addMarkers = function (markers,markersInfo, minZoom, maxZoom) {
+            MarkerManager.prototype.addMarkers = function (markers, markersInfo, minZoom, maxZoom) {
                 var len = markers.length,
                     me = this;
                 for (var i = len; i--;) {
@@ -318,19 +318,13 @@
             };
             c.prototype.addMarker = function (e, m, n) {
                 e.bAdded = false;
-                if (n == '1') {
-                    e.setIcon(PoloiceRoom_Gray);
-                } else
-                {
-                    e.setIcon(PoloiceRoom_Blue);
-                }
+                var icon = new BMap.Icon(n, new BMap.Size(32, 32), { anchor: new BMap.Size(16, 32), imageOffset: new BMap.Size(0, 0) });
+                e.setIcon(icon);
                 if (m != "")
                     e.setLabel(new BMap.Label(m, {
                         offset: new BMap.Size(40, 0)
                     }));
-                this._numMarkers.push(e);
-                //e.enableDragging()
-            };
+                this._numMarkers.push(e);            };
             c.prototype.addMarkers = function (h, x, y) {
                 var d = h.length;
                 for (var f = d; f--;) {
@@ -372,8 +366,8 @@
                         f[e].bAdded = true
                     } else {
                         this._visible && f[e].show()
-                        }
                     }
+                }
             };
             c.prototype.clearMarkers = function () {
                 var d = this._numMarkers.length;
@@ -382,12 +376,11 @@
                 }
                 this._numMarkers.length = 0
             };
-            c.prototype.selectAddr = function (a,b,i) {
+            c.prototype.selectAddr = function (a, b, i) {
                 var d = this._numMarkers.length;
                 for (var e = d; e--;) {
                     var p = this._numMarkers[e].getPosition();
-                    if (p.lng == a && p.lat == b)
-                    {
+                    if (p.lng == a && p.lat == b) {
                         if (i == "1") {
                             this._numMarkers[e].setIcon(PoloiceRoom_Gray);
                         }
@@ -399,9 +392,12 @@
             };
             c.prototype.removeAddr = function (lng, lat) {
                 var d = this._numMarkers.length;
+
                 for (var e = d; e--;) {
                     var p = this._numMarkers[e].getPosition();
+
                     if (p.lng == lng && p.lat == lat) {
+
                         this._map.removeOverlay(this._numMarkers[e])
                         return;
                     }
@@ -468,20 +464,13 @@
 
     function Load() {
         try {
-            //alert(1);
-            //var test = [];
-            //test = null;
-            //for (var a = 0; a < 10; a++)
-            //{
-            //    var x = test[a];
-            //    alert(x);
-            //}
-            //window.external.MapLoadEnd();
             var myCity = new BMap.LocalCity();
             myCity.get(Init_LoadCurrentCity);
+            
         }
         catch (err) {
             //alert("网络异常，在线地图显示异常");
+            alert(err);
         }
     }
     function Init_LoadCurrentCity(result)
@@ -503,91 +492,36 @@
             var mapType1 = new BMap.MapTypeControl({ mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP], anchor: BMAP_ANCHOR_BOTTOM_RIGHT, offset: new BMap.Size(0, 21) });
             map.addControl(mapType1);//添加地图切换功能
             BaiduMapControlInit();
-
+            mgr = new BMapLib.Manager(map);
             setTimeout(function () {
                 window.external.MapLoadEnd();   //短暂延时后上传状态至后台
             }, 300)
         }
         catch (err) {
-            alert("无法连接到Internet，请检测网络是否正常连接！");
+            alert(err);
+            //alert("无法连接到Internet，请检测网络是否正常连接！");
         }
     }
 
+    //设置中心点 180103
+    function SetMapCenter(lon, lat) {
+        var point = new BMap.Point(lon, lat);
+        map.setCenter(point);
+    }
 
-    function Init()
+    function SetMapLevel(intLevel)
     {
-        try
-        {
-
-            map = new BMap.Map("allmap", { enableMapClick: false });// 创建Map实例
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);// 初始化地图,设置中心点坐标和地图级别
-            map.enableScrollWheelZoom(true);//开启鼠标滚轮缩放
-            var ctrl_sca = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });//设置左下角标尺
-            map.addControl(ctrl_sca);//添加标尺到界面
-            var top_right_navigation = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_RIGHT });
-            map.addControl(top_right_navigation);
-            geoc = new BMap.Geocoder(); //初始化用于标注文字显示
-            myDis = new BMapLib.DistanceTool(map);//开启测距工具
-            //地图事件
-            map.addEventListener("click", showInfo);//将点击的标注添加到地图中
-            map.addEventListener("mousemove", GetlngAndlat);//鼠标移动事件——用于设置经纬度
-            map.addEventListener("zoomend", MapZoomChanged);
-
-            var mapType1 = new BMap.MapTypeControl({ mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP], anchor: BMAP_ANCHOR_BOTTOM_RIGHT, offset: new BMap.Size(0, 21) });
-            map.addControl(mapType1);//添加地图切换功能
-            BaiduMapControlInit();
-            
-            setTimeout(function () {
-                window.external.MapLoadEnd();       //
-            }, 300)
-        }
-        catch (err)
-        {
-            alert(err.toString());
-            alert("无法连接到Internet，请检测网络是否正常连接！");
-        }
+        map.setZoom(intLevel);
     }
 
-    function SelectCity() {
-        try
-        {
-            //window.external.FormHtml_DisplayPrompt("SelectCity");
-            var myCity = new BMap.LocalCity();
-            myCity.get(myFun);
-        }
-        catch (err) {
-
-        }
+    function DisplayMarker(lon, lat, strIconFilePath) {
+        var p = new BMap.Point(lon, lat);
+        var m = new BMap.Marker(p);
+        mgr.addMarker(m, '测试</br>', strIconFilePath);
+        mgr.showMarkers();
     }
-    var intReLoad = 0;
 
-	//IP定位到默认城市
-    function myFun(result) {
-        try
-        {
-            var cityName = result.name;
-            map.centerAndZoom(cityName, 12);
-            //map.clearOverlays();
-            //intReLoad = 0;
-        }
-        catch(err)
-        {
-            ////异常重新加载一次，重新加载后还是异常则进行错误提醒
-            //if (intReLoad == 0)
-            //{
-            //    //Init_LoadCurrentCity();
-            //    SelectCity();
-            //    intReLoad++;
-            //    //alert(intReLoad);
-            //}
-            //else
-            //{
-            //    alert("地图加载失败");
-            //}
-        }
-    }
-    
-	
+
 	//用于设置自定义标注
 	function MapAddMarker(lng, lat, userInfo, isalarm, maplevel) {
 	    try {
@@ -799,12 +733,14 @@
 	            markersInfo.push(data[i].info);
 	            markers.push(new BMap.Marker(point));
 	        }
-	        mgr = new BMapLib.MarkerManager(map, { borderPadding: 200, maxZoom: 18, trackMarkers: true });
-	        mgr.addMarkers(markers, markersInfo, 13, 19);
-	        mgr.show();
+	        //mgr = new BMapLib.MarkerManager(map, { borderPadding: 200, maxZoom: 18, trackMarkers: true });
+	        //mgr.addMarkers(markers, markersInfo, 13, 19);
+	        //mgr.show();
 	    }
 	    catch (err)
-	    { }
+        {
+            alert(err);
+        }
 	    
 	}
 
@@ -962,4 +898,3 @@
 	    }
 	}
 </script>
-

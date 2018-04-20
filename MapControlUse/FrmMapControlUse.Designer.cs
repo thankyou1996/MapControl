@@ -39,7 +39,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtMapCurrentMapLevl = new System.Windows.Forms.TextBox();
             this.txtMapCenterLat = new System.Windows.Forms.TextBox();
             this.txtMapType = new System.Windows.Forms.TextBox();
@@ -80,7 +79,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(3, 165);
+            this.groupBox1.Location = new System.Drawing.Point(3, 126);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(225, 89);
             this.groupBox1.TabIndex = 7;
@@ -153,7 +152,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.txtMapCurrentMapLevl);
             this.groupBox2.Controls.Add(this.txtMapCenterLat);
             this.groupBox2.Controls.Add(this.txtMapType);
@@ -164,19 +162,10 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(3, 34);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(225, 125);
+            this.groupBox2.Size = new System.Drawing.Size(225, 86);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "地图信息";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 24);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "*离线地图显示中心点\r\n 在线地图显示选中点";
             // 
             // txtMapCurrentMapLevl
             // 
@@ -316,7 +305,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtMapType;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtSelectedMapPointLevel;
         private System.Windows.Forms.TextBox txtSelectedMapPointLat;

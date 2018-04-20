@@ -28,101 +28,247 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.onlineMap1 = new OnlineMap.BaiduOnlineMap();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpSetMapInfo = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtMarkerIconFilePath = new System.Windows.Forms.TextBox();
+            this.btnSetMarker = new System.Windows.Forms.Button();
+            this.btnSetMapLevel = new System.Windows.Forms.Button();
+            this.btnSetCenter = new System.Windows.Forms.Button();
+            this.txtSetMapInfo_MapLevel = new System.Windows.Forms.TextBox();
+            this.txtSetMapInfo_MapLat = new System.Windows.Forms.TextBox();
+            this.txtSetMapInfo_MapType = new System.Windows.Forms.TextBox();
+            this.txtSetMapInfo_MapLon = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtMapCurrentMapLevl = new System.Windows.Forms.TextBox();
-            this.txtMapCenterLat = new System.Windows.Forms.TextBox();
-            this.txtMapType = new System.Windows.Forms.TextBox();
-            this.txtMapCenterLon = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSelectedMapPointLevel = new System.Windows.Forms.TextBox();
+            this.txtSelectedMapPointLat = new System.Windows.Forms.TextBox();
+            this.txtSelectedMapPointType = new System.Windows.Forms.TextBox();
+            this.txtSelectedMapPointLon = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnBaiduOnlineMap = new System.Windows.Forms.Button();
-            this.btnSogouOfflineMap = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.onlineMap1 = new OnlineMap.BaiduOnlineMap();
             this.pnlLeft.SuspendLayout();
+            this.grpSetMapInfo.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // onlineMap1
-            // 
-            this.onlineMap1.CurrentMapLevel = 0;
-            this.onlineMap1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.onlineMap1.Location = new System.Drawing.Point(0, 0);
-            this.onlineMap1.Name = "onlineMap1";
-            this.onlineMap1.Size = new System.Drawing.Size(485, 412);
-            this.onlineMap1.TabIndex = 0;
-            // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.grpSetMapInfo);
             this.pnlLeft.Controls.Add(this.groupBox2);
-            this.pnlLeft.Controls.Add(this.btnBaiduOnlineMap);
-            this.pnlLeft.Controls.Add(this.btnSogouOfflineMap);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(147, 412);
+            this.pnlLeft.Size = new System.Drawing.Size(186, 412);
             this.pnlLeft.TabIndex = 2;
             // 
-            // groupBox2
+            // grpSetMapInfo
             // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.txtMapCurrentMapLevl);
-            this.groupBox2.Controls.Add(this.txtMapCenterLat);
-            this.groupBox2.Controls.Add(this.txtMapType);
-            this.groupBox2.Controls.Add(this.txtMapCenterLon);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(3, 65);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(141, 138);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "地图信息";
+            this.grpSetMapInfo.Controls.Add(this.label10);
+            this.grpSetMapInfo.Controls.Add(this.textBox1);
+            this.grpSetMapInfo.Controls.Add(this.label9);
+            this.grpSetMapInfo.Controls.Add(this.txtMarkerIconFilePath);
+            this.grpSetMapInfo.Controls.Add(this.btnSetMarker);
+            this.grpSetMapInfo.Controls.Add(this.btnSetMapLevel);
+            this.grpSetMapInfo.Controls.Add(this.btnSetCenter);
+            this.grpSetMapInfo.Controls.Add(this.txtSetMapInfo_MapLevel);
+            this.grpSetMapInfo.Controls.Add(this.txtSetMapInfo_MapLat);
+            this.grpSetMapInfo.Controls.Add(this.txtSetMapInfo_MapType);
+            this.grpSetMapInfo.Controls.Add(this.txtSetMapInfo_MapLon);
+            this.grpSetMapInfo.Controls.Add(this.label2);
+            this.grpSetMapInfo.Controls.Add(this.label3);
+            this.grpSetMapInfo.Controls.Add(this.label4);
+            this.grpSetMapInfo.Controls.Add(this.label5);
+            this.grpSetMapInfo.Location = new System.Drawing.Point(3, 118);
+            this.grpSetMapInfo.Name = "grpSetMapInfo";
+            this.grpSetMapInfo.Size = new System.Drawing.Size(180, 222);
+            this.grpSetMapInfo.TabIndex = 7;
+            this.grpSetMapInfo.TabStop = false;
+            this.grpSetMapInfo.Text = "地图信息_设置点信息";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(9, 172);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "图标";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(44, 169);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(130, 21);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "显示测试";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 142);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "图标";
+            // 
+            // txtMarkerIconFilePath
+            // 
+            this.txtMarkerIconFilePath.Location = new System.Drawing.Point(44, 139);
+            this.txtMarkerIconFilePath.Name = "txtMarkerIconFilePath";
+            this.txtMarkerIconFilePath.Size = new System.Drawing.Size(130, 21);
+            this.txtMarkerIconFilePath.TabIndex = 10;
+            this.txtMarkerIconFilePath.Text = "MapIcon_PositionLabel1_Red.png";
+            // 
+            // btnSetMarker
+            // 
+            this.btnSetMarker.Location = new System.Drawing.Point(9, 193);
+            this.btnSetMarker.Name = "btnSetMarker";
+            this.btnSetMarker.Size = new System.Drawing.Size(75, 23);
+            this.btnSetMarker.TabIndex = 9;
+            this.btnSetMarker.Text = "设置标注点";
+            this.btnSetMarker.UseVisualStyleBackColor = true;
+            this.btnSetMarker.Click += new System.EventHandler(this.btnSetMarker_Click);
+            // 
+            // btnSetMapLevel
+            // 
+            this.btnSetMapLevel.Location = new System.Drawing.Point(90, 110);
+            this.btnSetMapLevel.Name = "btnSetMapLevel";
+            this.btnSetMapLevel.Size = new System.Drawing.Size(75, 23);
+            this.btnSetMapLevel.TabIndex = 8;
+            this.btnSetMapLevel.Text = "设置等级";
+            this.btnSetMapLevel.UseVisualStyleBackColor = true;
+            this.btnSetMapLevel.Click += new System.EventHandler(this.btnSetMapLevel_Click);
+            // 
+            // btnSetCenter
+            // 
+            this.btnSetCenter.Location = new System.Drawing.Point(9, 110);
+            this.btnSetCenter.Name = "btnSetCenter";
+            this.btnSetCenter.Size = new System.Drawing.Size(75, 23);
+            this.btnSetCenter.TabIndex = 8;
+            this.btnSetCenter.Text = "设置中心";
+            this.btnSetCenter.UseVisualStyleBackColor = true;
+            this.btnSetCenter.Click += new System.EventHandler(this.btnSetCenter_Click);
+            // 
+            // txtSetMapInfo_MapLevel
+            // 
+            this.txtSetMapInfo_MapLevel.Location = new System.Drawing.Point(66, 83);
+            this.txtSetMapInfo_MapLevel.Name = "txtSetMapInfo_MapLevel";
+            this.txtSetMapInfo_MapLevel.Size = new System.Drawing.Size(108, 21);
+            this.txtSetMapInfo_MapLevel.TabIndex = 1;
+            // 
+            // txtSetMapInfo_MapLat
+            // 
+            this.txtSetMapInfo_MapLat.Location = new System.Drawing.Point(44, 61);
+            this.txtSetMapInfo_MapLat.Name = "txtSetMapInfo_MapLat";
+            this.txtSetMapInfo_MapLat.Size = new System.Drawing.Size(130, 21);
+            this.txtSetMapInfo_MapLat.TabIndex = 1;
+            // 
+            // txtSetMapInfo_MapType
+            // 
+            this.txtSetMapInfo_MapType.Location = new System.Drawing.Point(44, 14);
+            this.txtSetMapInfo_MapType.Name = "txtSetMapInfo_MapType";
+            this.txtSetMapInfo_MapType.Size = new System.Drawing.Size(130, 21);
+            this.txtSetMapInfo_MapType.TabIndex = 1;
+            // 
+            // txtSetMapInfo_MapLon
+            // 
+            this.txtSetMapInfo_MapLon.Location = new System.Drawing.Point(44, 38);
+            this.txtSetMapInfo_MapLon.Name = "txtSetMapInfo_MapLon";
+            this.txtSetMapInfo_MapLon.Size = new System.Drawing.Size(130, 21);
+            this.txtSetMapInfo_MapLon.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 107);
+            this.label2.Location = new System.Drawing.Point(7, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 24);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "*离线地图显示中心点\r\n 在线地图显示选中点";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "显示等级";
             // 
-            // txtMapCurrentMapLevl
+            // label3
             // 
-            this.txtMapCurrentMapLevl.Location = new System.Drawing.Point(66, 83);
-            this.txtMapCurrentMapLevl.Name = "txtMapCurrentMapLevl";
-            this.txtMapCurrentMapLevl.Size = new System.Drawing.Size(73, 21);
-            this.txtMapCurrentMapLevl.TabIndex = 1;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "纬度";
             // 
-            // txtMapCenterLat
+            // label4
             // 
-            this.txtMapCenterLat.Location = new System.Drawing.Point(44, 61);
-            this.txtMapCenterLat.Name = "txtMapCenterLat";
-            this.txtMapCenterLat.Size = new System.Drawing.Size(95, 21);
-            this.txtMapCenterLat.TabIndex = 1;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "类型";
             // 
-            // txtMapType
+            // label5
             // 
-            this.txtMapType.Location = new System.Drawing.Point(44, 14);
-            this.txtMapType.Name = "txtMapType";
-            this.txtMapType.Size = new System.Drawing.Size(95, 21);
-            this.txtMapType.TabIndex = 1;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 41);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "经度";
             // 
-            // txtMapCenterLon
+            // groupBox2
             // 
-            this.txtMapCenterLon.Location = new System.Drawing.Point(44, 38);
-            this.txtMapCenterLon.Name = "txtMapCenterLon";
-            this.txtMapCenterLon.Size = new System.Drawing.Size(95, 21);
-            this.txtMapCenterLon.TabIndex = 1;
+            this.groupBox2.Controls.Add(this.txtSelectedMapPointLevel);
+            this.groupBox2.Controls.Add(this.txtSelectedMapPointLat);
+            this.groupBox2.Controls.Add(this.txtSelectedMapPointType);
+            this.groupBox2.Controls.Add(this.txtSelectedMapPointLon);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(180, 109);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "地图信息_选中点信息";
+            // 
+            // txtSelectedMapPointLevel
+            // 
+            this.txtSelectedMapPointLevel.Location = new System.Drawing.Point(66, 83);
+            this.txtSelectedMapPointLevel.Name = "txtSelectedMapPointLevel";
+            this.txtSelectedMapPointLevel.Size = new System.Drawing.Size(108, 21);
+            this.txtSelectedMapPointLevel.TabIndex = 1;
+            // 
+            // txtSelectedMapPointLat
+            // 
+            this.txtSelectedMapPointLat.Location = new System.Drawing.Point(44, 61);
+            this.txtSelectedMapPointLat.Name = "txtSelectedMapPointLat";
+            this.txtSelectedMapPointLat.Size = new System.Drawing.Size(130, 21);
+            this.txtSelectedMapPointLat.TabIndex = 1;
+            // 
+            // txtSelectedMapPointType
+            // 
+            this.txtSelectedMapPointType.Location = new System.Drawing.Point(44, 14);
+            this.txtSelectedMapPointType.Name = "txtSelectedMapPointType";
+            this.txtSelectedMapPointType.Size = new System.Drawing.Size(130, 21);
+            this.txtSelectedMapPointType.TabIndex = 1;
+            // 
+            // txtSelectedMapPointLon
+            // 
+            this.txtSelectedMapPointLon.Location = new System.Drawing.Point(44, 38);
+            this.txtSelectedMapPointLon.Name = "txtSelectedMapPointLon";
+            this.txtSelectedMapPointLon.Size = new System.Drawing.Size(130, 21);
+            this.txtSelectedMapPointLon.TabIndex = 1;
             // 
             // label8
             // 
@@ -160,32 +306,23 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "经度";
             // 
-            // btnBaiduOnlineMap
-            // 
-            this.btnBaiduOnlineMap.Location = new System.Drawing.Point(3, 34);
-            this.btnBaiduOnlineMap.Name = "btnBaiduOnlineMap";
-            this.btnBaiduOnlineMap.Size = new System.Drawing.Size(138, 25);
-            this.btnBaiduOnlineMap.TabIndex = 0;
-            this.btnBaiduOnlineMap.Text = "百度在线";
-            this.btnBaiduOnlineMap.UseVisualStyleBackColor = true;
-            // 
-            // btnSogouOfflineMap
-            // 
-            this.btnSogouOfflineMap.Location = new System.Drawing.Point(3, 3);
-            this.btnSogouOfflineMap.Name = "btnSogouOfflineMap";
-            this.btnSogouOfflineMap.Size = new System.Drawing.Size(138, 25);
-            this.btnSogouOfflineMap.TabIndex = 0;
-            this.btnSogouOfflineMap.Text = "搜狗离线";
-            this.btnSogouOfflineMap.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.onlineMap1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(147, 0);
+            this.panel1.Location = new System.Drawing.Point(186, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(485, 412);
+            this.panel1.Size = new System.Drawing.Size(446, 412);
             this.panel1.TabIndex = 3;
+            // 
+            // onlineMap1
+            // 
+            this.onlineMap1.CurrentMapLevel = 0;
+            this.onlineMap1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.onlineMap1.Location = new System.Drawing.Point(0, 0);
+            this.onlineMap1.Name = "onlineMap1";
+            this.onlineMap1.Size = new System.Drawing.Size(446, 412);
+            this.onlineMap1.TabIndex = 0;
             // 
             // FrmMain
             // 
@@ -198,6 +335,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.pnlLeft.ResumeLayout(false);
+            this.grpSetMapInfo.ResumeLayout(false);
+            this.grpSetMapInfo.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -211,18 +350,31 @@
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMapCurrentMapLevl;
-        private System.Windows.Forms.TextBox txtMapCenterLat;
-        private System.Windows.Forms.TextBox txtMapType;
-        private System.Windows.Forms.TextBox txtMapCenterLon;
+        private System.Windows.Forms.TextBox txtSelectedMapPointLevel;
+        private System.Windows.Forms.TextBox txtSelectedMapPointLat;
+        private System.Windows.Forms.TextBox txtSelectedMapPointType;
+        private System.Windows.Forms.TextBox txtSelectedMapPointLon;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnBaiduOnlineMap;
-        private System.Windows.Forms.Button btnSogouOfflineMap;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnSetCenter;
+        private System.Windows.Forms.GroupBox grpSetMapInfo;
+        private System.Windows.Forms.TextBox txtSetMapInfo_MapLevel;
+        private System.Windows.Forms.TextBox txtSetMapInfo_MapLat;
+        private System.Windows.Forms.TextBox txtSetMapInfo_MapType;
+        private System.Windows.Forms.TextBox txtSetMapInfo_MapLon;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnSetMapLevel;
+        private System.Windows.Forms.Button btnSetMarker;
+        private System.Windows.Forms.TextBox txtMarkerIconFilePath;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

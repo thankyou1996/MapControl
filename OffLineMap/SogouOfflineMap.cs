@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using ZYB.GIS;
 using PublicClassCurrency;
+using PublicClassCurrency.Map;
 
 namespace OffLineMap
 {
@@ -16,7 +17,7 @@ namespace OffLineMap
     //    Description("离线地图"),  //控件说明
     //    ToolboxBitmap(typeof(PagingControl), "Resources.Bitmap.pager") //设置控件图标
     //]
-    public partial class SogouOfflineMap : UserControl
+    public partial class SogouOfflineMap : UserControl, IMapControl
     {
         #region 全局变量
         SogouMap mapMain;
@@ -33,6 +34,11 @@ namespace OffLineMap
         /// 地图Ini文件
         /// </summary>
         public string strMapFileIni = "";
+
+        public string strMapIconPath = "";
+
+        int intPicValueKey = 1;
+        Dictionary<object, PictureBox> dicPicValue = new Dictionary<object, PictureBox>();
 
         #region 地图文件基本信息
         /// <summary>
@@ -226,7 +232,7 @@ namespace OffLineMap
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
 
-        public void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
+        private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
             if (SelectedMapPointEvent != null)
             {
@@ -404,6 +410,20 @@ namespace OffLineMap
             if (mapMain != null)
             {
                 picMap.Image = mapMain.GetMapImage(pointCurrentMapCenter, picMap.Size, CurrentMapLevel);
+
+                if (dicPicValue != null && dicPicValue.Count > 0)
+                {
+                    foreach (PictureBox pic in dicPicValue.Values)
+                    {
+                        if (pic != null && pic.Visible == true && pic.Parent == picMap)
+                        {
+                            MapPointInfo point = (MapPointInfo)pic.Tag;
+                            PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+                            PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
+                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width/2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                        }
+                    }
+                }
 
                 if (picsDisplayPointList != null && picsDisplayPointList.Length > 0)
                 {
@@ -632,12 +652,12 @@ namespace OffLineMap
         /// 显示地图_设置地图中心点
         /// </summary>
         /// <param name="pointDisplayMapCenter"></param>
-        public void DisplayMap_SetCenter(double dblLon, double dblLat)
+        public void DisplayMap_SetCenter(MapPointInfo point)
         {
             if (mapMain != null)
             {
-                LegalLonAndLat(ref dblLon, ref dblLat);
-                pointCurrentMapCenter = new PointD(dblLon, dblLat);
+                LegalLonAndLat(ref point.dblLon, ref point.dblLat);
+                pointCurrentMapCenter = new PointD(point.dblLon, point.dblLat);
                 DisplayMap();
             }
         }
@@ -653,6 +673,29 @@ namespace OffLineMap
                 CurrentMapLevel = intDisplayMapLevel;
                 DisplayMap();
             }
+        }
+
+        /// <summary>
+        /// 设置标注点
+        /// </summary>
+        public void DisplayMap_SetMarker(MapPointInfo point, string strImageFileName)
+        {
+            //设置图片位置，将状态置为显示
+            PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+            PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
+            PictureBox pic = new PictureBox();
+            pic.Image = Image.FromFile(strMapIconPath + "\\" + strImageFileName);
+            pic.Size = new Size(32, 32);
+            pic.BackColor = Color.Transparent;
+            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+            pic.Tag = point;
+            if (dicPicValue.ContainsKey(intPicValueKey))
+            {
+                dicPicValue[intPicValueKey].Dispose();
+            }
+            dicPicValue[intPicValueKey] = pic;
+            intPicValueKey++;
+            picMap.Controls.Add(pic);
         }
 
         /// <summary>
@@ -803,13 +846,31 @@ namespace OffLineMap
                 int intCurX = intLastX - this.picMap.Width / 2;
                 int intCurY = intLastY - this.picMap.Height / 2;
                 PointD p = mapMain.MoveMap(pointCurrentMapCenter, new Point(intCurX, intCurY), intCurrentMapLevel);
-                PublicClassCurrency.MapPointInfo m = new PublicClassCurrency.MapPointInfo();
+                MapPointInfo m = new MapPointInfo();
                 m.dblLon = p.X;
                 m.dblLat = p.Y;
                 m.intMapLevel = intCurrentMapLevel;
-                m.cordinateSyatem = PublicClassCurrency.Enum_CordinateSystem.WGS_84;
+                m.cordinateSyatem = Enum_CordinateSystem.WGS_84;
                 SelectedMapPoint(m);
             }
+        }
+
+        public bool SetCenterPoint(MapPointInfo point)
+        {
+            bool bolResult = false;
+            if (mapMain != null)
+            {
+                LegalLonAndLat(ref point.dblLon, ref point.dblLat);
+                pointCurrentMapCenter = new PointD(point.dblLon, point.dblLat);
+                DisplayMap();
+                bolResult = true;
+            }
+            return false;
+        }
+
+        public bool SetMapLevel(MapPointInfo point)
+        {
+            throw new NotImplementedException();
         }
     }
 

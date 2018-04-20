@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PublicClassCurrency;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,6 +41,7 @@ namespace OffLineMapUse
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            offlineMap1.SelectedMapPointEvent += SelectedMapPoint;
             offlineMap1.OfflineMapDisplay += OfflineMapDisplay;
             pictureBox2.Parent = pictureBox3;
             Init();
@@ -59,6 +61,7 @@ namespace OffLineMapUse
                 cmbMapLevel.Items.Add(i);
             }
             offlineMap1.Init(g_strMapFileBin, g_strMapFileInfo, g_strMapFileIni);
+            offlineMap1.strMapIconPath= Environment.CurrentDirectory + "\\OnlineMapFile\\ImageFile";
         }
 
         public void OfflineMapDisplay(double dblLon, double dblLat, int intMapLevel, string strTag = "")
@@ -97,12 +100,7 @@ namespace OffLineMapUse
             }
         }
 
-        private void btnSetCenter_Click(object sender, EventArgs e)
-        {
-            double dblLon = Convert.ToDouble(txtLon.Text.Trim());
-            double dblLat = Convert.ToDouble(txtLat.Text.Trim());
-            offlineMap1.DisplayMap_SetCenter(dblLon, dblLat);
-        }
+        
 
         private void cmbMapLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,6 +186,43 @@ namespace OffLineMapUse
         private void offlineMap1_OfflineMapError(Exception ex, string strExceptionTag)
         {
 
+        }
+
+        #region　地图控件事件
+        public void SelectedMapPoint(object sender, MapPointInfo MapPointInfo)
+        {
+            txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
+            txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
+            txtSelectedMapPointLon.Text = MapPointInfo.dblLon.ToString();
+            txtSelectedMapPointLat.Text = MapPointInfo.dblLat.ToString();
+            txtSetMapInfo_MapLon.Text = MapPointInfo.dblLon.ToString();
+            txtSetMapInfo_MapLat.Text = MapPointInfo.dblLat.ToString();
+        }
+
+        #endregion
+        
+
+        private void btnSetCenter_Click(object sender, EventArgs e)
+        {
+            MapPointInfo point = new MapPointInfo();
+            point.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text.Trim());
+            point.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text.Trim());
+            offlineMap1.SetCenterPoint(point);
+        }
+
+        private void btnSetMapLevel_Click(object sender, EventArgs e)
+        {
+            int intMapLevel = Convert.ToInt32(txtSetMapInfo_MapLevel.Text.ToString());
+            offlineMap1.DisplayMap_SetMapLevel(intMapLevel);
+        }
+
+        private void btnSetMarker_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
+            m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
+            string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+            offlineMap1.DisplayMap_SetMarker(m, strMapIconFilePath);
         }
     }
 }

@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="PublicClassCurrency, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\File_Libary\dll_Libary\PublicClassCurrency.dll</HintPath>
+      <HintPath>..\..\..\CommonMethod\CommonMethod\PublicClassCurrency\bin\Release\PublicClassCurrency.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

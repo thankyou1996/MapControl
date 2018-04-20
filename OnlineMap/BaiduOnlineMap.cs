@@ -6,10 +6,12 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using PublicClassCurrency;
+using System.IO;
+using PublicClassCurrency.Map;
 
 namespace OnlineMap
 {
-    public partial class BaiduOnlineMap : UserControl
+    public partial class BaiduOnlineMap : UserControl ,IMapControl
     {
 
         /// <summary>
@@ -17,6 +19,10 @@ namespace OnlineMap
         /// </summary>
         string strMapFilePath = "";
 
+        /// <summary>
+        /// 地图文件Icon位置
+        /// </summary>
+        public string strMapIconPath = "\\OnlineMapFile\\ImageFile";
 
         #region 地图实时信息
 
@@ -24,6 +30,11 @@ namespace OnlineMap
         /// 初始化状态
         /// </summary>
         bool bolInit = false;
+
+        /// <summary>
+        /// 地图加载完成
+        /// </summary>
+        bool Maploaded = false;
 
         /// <summary>
         /// 地图当前中心点
@@ -42,7 +53,6 @@ namespace OnlineMap
         }
 
         #endregion
-
         public BaiduOnlineMap()
         {
             InitializeComponent();
@@ -88,7 +98,16 @@ namespace OnlineMap
         /// </summary>
         public void MapLoadEnd()
         {
+            Maploaded = true;
             OnlineMapLoadEnd();
+        }
+
+        /// <summary>
+        /// 地图加载异常
+        /// </summary>
+        public void MapLoadException()
+        {
+
         }
 
         //JS脚本调用用于显示标注的经纬度 160728
@@ -101,9 +120,6 @@ namespace OnlineMap
             mappointInfo.cordinateSyatem = Enum_CordinateSystem.BD_09;
             SelectedMapPoint(mappointInfo);
         }
-
-        
-      
 
         public void MapLaodError()
         {
@@ -128,6 +144,75 @@ namespace OnlineMap
 
         #region 后台调用页面事件
 
+        /// <summary>
+        /// Html页面事件_设置中心点 当前等级
+        /// </summary>
+        private void ToHtml_SetCenter(MapPointInfo point)
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetMapCenter", new object[] { point.dblLon, point.dblLat });
+                        }));
+                        return;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+        }
+
+        /// <summary>
+        /// Html页面事件_设置地图等级
+        /// </summary>
+        /// <param name="MapLevel"></param>
+        private void ToHtml_SetMapLevel(int MapLevel)
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetMapLevel", new object[] { MapLevel });
+                        }));
+                        return;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+        }
+
+        /// <summary>
+        /// Html页面事件_显示标注点
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="strIconFilePath"></param>
+        private void ToHtml_DisplayMarker(MapPointInfo point,string strIconFilePath)
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("DisplayMarker", new object[] { point.dblLon, point.dblLat, strIconFilePath });
+                        }));
+                        return;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+        }
+        
         /// <summary>
         /// Html页面事件_显示主机位置信息
         /// </summary>
@@ -277,25 +362,7 @@ namespace OnlineMap
 
         }
 
-        /// <summary>
-        /// Html页面事件_设置中心点 MapLevel=0 默认当前等级
-        /// </summary>
-        public void ToHtml_SetCenter(double dblLon, double dblLat, int intMapLevel)
-        {
-            //while (bolOnlineMapLoad)
-            //{
-            //    if (webBrowser1.ReadyState == WebBrowserReadyState.Complete)
-            //    {
-            //        //BeginInvoke(new EventHandler(delegate
-            //        //{
-            //        webBrowser1.Document.InvokeScript("SetCenter", new object[] { dblLon, dblLat, intMapLevel });
-            //        //}));
-            //        return;
-            //    }
-            //    Delay(50);
-            //}
-        }
-
+        
         /// <summary>
         /// Html页面事件_设置双击放大是否启用
         /// </summary>
@@ -501,7 +568,7 @@ namespace OnlineMap
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
 
-        public void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
+        private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
             if (SelectedMapPointEvent != null)
             {
@@ -531,17 +598,13 @@ namespace OnlineMap
         #endregion
 
         #region 外部调用事件
-        //1.设置中心点位置
-
-
-        /// <summary>
         /// 设置地图中心点
         /// </summary>
         /// <param name="dblLon"></param>
         /// <param name="dblLat"></param>
-        public void DisplayMap_SetCenter(double dblLon, double dblLat)
+        public void DisplayMap_SetCenter(MapPointInfo point)
         {
-
+            ToHtml_SetCenter(point);
         }
 
         /// <summary>
@@ -550,16 +613,60 @@ namespace OnlineMap
         /// <param name="intMapLevel"></param>
         public void DisplayMap_SetMapLevel(int intMapLevel)
         {
-
+            ToHtml_SetMapLevel(intMapLevel);
         }
 
         /// <summary>
         /// 设置标注点
         /// </summary>
-        public void DisplayMap_SetMarker()
+        public void DisplayMap_SetMarker(MapPointInfo point, string strImageFileName)
         {
-
+            ToHtml_DisplayMarker(point, strMapIconPath + "\\" + strImageFileName);
+            
         }
+
+        public bool SetCenterPoint(MapPointInfo point)
+        {
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetMapCenter", new object[] { point.dblLon, point.dblLat });
+                        }));
+                        bolResult = true;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
+
+        public bool SetMapLevel(MapPointInfo point)
+        {
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetMapLevel", new object[] { point.intMapLevel });
+                        }));
+                        bolResult = true;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
+
         #endregion
     }
 }

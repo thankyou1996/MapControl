@@ -67,7 +67,6 @@ namespace MapControlUse
         #region　地图控件事件
         public void SelectedMapPoint(object sender,MapPointInfo MapPointInfo)
         {
-            MapPointInfo test = MapPointInfo.ToGCJ_02();
             txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
             txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
             txtSelectedMapPointLon.Text= MapPointInfo.dblLon.ToString();
