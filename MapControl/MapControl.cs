@@ -6,10 +6,11 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using PublicClassCurrency;
+using PublicClassCurrency.Map;
 
 namespace MapControl
 {
-    public partial class MapControl : UserControl
+    public partial class MapControl : UserControl, IMapControl
     {
         public MapControl()
         {
@@ -35,6 +36,8 @@ namespace MapControl
 
 
         public string g_strBaiduOnlieMapFilePath = "";
+
+        IMapControl mapControl;
         #endregion
 
         #region 回调与事件
@@ -85,12 +88,14 @@ namespace MapControl
                             baiduOnlineMap1.Visible = true;
                             sogouOfflineMap1.Visible = false;
                             baiduOnlineMap1.Dock = DockStyle.Fill;
+                            mapControl = baiduOnlineMap1;
                             break;
 
                         case MapType.SogouOffLineMap:
                             baiduOnlineMap1.Visible = false;
                             sogouOfflineMap1.Visible = true;
                             sogouOfflineMap1.Dock = DockStyle.Fill;
+                            mapControl = sogouOfflineMap1;
                             break;
                     }
                     currentMapType = value;
@@ -121,9 +126,11 @@ namespace MapControl
             {
                 case MapType.BaiduOnlineMap:
                     Init_BaiduOnlineMap();
+                    //mapControl = baiduOnlineMap1;
                     break;
                 case MapType.SogouOffLineMap:
                     Init_SogouMapOfflineMap();
+                    //mapControl = sogouOfflineMap1;
                     break;
             }
         }
@@ -147,6 +154,26 @@ namespace MapControl
         public void SelectedMapPoint(object sender, MapPointInfo mappointInfo)
         {
             SelectedMapPoint(mappointInfo);
+        }
+
+        public bool SetCenterPoint(MapPointInfo point)
+        {
+            return mapControl.SetCenterPoint(point);
+        }
+
+        public bool SetMapLevel(MapPointInfo point)
+        {
+            return mapControl.SetMapLevel(point);
+        }
+
+        public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
+        {
+            return mapControl.SetMapMarker(point, strMarkerPicFilePath);
+        }
+
+        public bool SetMapPointInfo(MapPointInfo point)
+        {
+            return mapControl.SetMapPointInfo(point);
         }
     }
     public enum MapType

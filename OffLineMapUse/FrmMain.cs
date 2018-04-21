@@ -213,7 +213,8 @@ namespace OffLineMapUse
         private void btnSetMapLevel_Click(object sender, EventArgs e)
         {
             int intMapLevel = Convert.ToInt32(txtSetMapInfo_MapLevel.Text.ToString());
-            offlineMap1.DisplayMap_SetMapLevel(intMapLevel);
+            //offlineMap1.DisplayMap_SetMapLevel(intMapLevel);
+            offlineMap1.SetMapLevel(new MapPointInfo { intMapLevel = intMapLevel });
         }
 
         private void btnSetMarker_Click(object sender, EventArgs e)
@@ -222,7 +223,9 @@ namespace OffLineMapUse
             m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
             string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
-            offlineMap1.DisplayMap_SetMarker(m, strMapIconFilePath);
+            //public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
+            offlineMap1.SetMapMarker(m, Environment.CurrentDirectory + "\\OnlineMapFile\\ImageFile\\" + strMapIconFilePath);
+            //offlineMap1.DisplayMap_SetMarker(m, strMapIconFilePath);
         }
     }
 }

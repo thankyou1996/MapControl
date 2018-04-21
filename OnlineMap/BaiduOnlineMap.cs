@@ -11,7 +11,7 @@ using PublicClassCurrency.Map;
 
 namespace OnlineMap
 {
-    public partial class BaiduOnlineMap : UserControl ,IMapControl
+    public partial class BaiduOnlineMap : UserControl , IMapControl
     {
 
         /// <summary>
@@ -665,6 +665,34 @@ namespace OnlineMap
                 }
             }
             return bolResult;
+        }
+
+        public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
+        {
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("DisplayMarker", new object[] { point.dblLon, point.dblLat, strMarkerPicFilePath });
+                        }));
+                        bolResult = true;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
+
+        public bool SetMapPointInfo(MapPointInfo point)
+        {
+            ToHtml_SetCenter(point);
+            ToHtml_SetMapLevel(point.intMapLevel);
+            return true;
         }
 
         #endregion

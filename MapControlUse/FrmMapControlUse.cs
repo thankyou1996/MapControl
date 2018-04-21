@@ -33,7 +33,7 @@ namespace MapControlUse
         }
         public void Test()
         {
-            mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
+            mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\MapFile\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
             mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath+ "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
@@ -75,5 +75,69 @@ namespace MapControlUse
 
         #endregion
 
+        private void btnSetMarker_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            try
+            {
+                m.dblLon = Convert.ToDouble(txtSelectedMapPointLon.Text);
+                m.dblLat = Convert.ToDouble(txtSelectedMapPointLat.Text);
+                string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+                mapControl1.SetMapMarker(m, Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath);
+            }
+            catch
+            {
+                //取值异常不做处理
+            }
+        }
+
+        private void btntxtSetMapPoint_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            try
+            {
+                m.dblLon = Convert.ToDouble(txtSetMapPointLon.Text);
+                m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
+                string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+                mapControl1.SetCenterPoint(m);
+            }
+            catch
+            {
+                //取值异常不做处理
+            }
+        }
+
+        private void btntxtSetMapLevel_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            try
+            {
+                m.dblLon = Convert.ToDouble(txtSetMapPointLon.Text);
+                m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
+                m.intMapLevel = Convert.ToInt32(txtSetMapLevel.Text);
+                string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+                mapControl1.SetMapLevel(m);
+            }
+            catch
+            {
+                //取值异常不做处理
+            }
+        }
+
+        private void btntxtSetMapPointInfo_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            try
+            {
+                m.dblLon = Convert.ToDouble(txtSetMapPointLon.Text);
+                m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
+                string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+                mapControl1.SetMapPointInfo(m);
+            }
+            catch
+            {
+                //取值异常不做处理
+            }
+        }
     }
 }

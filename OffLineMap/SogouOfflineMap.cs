@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using ZYB.GIS;
 using PublicClassCurrency;
 using PublicClassCurrency.Map;
+using System.IO;
 
 namespace OffLineMap
 {
@@ -865,13 +866,64 @@ namespace OffLineMap
                 DisplayMap();
                 bolResult = true;
             }
-            return false;
+            return bolResult;
         }
 
         public bool SetMapLevel(MapPointInfo point)
         {
-            throw new NotImplementedException();
+            bool bolResult = false;
+            if (mapMain != null)
+            {
+                CurrentMapLevel = point.intMapLevel;
+                DisplayMap();
+                bolResult = true;
+            }
+            return bolResult;
         }
+        public bool SetMapPointInfo(MapPointInfo point)
+        {
+            bool bolResult = false;
+            if (mapMain != null)
+            {
+                CurrentMapLevel = point.intMapLevel;
+                LegalLonAndLat(ref point.dblLon, ref point.dblLat);
+                pointCurrentMapCenter = new PointD(point.dblLon, point.dblLat);
+                DisplayMap();
+                bolResult = true;
+            }
+            return bolResult;
+        }
+
+        public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
+        {
+            bool bolResult = false;
+            if (mapMain != null)
+            {
+                if (File.Exists(strMarkerPicFilePath))
+                {
+                    //设置图片位置，将状态置为显示
+                    PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+                    PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
+                    PictureBox pic = new PictureBox();
+                    pic.Image = Image.FromFile(strMarkerPicFilePath);
+                    pic.Size = new Size(32, 32);
+                    pic.BackColor = Color.Transparent;
+                    pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                    pic.Tag = point;
+                    if (dicPicValue.ContainsKey(intPicValueKey))
+                    {
+                        dicPicValue[intPicValueKey].Dispose();
+                    }
+                    dicPicValue[intPicValueKey] = pic;
+                    intPicValueKey++;
+                    picMap.Controls.Add(pic);
+                    bolResult = true;
+                }
+            }
+            return bolResult;
+        }
+
+        
     }
 
 

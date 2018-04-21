@@ -58,7 +58,8 @@ namespace OnlineMapUse
             m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
             string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
-            onlineMap1.DisplayMap_SetMarker(m, strMapIconFilePath);
+            //onlineMap1.DisplayMap_SetMarker(m, strMapIconFilePath);
+            onlineMap1.SetMapMarker(m, Environment.CurrentDirectory + "\\OnlineMapFile\\ImageFile\\" + strMapIconFilePath);
         }
     }
 }
