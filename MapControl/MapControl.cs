@@ -67,8 +67,8 @@ namespace MapControl
             }
         }
         #endregion
-
-
+        public event MapControlLoadEndDelegate MapControlLoadEndEvent;
+        
         #endregion
 
         #region 自定义属性
@@ -98,12 +98,18 @@ namespace MapControl
                             mapControl = sogouOfflineMap1;
                             break;
                     }
+                    if (MapControlLoadEndEvent != null)
+                    {
+                        mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
+                        mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
+                    }
                     currentMapType = value;
                 }
 
             }
         }
 
+       
         #endregion
 
 
@@ -125,12 +131,26 @@ namespace MapControl
             switch (currentMapType)
             {
                 case MapType.BaiduOnlineMap:
+                    mapControl = baiduOnlineMap1;
+                    
+                    break;
+                case MapType.SogouOffLineMap:
+                    mapControl = sogouOfflineMap1;
+                    break;
+            }
+            if (MapControlLoadEndEvent != null)
+            {
+                mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
+                mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
+            }
+            switch (currentMapType)
+            {
+                case MapType.BaiduOnlineMap:
                     Init_BaiduOnlineMap();
-                    //mapControl = baiduOnlineMap1;
+
                     break;
                 case MapType.SogouOffLineMap:
                     Init_SogouMapOfflineMap();
-                    //mapControl = sogouOfflineMap1;
                     break;
             }
         }
@@ -150,6 +170,11 @@ namespace MapControl
             SelectedMapPoint(mappointInfo);
         }
         #endregion
+        public MapType mapType
+        {
+            get => CurrentMapType;
+            set => CurrentMapType = value;
+        }
 
         public void SelectedMapPoint(object sender, MapPointInfo mappointInfo)
         {
@@ -175,10 +200,5 @@ namespace MapControl
         {
             return mapControl.SetMapPointInfo(point);
         }
-    }
-    public enum MapType
-    {
-        BaiduOnlineMap = 0,
-        SogouOffLineMap = 1
     }
 }

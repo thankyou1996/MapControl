@@ -232,6 +232,7 @@ namespace OffLineMap
         public delegate void SelectedMapPointDelegate(object sender, MapPointInfo SelectedMapPointValue);
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
+        public event MapControlLoadEndDelegate MapControlLoadEndDelegate;
 
         private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
@@ -241,6 +242,15 @@ namespace OffLineMap
             }
         }
         #endregion
+
+        public event MapControlLoadEndDelegate MapControlLoadEndEvent;
+        private void MapControlLoadEnd(object MapControlLoadEndValue)
+        {
+            if (MapControlLoadEndEvent != null)
+            {
+                MapControlLoadEndEvent(this, MapControlLoadEndValue);
+            }
+        }
 
         #region 
 
@@ -280,6 +290,7 @@ namespace OffLineMap
             mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
             Init_ReadMapInfo();
             DisplayMap();
+            MapControlLoadEnd(null);
             bolInit = true;
         }
 
@@ -829,13 +840,21 @@ namespace OffLineMap
             }
         }
 
-        
+       
+
+
         #endregion
         public class PointAndLevel
         {
             public double lon;
             public double lat;
             public int intMapLevel;
+        }
+
+        public MapType mapType
+        {
+            get => MapType.SogouOffLineMap;
+            set => throw new NotImplementedException();
         }
 
         private void picMap_MouseClick(object sender, MouseEventArgs e)
@@ -858,6 +877,7 @@ namespace OffLineMap
 
         public bool SetCenterPoint(MapPointInfo point)
         {
+            point = point.ToWGS_84();
             bool bolResult = false;
             if (mapMain != null)
             {
@@ -872,6 +892,7 @@ namespace OffLineMap
         public bool SetMapLevel(MapPointInfo point)
         {
             bool bolResult = false;
+            point = point.ToWGS_84();
             if (mapMain != null)
             {
                 CurrentMapLevel = point.intMapLevel;
@@ -883,6 +904,7 @@ namespace OffLineMap
         public bool SetMapPointInfo(MapPointInfo point)
         {
             bool bolResult = false;
+            point = point.ToWGS_84();
             if (mapMain != null)
             {
                 CurrentMapLevel = point.intMapLevel;
@@ -897,6 +919,7 @@ namespace OffLineMap
         public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
         {
             bool bolResult = false;
+            point = point.ToWGS_84();
             if (mapMain != null)
             {
                 if (File.Exists(strMarkerPicFilePath))

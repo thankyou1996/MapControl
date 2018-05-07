@@ -1,4 +1,5 @@
 ﻿using PublicClassCurrency;
+using PublicClassCurrency.Map;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +19,17 @@ namespace MapControlUse
 
         private void FrmMapControlUse_Load(object sender, EventArgs e)
         {
+
+            mapControl1.MapControlLoadEndEvent += MapControl1_MapControlLoadEndEvent;
             Init();
             Test();
             mapControl1.Init();
+        }
+
+        private void MapControl1_MapControlLoadEndEvent(object sender, object MapControlLoadEndValue)
+        {
+            IMapControl mapControl = (IMapControl)sender;
+            Console.WriteLine(mapControl.mapType.ToString() + "_LoadEnd");
         }
 
         public void Init()
@@ -42,7 +51,7 @@ namespace MapControlUse
 
 
 
-        public void MapDisplay(MapControl.MapType mtType, double dblLon, double dblLat, int intMapLevel, string strTag = "")
+        public void MapDisplay(MapType mtType, double dblLon, double dblLat, int intMapLevel, string strTag = "")
         {
             txtMapType.Text = mtType.ToString();
             txtMapCenterLon.Text = dblLon.ToString();
@@ -52,15 +61,11 @@ namespace MapControlUse
 
 
 
-        private void btnSogouOfflineMap_Click(object sender, EventArgs e)
-        {
-            mapControl1.CurrentMapType = MapControl.MapType.SogouOffLineMap;
-            mapControl1.Init();
-        }
+        
 
         private void btnBaiduOnlineMap_Click(object sender, EventArgs e)
         {
-            mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
+            mapControl1.CurrentMapType = MapType.BaiduOnlineMap;
             mapControl1.Init();
         }
 
@@ -138,6 +143,23 @@ namespace MapControlUse
             {
                 //取值异常不做处理
             }
+        }
+
+        private void btnSogouOfflineMap2_Click(object sender, EventArgs e)
+        {
+            mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.bin";
+            mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
+            mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
+            mapControl1.CurrentMapType = MapType.SogouOffLineMap;
+            mapControl1.Init();
+        }
+        private void btnSogouOfflineMap_Click(object sender, EventArgs e)
+        {
+            mapControl1.g_strSougouOffLineMapFileBin = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.bin";
+            mapControl1.g_strSougouOffLineMapFileInfo = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.info";
+            mapControl1.g_strSougouOffLineMapFileIni = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.ini";
+            mapControl1.CurrentMapType = MapType.SogouOffLineMap;
+            mapControl1.Init();
         }
     }
 }

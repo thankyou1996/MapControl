@@ -52,6 +52,7 @@ namespace OnlineMap
             set { intCurrentMapLevel = value; }
         }
 
+        
         #endregion
         public BaiduOnlineMap()
         {
@@ -100,6 +101,7 @@ namespace OnlineMap
         {
             Maploaded = true;
             OnlineMapLoadEnd();
+            MapControlLoadEnd(null);
         }
 
         /// <summary>
@@ -159,7 +161,7 @@ namespace OnlineMap
                         {
                             wbMain.Document.InvokeScript("SetMapCenter", new object[] { point.dblLon, point.dblLat });
                         }));
-                        return;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -182,7 +184,7 @@ namespace OnlineMap
                         {
                             wbMain.Document.InvokeScript("SetMapLevel", new object[] { MapLevel });
                         }));
-                        return;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -206,7 +208,7 @@ namespace OnlineMap
                         {
                             wbMain.Document.InvokeScript("DisplayMarker", new object[] { point.dblLon, point.dblLat, strIconFilePath });
                         }));
-                        return;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -568,6 +570,14 @@ namespace OnlineMap
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
 
+        public event MapControlLoadEndDelegate MapControlLoadEndEvent;
+        private void MapControlLoadEnd(object MapControlLoadEndValue)
+        {
+            if (MapControlLoadEndEvent != null)
+            {
+                MapControlLoadEndEvent(this, MapControlLoadEndValue);
+            }
+        }
         private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
             if (SelectedMapPointEvent != null)
@@ -624,9 +634,18 @@ namespace OnlineMap
             ToHtml_DisplayMarker(point, strMapIconPath + "\\" + strImageFileName);
             
         }
+        #endregion
+
+
+        public MapType mapType
+        {
+            get => MapType.BaiduOnlineMap;
+            set => throw new NotImplementedException();
+        }
 
         public bool SetCenterPoint(MapPointInfo point)
         {
+            point = point.ToBD_09();
             bool bolResult = false;
             if (Maploaded)
             {
@@ -639,6 +658,7 @@ namespace OnlineMap
                             wbMain.Document.InvokeScript("SetMapCenter", new object[] { point.dblLon, point.dblLat });
                         }));
                         bolResult = true;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -648,6 +668,7 @@ namespace OnlineMap
 
         public bool SetMapLevel(MapPointInfo point)
         {
+            point = point.ToBD_09();
             bool bolResult = false;
             if (Maploaded)
             {
@@ -660,6 +681,7 @@ namespace OnlineMap
                             wbMain.Document.InvokeScript("SetMapLevel", new object[] { point.intMapLevel });
                         }));
                         bolResult = true;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -670,6 +692,7 @@ namespace OnlineMap
         public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
         {
             bool bolResult = false;
+            point = point.ToBD_09();
             if (Maploaded)
             {
                 while (!this.IsDisposed)
@@ -681,6 +704,7 @@ namespace OnlineMap
                             wbMain.Document.InvokeScript("DisplayMarker", new object[] { point.dblLon, point.dblLat, strMarkerPicFilePath });
                         }));
                         bolResult = true;
+                        break;
                     }
                     Delay(50);  //系统延迟50毫秒
                 }
@@ -690,11 +714,11 @@ namespace OnlineMap
 
         public bool SetMapPointInfo(MapPointInfo point)
         {
+            point = point.ToBD_09();
             ToHtml_SetCenter(point);
             ToHtml_SetMapLevel(point.intMapLevel);
             return true;
         }
 
-        #endregion
     }
 }

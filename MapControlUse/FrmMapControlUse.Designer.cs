@@ -1,4 +1,6 @@
-﻿namespace MapControlUse
+﻿using PublicClassCurrency.Map;
+
+namespace MapControlUse
 {
     partial class FrmMapControlUse
     {
@@ -29,6 +31,16 @@
         private void InitializeComponent()
         {
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtSetMapLevel = new System.Windows.Forms.TextBox();
+            this.txtSetMapPointLat = new System.Windows.Forms.TextBox();
+            this.txtSetMapPointLon = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btntxtSetMapLevel = new System.Windows.Forms.Button();
+            this.btntxtSetMapPointInfo = new System.Windows.Forms.Button();
+            this.btntxtSetMapPoint = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnSetMarker = new System.Windows.Forms.Button();
             this.txtMarkerIconFilePath = new System.Windows.Forms.TextBox();
@@ -52,25 +64,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBaiduOnlineMap = new System.Windows.Forms.Button();
-            this.btnSogouOfflineMap = new System.Windows.Forms.Button();
+            this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.mapControl1 = new MapControl.MapControl();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btntxtSetMapPoint = new System.Windows.Forms.Button();
-            this.txtSetMapPointLat = new System.Windows.Forms.TextBox();
-            this.txtSetMapPointLon = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtSetMapLevel = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btntxtSetMapLevel = new System.Windows.Forms.Button();
-            this.btntxtSetMapPointInfo = new System.Windows.Forms.Button();
+            this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlMain.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlLeft
@@ -80,19 +83,116 @@
             this.pnlLeft.Controls.Add(this.groupBox1);
             this.pnlLeft.Controls.Add(this.groupBox2);
             this.pnlLeft.Controls.Add(this.btnBaiduOnlineMap);
-            this.pnlLeft.Controls.Add(this.btnSogouOfflineMap);
+            this.pnlLeft.Controls.Add(this.btnSogouOfflineMap2);
+            this.pnlLeft.Controls.Add(this.btnSogouOfflineMap1);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(234, 468);
             this.pnlLeft.TabIndex = 1;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtSetMapLevel);
+            this.groupBox4.Controls.Add(this.txtSetMapPointLat);
+            this.groupBox4.Controls.Add(this.txtSetMapPointLon);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.btntxtSetMapLevel);
+            this.groupBox4.Controls.Add(this.btntxtSetMapPointInfo);
+            this.groupBox4.Controls.Add(this.btntxtSetMapPoint);
+            this.groupBox4.Location = new System.Drawing.Point(6, 258);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(225, 121);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "设置地图点";
+            // 
+            // txtSetMapLevel
+            // 
+            this.txtSetMapLevel.Location = new System.Drawing.Point(43, 66);
+            this.txtSetMapLevel.Name = "txtSetMapLevel";
+            this.txtSetMapLevel.Size = new System.Drawing.Size(93, 21);
+            this.txtSetMapLevel.TabIndex = 17;
+            // 
+            // txtSetMapPointLat
+            // 
+            this.txtSetMapPointLat.Location = new System.Drawing.Point(43, 42);
+            this.txtSetMapPointLat.Name = "txtSetMapPointLat";
+            this.txtSetMapPointLat.Size = new System.Drawing.Size(174, 21);
+            this.txtSetMapPointLat.TabIndex = 15;
+            // 
+            // txtSetMapPointLon
+            // 
+            this.txtSetMapPointLon.Location = new System.Drawing.Point(43, 19);
+            this.txtSetMapPointLon.Name = "txtSetMapPointLon";
+            this.txtSetMapPointLon.Size = new System.Drawing.Size(174, 21);
+            this.txtSetMapPointLon.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 70);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "纬度";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "纬度";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "经度";
+            // 
+            // btntxtSetMapLevel
+            // 
+            this.btntxtSetMapLevel.Location = new System.Drawing.Point(140, 65);
+            this.btntxtSetMapLevel.Name = "btntxtSetMapLevel";
+            this.btntxtSetMapLevel.Size = new System.Drawing.Size(75, 23);
+            this.btntxtSetMapLevel.TabIndex = 12;
+            this.btntxtSetMapLevel.Text = "设置等级";
+            this.btntxtSetMapLevel.UseVisualStyleBackColor = true;
+            this.btntxtSetMapLevel.Click += new System.EventHandler(this.btntxtSetMapLevel_Click);
+            // 
+            // btntxtSetMapPointInfo
+            // 
+            this.btntxtSetMapPointInfo.Location = new System.Drawing.Point(96, 93);
+            this.btntxtSetMapPointInfo.Name = "btntxtSetMapPointInfo";
+            this.btntxtSetMapPointInfo.Size = new System.Drawing.Size(75, 23);
+            this.btntxtSetMapPointInfo.TabIndex = 12;
+            this.btntxtSetMapPointInfo.Text = "设置点信息";
+            this.btntxtSetMapPointInfo.UseVisualStyleBackColor = true;
+            this.btntxtSetMapPointInfo.Click += new System.EventHandler(this.btntxtSetMapPointInfo_Click);
+            // 
+            // btntxtSetMapPoint
+            // 
+            this.btntxtSetMapPoint.Location = new System.Drawing.Point(10, 93);
+            this.btntxtSetMapPoint.Name = "btntxtSetMapPoint";
+            this.btntxtSetMapPoint.Size = new System.Drawing.Size(75, 23);
+            this.btntxtSetMapPoint.TabIndex = 12;
+            this.btntxtSetMapPoint.Text = "设置中心点";
+            this.btntxtSetMapPoint.UseVisualStyleBackColor = true;
+            this.btntxtSetMapPoint.Click += new System.EventHandler(this.btntxtSetMapPoint_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnSetMarker);
             this.groupBox3.Controls.Add(this.txtMarkerIconFilePath);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(5, 349);
+            this.groupBox3.Location = new System.Drawing.Point(5, 393);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(225, 66);
             this.groupBox3.TabIndex = 7;
@@ -136,7 +236,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(3, 126);
+            this.groupBox1.Location = new System.Drawing.Point(3, 170);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(225, 89);
             this.groupBox1.TabIndex = 7;
@@ -217,7 +317,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(3, 34);
+            this.groupBox2.Location = new System.Drawing.Point(3, 78);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(225, 86);
             this.groupBox2.TabIndex = 7;
@@ -290,23 +390,23 @@
             // 
             // btnBaiduOnlineMap
             // 
-            this.btnBaiduOnlineMap.Location = new System.Drawing.Point(113, 3);
+            this.btnBaiduOnlineMap.Location = new System.Drawing.Point(146, 3);
             this.btnBaiduOnlineMap.Name = "btnBaiduOnlineMap";
-            this.btnBaiduOnlineMap.Size = new System.Drawing.Size(108, 25);
+            this.btnBaiduOnlineMap.Size = new System.Drawing.Size(75, 25);
             this.btnBaiduOnlineMap.TabIndex = 0;
             this.btnBaiduOnlineMap.Text = "百度在线";
             this.btnBaiduOnlineMap.UseVisualStyleBackColor = true;
             this.btnBaiduOnlineMap.Click += new System.EventHandler(this.btnBaiduOnlineMap_Click);
             // 
-            // btnSogouOfflineMap
+            // btnSogouOfflineMap1
             // 
-            this.btnSogouOfflineMap.Location = new System.Drawing.Point(3, 3);
-            this.btnSogouOfflineMap.Name = "btnSogouOfflineMap";
-            this.btnSogouOfflineMap.Size = new System.Drawing.Size(104, 25);
-            this.btnSogouOfflineMap.TabIndex = 0;
-            this.btnSogouOfflineMap.Text = "搜狗离线";
-            this.btnSogouOfflineMap.UseVisualStyleBackColor = true;
-            this.btnSogouOfflineMap.Click += new System.EventHandler(this.btnSogouOfflineMap_Click);
+            this.btnSogouOfflineMap1.Location = new System.Drawing.Point(3, 3);
+            this.btnSogouOfflineMap1.Name = "btnSogouOfflineMap1";
+            this.btnSogouOfflineMap1.Size = new System.Drawing.Size(74, 25);
+            this.btnSogouOfflineMap1.TabIndex = 0;
+            this.btnSogouOfflineMap1.Text = "搜狗离线1";
+            this.btnSogouOfflineMap1.UseVisualStyleBackColor = true;
+            this.btnSogouOfflineMap1.Click += new System.EventHandler(this.btnSogouOfflineMap_Click);
             // 
             // pnlMain
             // 
@@ -319,108 +419,23 @@
             // 
             // mapControl1
             // 
-            this.mapControl1.CurrentMapType = MapControl.MapType.SogouOffLineMap;
+            this.mapControl1.CurrentMapType = PublicClassCurrency.Map.MapType.SogouOffLineMap;
             this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.mapType = PublicClassCurrency.Map.MapType.SogouOffLineMap;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(671, 468);
             this.mapControl1.TabIndex = 0;
             // 
-            // groupBox4
+            // btnSogouOfflineMap2
             // 
-            this.groupBox4.Controls.Add(this.txtSetMapLevel);
-            this.groupBox4.Controls.Add(this.txtSetMapPointLat);
-            this.groupBox4.Controls.Add(this.txtSetMapPointLon);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.btntxtSetMapLevel);
-            this.groupBox4.Controls.Add(this.btntxtSetMapPointInfo);
-            this.groupBox4.Controls.Add(this.btntxtSetMapPoint);
-            this.groupBox4.Location = new System.Drawing.Point(6, 214);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(225, 121);
-            this.groupBox4.TabIndex = 7;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "设置地图点";
-            // 
-            // btntxtSetMapPoint
-            // 
-            this.btntxtSetMapPoint.Location = new System.Drawing.Point(10, 93);
-            this.btntxtSetMapPoint.Name = "btntxtSetMapPoint";
-            this.btntxtSetMapPoint.Size = new System.Drawing.Size(75, 23);
-            this.btntxtSetMapPoint.TabIndex = 12;
-            this.btntxtSetMapPoint.Text = "设置中心点";
-            this.btntxtSetMapPoint.UseVisualStyleBackColor = true;
-            this.btntxtSetMapPoint.Click += new System.EventHandler(this.btntxtSetMapPoint_Click);
-            // 
-            // txtSetMapPointLat
-            // 
-            this.txtSetMapPointLat.Location = new System.Drawing.Point(43, 42);
-            this.txtSetMapPointLat.Name = "txtSetMapPointLat";
-            this.txtSetMapPointLat.Size = new System.Drawing.Size(174, 21);
-            this.txtSetMapPointLat.TabIndex = 15;
-            // 
-            // txtSetMapPointLon
-            // 
-            this.txtSetMapPointLon.Location = new System.Drawing.Point(43, 19);
-            this.txtSetMapPointLon.Name = "txtSetMapPointLon";
-            this.txtSetMapPointLon.Size = new System.Drawing.Size(174, 21);
-            this.txtSetMapPointLon.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "纬度";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 22);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 12);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "经度";
-            // 
-            // txtSetMapLevel
-            // 
-            this.txtSetMapLevel.Location = new System.Drawing.Point(43, 66);
-            this.txtSetMapLevel.Name = "txtSetMapLevel";
-            this.txtSetMapLevel.Size = new System.Drawing.Size(93, 21);
-            this.txtSetMapLevel.TabIndex = 17;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 70);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(29, 12);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "纬度";
-            // 
-            // btntxtSetMapLevel
-            // 
-            this.btntxtSetMapLevel.Location = new System.Drawing.Point(140, 65);
-            this.btntxtSetMapLevel.Name = "btntxtSetMapLevel";
-            this.btntxtSetMapLevel.Size = new System.Drawing.Size(75, 23);
-            this.btntxtSetMapLevel.TabIndex = 12;
-            this.btntxtSetMapLevel.Text = "设置等级";
-            this.btntxtSetMapLevel.UseVisualStyleBackColor = true;
-            this.btntxtSetMapLevel.Click += new System.EventHandler(this.btntxtSetMapLevel_Click);
-            // 
-            // btntxtSetMapPointInfo
-            // 
-            this.btntxtSetMapPointInfo.Location = new System.Drawing.Point(96, 93);
-            this.btntxtSetMapPointInfo.Name = "btntxtSetMapPointInfo";
-            this.btntxtSetMapPointInfo.Size = new System.Drawing.Size(75, 23);
-            this.btntxtSetMapPointInfo.TabIndex = 12;
-            this.btntxtSetMapPointInfo.Text = "设置点信息";
-            this.btntxtSetMapPointInfo.UseVisualStyleBackColor = true;
-            this.btntxtSetMapPointInfo.Click += new System.EventHandler(this.btntxtSetMapPointInfo_Click);
+            this.btnSogouOfflineMap2.Location = new System.Drawing.Point(3, 34);
+            this.btnSogouOfflineMap2.Name = "btnSogouOfflineMap2";
+            this.btnSogouOfflineMap2.Size = new System.Drawing.Size(74, 25);
+            this.btnSogouOfflineMap2.TabIndex = 0;
+            this.btnSogouOfflineMap2.Text = "搜狗离线2";
+            this.btnSogouOfflineMap2.UseVisualStyleBackColor = true;
+            this.btnSogouOfflineMap2.Click += new System.EventHandler(this.btnSogouOfflineMap2_Click);
             // 
             // FrmMapControlUse
             // 
@@ -433,6 +448,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmMapControlUse_Load);
             this.pnlLeft.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -440,8 +457,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.pnlMain.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -452,7 +467,7 @@
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Button btnBaiduOnlineMap;
-        private System.Windows.Forms.Button btnSogouOfflineMap;
+        private System.Windows.Forms.Button btnSogouOfflineMap1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtMapCurrentMapLevl;
         private System.Windows.Forms.TextBox txtMapCenterLat;
@@ -485,6 +500,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btntxtSetMapLevel;
         private System.Windows.Forms.Button btntxtSetMapPointInfo;
+        private System.Windows.Forms.Button btnSogouOfflineMap2;
     }
 }
 
