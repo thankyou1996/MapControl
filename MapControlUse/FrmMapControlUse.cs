@@ -1,5 +1,4 @@
-﻿using PublicClassCurrency;
-using PublicClassCurrency.Map;
+﻿using MapControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

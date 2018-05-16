@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sogouOfflineMap1 = new OffLineMap.SogouOfflineMap();
-            this.baiduOnlineMap1 = new OnlineMap.BaiduOnlineMap();
+            this.sogouOfflineMap1 = new SogouOfflineMap();
+            this.baiduOnlineMap1 = new BaiduOnlineMap();
             this.SuspendLayout();
             // 
             // sogouOfflineMap1
@@ -68,7 +68,7 @@
 
         #endregion
 
-        private OffLineMap.SogouOfflineMap sogouOfflineMap1;
-        private OnlineMap.BaiduOnlineMap baiduOnlineMap1;
+        private SogouOfflineMap sogouOfflineMap1;
+        private BaiduOnlineMap baiduOnlineMap1;
     }
 }

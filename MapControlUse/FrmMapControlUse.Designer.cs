@@ -1,4 +1,5 @@
-﻿using PublicClassCurrency.Map;
+﻿
+using MapControl;
 
 namespace MapControlUse
 {
@@ -419,10 +420,10 @@ namespace MapControlUse
             // 
             // mapControl1
             // 
-            this.mapControl1.CurrentMapType = PublicClassCurrency.Map.MapType.SogouOffLineMap;
+            this.mapControl1.CurrentMapType = MapType.SogouOffLineMap;
             this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = PublicClassCurrency.Map.MapType.SogouOffLineMap;
+            this.mapControl1.mapType = MapType.SogouOffLineMap;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(671, 468);
             this.mapControl1.TabIndex = 0;

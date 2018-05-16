@@ -5,8 +5,6 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using PublicClassCurrency;
-using PublicClassCurrency.Map;
 
 namespace MapControl
 {
@@ -55,11 +53,11 @@ namespace MapControl
         #endregion
 
         #region 选中地图点
-        public delegate void SelectedMapPointDelegate(object sender, PublicClassCurrency.MapPointInfo MapPointInfo);
+        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo MapPointInfo);
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
 
-        public void SelectedMapPoint(PublicClassCurrency.MapPointInfo MapPointInfo)
+        public void SelectedMapPoint(MapPointInfo MapPointInfo)
         {
             if (SelectedMapPointEvent != null)
             {
@@ -199,6 +197,11 @@ namespace MapControl
         public bool SetMapPointInfo(MapPointInfo point)
         {
             return mapControl.SetMapPointInfo(point);
+        }
+
+        public bool SetMapMarker(MapMarkerPointInfo marker)
+        {
+            throw new NotImplementedException();
         }
     }
 }

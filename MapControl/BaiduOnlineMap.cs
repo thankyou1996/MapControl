@@ -5,12 +5,11 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using PublicClassCurrency;
 using System.IO;
-using PublicClassCurrency.Map;
 
-namespace OnlineMap
+namespace MapControl
 {
+    [System.Runtime.InteropServices.ComVisible(true)]   //窗体与脚本交互设置
     public partial class BaiduOnlineMap : UserControl , IMapControl
     {
 
@@ -115,12 +114,12 @@ namespace OnlineMap
         //JS脚本调用用于显示标注的经纬度 160728
         public void Setlnglat(string lng, string lat, string level)
         {
-            MapPointInfo1 MapPointInfo1 = new MapPointInfo1();
-            MapPointInfo1.dblLon = Convert.ToDouble(lng);
-            MapPointInfo1.dblLat = Convert.ToDouble(lat);
-            MapPointInfo1.intMapLevel = Convert.ToInt32(level);
-            MapPointInfo1.cordinateSyatem = Enum_CordinateSystem1.BD_09;
-            SelectedMapPoint(MapPointInfo1);
+            MapPointInfo mappointInfo = new MapPointInfo();
+            mappointInfo.dblLon = Convert.ToDouble(lng);
+            mappointInfo.dblLat = Convert.ToDouble(lat);
+            mappointInfo.intMapLevel = Convert.ToInt32(level);
+            mappointInfo.cordinateSyatem = Enum_CordinateSystem.BD_09;
+            SelectedMapPoint(mappointInfo);
         }
 
         public void MapLaodError()
@@ -149,7 +148,7 @@ namespace OnlineMap
         /// <summary>
         /// Html页面事件_设置中心点 当前等级
         /// </summary>
-        private void ToHtml_SetCenter(MapPointInfo1 point)
+        private void ToHtml_SetCenter(MapPointInfo point)
         {
             if (Maploaded)
             {
@@ -196,7 +195,7 @@ namespace OnlineMap
         /// </summary>
         /// <param name="point"></param>
         /// <param name="strIconFilePath"></param>
-        private void ToHtml_DisplayMarker(MapPointInfo1 point,string strIconFilePath)
+        private void ToHtml_DisplayMarker(MapPointInfo point,string strIconFilePath)
         {
             if (Maploaded)
             {
@@ -566,7 +565,7 @@ namespace OnlineMap
         #endregion
 
         #region 地图选中事件
-        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo1 SelectedMapPointValue);
+        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo SelectedMapPointValue);
 
         public event SelectedMapPointDelegate SelectedMapPointEvent;
 
@@ -578,7 +577,7 @@ namespace OnlineMap
                 MapControlLoadEndEvent(this, MapControlLoadEndValue);
             }
         }
-        private void SelectedMapPoint(MapPointInfo1 SelectedMapPointValue)
+        private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
             if (SelectedMapPointEvent != null)
             {
@@ -612,7 +611,7 @@ namespace OnlineMap
         /// </summary>
         /// <param name="dblLon"></param>
         /// <param name="dblLat"></param>
-        public void DisplayMap_SetCenter(MapPointInfo1 point)
+        public void DisplayMap_SetCenter(MapPointInfo point)
         {
             ToHtml_SetCenter(point);
         }
@@ -629,7 +628,7 @@ namespace OnlineMap
         /// <summary>
         /// 设置标注点
         /// </summary>
-        public void DisplayMap_SetMarker(MapPointInfo1 point, string strImageFileName)
+        public void DisplayMap_SetMarker(MapPointInfo point, string strImageFileName)
         {
             ToHtml_DisplayMarker(point, strMapIconPath + "\\" + strImageFileName);
             
@@ -637,13 +636,13 @@ namespace OnlineMap
         #endregion
 
 
-        public MapType1 mapType
+        public MapType mapType
         {
-            get => MapType1.BaiduOnlineMap;
+            get => MapType.BaiduOnlineMap;
             set => throw new NotImplementedException();
         }
 
-        public bool SetCenterPoint(MapPointInfo1 point)
+        public bool SetCenterPoint(MapPointInfo point)
         {
             point = point.ToBD_09();
             bool bolResult = false;
@@ -666,7 +665,7 @@ namespace OnlineMap
             return bolResult;
         }
 
-        public bool SetMapLevel(MapPointInfo1 point)
+        public bool SetMapLevel(MapPointInfo point)
         {
             point = point.ToBD_09();
             bool bolResult = false;
@@ -689,7 +688,7 @@ namespace OnlineMap
             return bolResult;
         }
 
-        public bool SetMapMarker(MapPointInfo1 point, string strMarkerPicFilePath)
+        public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
         {
             bool bolResult = false;
             point = point.ToBD_09();
@@ -712,7 +711,7 @@ namespace OnlineMap
             return bolResult;
         }
 
-        public bool SetMapPointInfo1(MapPointInfo1 point)
+        public bool SetMapPointInfo(MapPointInfo point)
         {
             point = point.ToBD_09();
             ToHtml_SetCenter(point);
@@ -721,11 +720,6 @@ namespace OnlineMap
         }
 
         public bool SetMapMarker(MapMarkerPointInfo marker)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SetMapPointInfo(MapPointInfo1 point)
         {
             throw new NotImplementedException();
         }
