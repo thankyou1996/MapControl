@@ -25,22 +25,22 @@ namespace OnlineMapUse
         }
 
         #region　地图控件事件
-        public void SelectedMapPoint(object sender, MapPointInfo MapPointInfo)
+        public void SelectedMapPoint(object sender, MapPointInfo1 MapPointInfo1)
         {
-            MapPointInfo test = MapPointInfo.ToGCJ_02();
-            txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
-            txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
-            txtSelectedMapPointLon.Text = MapPointInfo.dblLon.ToString();
-            txtSelectedMapPointLat.Text = MapPointInfo.dblLat.ToString();
-            txtSetMapInfo_MapLon.Text= MapPointInfo.dblLon.ToString();
-            txtSetMapInfo_MapLat.Text = MapPointInfo.dblLat.ToString();
+            MapPointInfo1 test = MapPointInfo1.ToGCJ_02();
+            txtSelectedMapPointType.Text = MapPointInfo1.cordinateSyatem.ToString();
+            txtSelectedMapPointLevel.Text = MapPointInfo1.intMapLevel.ToString();
+            txtSelectedMapPointLon.Text = MapPointInfo1.dblLon.ToString();
+            txtSelectedMapPointLat.Text = MapPointInfo1.dblLat.ToString();
+            txtSetMapInfo_MapLon.Text= MapPointInfo1.dblLon.ToString();
+            txtSetMapInfo_MapLat.Text = MapPointInfo1.dblLat.ToString();
         }
 
         #endregion
 
         private void btnSetCenter_Click(object sender, EventArgs e)
         {
-            MapPointInfo m = new MapPointInfo();
+            MapPointInfo1 m = new MapPointInfo1();
             m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
             onlineMap1.SetCenterPoint(m);
@@ -54,7 +54,7 @@ namespace OnlineMapUse
 
         private void btnSetMarker_Click(object sender, EventArgs e)
         {
-            MapPointInfo m = new MapPointInfo();
+            MapPointInfo1 m = new MapPointInfo1();
             m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
             string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
