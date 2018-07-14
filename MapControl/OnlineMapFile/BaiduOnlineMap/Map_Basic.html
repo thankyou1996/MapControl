@@ -473,6 +473,7 @@
             alert(err);
         }
     }
+    
     function Init_LoadCurrentCity(result)
     {
         try {
@@ -493,6 +494,7 @@
             map.addControl(mapType1);//添加地图切换功能
             BaiduMapControlInit();
             mgr = new BMapLib.Manager(map);
+            map.addEventListener("rightclick", function () { window.external.MapControlRightClick(); });
             setTimeout(function () {
                 window.external.MapLoadEnd();   //短暂延时后上传状态至后台
             }, 300)
@@ -517,10 +519,21 @@
     function DisplayMarker(lon, lat, strIconFilePath) {
         var p = new BMap.Point(lon, lat);
         var m = new BMap.Marker(p);
-        mgr.addMarker(m, '测试</br>', strIconFilePath);
+        mgr.addMarker(m, '123', strIconFilePath);
         mgr.showMarkers();
     }
-
+    function MarkerRightClick(m, e) {
+        alert(1);
+        var p = m.getPosition();       //获取marker的位置
+        alert("marker的位置是" + p.lng + "," + p.lat);   
+    }
+    function DisplayMarker1(lon, lat, strTitle, strIconFilePath, strclickInfo) {
+        var p = new BMap.Point(lon, lat);
+        var m = new BMap.Marker(p);
+        m.addEventListener("rightclick", function () { window.external.MarkerRightClick(strclickInfo);});
+        mgr.addMarker(m, strTitle, strIconFilePath);
+        mgr.showMarkers();
+    }
 
 	//用于设置自定义标注
 	function MapAddMarker(lng, lat, userInfo, isalarm, maplevel) {

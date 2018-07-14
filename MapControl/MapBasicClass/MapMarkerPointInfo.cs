@@ -4,11 +4,26 @@ using System.Text;
 
 namespace MapControl
 {
+    public delegate bool MarkerRightClickDelegate(object sneder, object MarkerRightClickValue);
     /// <summary>
     /// 地图标注点信息
     /// </summary>
     public class MapMarkerPointInfo
     {
+        /// <summary>
+        /// 标注点ID
+        /// </summary>
+        private int intMarkerID;
+
+        /// <summary>
+        /// 标注点ID
+        /// </summary>
+        public int MarkerID
+        {
+            get { return intMarkerID; }
+            set { intMarkerID = value; }
+        }
+
         /// <summary>
         /// 标注点名称
         /// </summary>
@@ -48,5 +63,27 @@ namespace MapControl
         /// 地图点信息
         /// </summary>
         public MapPointInfo MarkerPoint = new MapPointInfo();
+
+        #region 事件
+
+        public bool ExistMarkerRightClickEvent()
+        {
+            return MarkerRightClickEvent != null;
+        }
+
+        public bool MarkerRightClick(object MarkerRightValue)
+        {
+            bool bolResult = false;
+            if (MarkerRightClickEvent != null)
+            {
+                bolResult = MarkerRightClickEvent(this, MarkerRightValue);
+            }
+            return bolResult;
+        }
+        /// <summary>
+        /// 标注点右键点击事件
+        /// </summary>
+        public event MarkerRightClickDelegate MarkerRightClickEvent;
+        #endregion
     }
 }

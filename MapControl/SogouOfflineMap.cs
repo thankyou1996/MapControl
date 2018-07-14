@@ -242,6 +242,9 @@ namespace MapControl
         #endregion
 
         public event MapControlLoadEndDelegate MapControlLoadEndEvent;
+        public event MarkerRightClickDelegate MarkerRightClickEvent;
+        public event MapControlRightClick MapControlRightClickEvent;
+
         private void MapControlLoadEnd(object MapControlLoadEndValue)
         {
             if (MapControlLoadEndEvent != null)

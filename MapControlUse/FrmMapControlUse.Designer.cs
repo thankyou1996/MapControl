@@ -31,6 +31,7 @@ namespace MapControlUse
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtSetMapLevel = new System.Windows.Forms.TextBox();
@@ -43,7 +44,8 @@ namespace MapControlUse
             this.btntxtSetMapPointInfo = new System.Windows.Forms.Button();
             this.btntxtSetMapPoint = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnSetMarker = new System.Windows.Forms.Button();
+            this.btnSetMarker2 = new System.Windows.Forms.Button();
+            this.btnSetMarker1 = new System.Windows.Forms.Button();
             this.txtMarkerIconFilePath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -65,16 +67,21 @@ namespace MapControlUse
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBaiduOnlineMap = new System.Windows.Forms.Button();
+            this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mapControl1 = new MapControl.MapControl();
-            this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
+            this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlMain.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlLeft
@@ -91,6 +98,7 @@ namespace MapControlUse
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(234, 468);
             this.pnlLeft.TabIndex = 1;
+            this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
             // 
             // groupBox4
             // 
@@ -190,7 +198,8 @@ namespace MapControlUse
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnSetMarker);
+            this.groupBox3.Controls.Add(this.btnSetMarker2);
+            this.groupBox3.Controls.Add(this.btnSetMarker1);
             this.groupBox3.Controls.Add(this.txtMarkerIconFilePath);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Location = new System.Drawing.Point(5, 393);
@@ -200,15 +209,25 @@ namespace MapControlUse
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "添加标注点";
             // 
-            // btnSetMarker
+            // btnSetMarker2
             // 
-            this.btnSetMarker.Location = new System.Drawing.Point(11, 41);
-            this.btnSetMarker.Name = "btnSetMarker";
-            this.btnSetMarker.Size = new System.Drawing.Size(75, 23);
-            this.btnSetMarker.TabIndex = 12;
-            this.btnSetMarker.Text = "设置标注点";
-            this.btnSetMarker.UseVisualStyleBackColor = true;
-            this.btnSetMarker.Click += new System.EventHandler(this.btnSetMarker_Click);
+            this.btnSetMarker2.Location = new System.Drawing.Point(78, 41);
+            this.btnSetMarker2.Name = "btnSetMarker2";
+            this.btnSetMarker2.Size = new System.Drawing.Size(61, 23);
+            this.btnSetMarker2.TabIndex = 12;
+            this.btnSetMarker2.Text = "标注点2";
+            this.btnSetMarker2.UseVisualStyleBackColor = true;
+            this.btnSetMarker2.Click += new System.EventHandler(this.btnSetMarker2_Click);
+            // 
+            // btnSetMarker1
+            // 
+            this.btnSetMarker1.Location = new System.Drawing.Point(11, 41);
+            this.btnSetMarker1.Name = "btnSetMarker1";
+            this.btnSetMarker1.Size = new System.Drawing.Size(61, 23);
+            this.btnSetMarker1.TabIndex = 12;
+            this.btnSetMarker1.Text = "标注点1";
+            this.btnSetMarker1.UseVisualStyleBackColor = true;
+            this.btnSetMarker1.Click += new System.EventHandler(this.btnSetMarker_Click);
             // 
             // txtMarkerIconFilePath
             // 
@@ -399,6 +418,16 @@ namespace MapControlUse
             this.btnBaiduOnlineMap.UseVisualStyleBackColor = true;
             this.btnBaiduOnlineMap.Click += new System.EventHandler(this.btnBaiduOnlineMap_Click);
             // 
+            // btnSogouOfflineMap2
+            // 
+            this.btnSogouOfflineMap2.Location = new System.Drawing.Point(3, 34);
+            this.btnSogouOfflineMap2.Name = "btnSogouOfflineMap2";
+            this.btnSogouOfflineMap2.Size = new System.Drawing.Size(74, 25);
+            this.btnSogouOfflineMap2.TabIndex = 0;
+            this.btnSogouOfflineMap2.Text = "搜狗离线2";
+            this.btnSogouOfflineMap2.UseVisualStyleBackColor = true;
+            this.btnSogouOfflineMap2.Click += new System.EventHandler(this.btnSogouOfflineMap2_Click);
+            // 
             // btnSogouOfflineMap1
             // 
             this.btnSogouOfflineMap1.Location = new System.Drawing.Point(3, 3);
@@ -418,25 +447,45 @@ namespace MapControlUse
             this.pnlMain.Size = new System.Drawing.Size(671, 468);
             this.pnlMain.TabIndex = 2;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.右键点击1ToolStripMenuItem,
+            this.右键点击3ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "右键点击1";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // mapControl1
             // 
-            this.mapControl1.CurrentMapType = MapType.SogouOffLineMap;
+            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
             this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = MapType.SogouOffLineMap;
+            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(671, 468);
             this.mapControl1.TabIndex = 0;
             // 
-            // btnSogouOfflineMap2
+            // 右键点击1ToolStripMenuItem
             // 
-            this.btnSogouOfflineMap2.Location = new System.Drawing.Point(3, 34);
-            this.btnSogouOfflineMap2.Name = "btnSogouOfflineMap2";
-            this.btnSogouOfflineMap2.Size = new System.Drawing.Size(74, 25);
-            this.btnSogouOfflineMap2.TabIndex = 0;
-            this.btnSogouOfflineMap2.Text = "搜狗离线2";
-            this.btnSogouOfflineMap2.UseVisualStyleBackColor = true;
-            this.btnSogouOfflineMap2.Click += new System.EventHandler(this.btnSogouOfflineMap2_Click);
+            this.右键点击1ToolStripMenuItem.Name = "右键点击1ToolStripMenuItem";
+            this.右键点击1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.右键点击1ToolStripMenuItem.Text = "右键点击2";
+            this.右键点击1ToolStripMenuItem.Click += new System.EventHandler(this.右键点击1ToolStripMenuItem_Click);
+            // 
+            // 右键点击3ToolStripMenuItem
+            // 
+            this.右键点击3ToolStripMenuItem.Name = "右键点击3ToolStripMenuItem";
+            this.右键点击3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.右键点击3ToolStripMenuItem.Text = "右键点击3";
+            this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
             // FrmMapControlUse
             // 
@@ -458,6 +507,7 @@ namespace MapControlUse
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.pnlMain.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -488,7 +538,7 @@ namespace MapControlUse
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnSetMarker;
+        private System.Windows.Forms.Button btnSetMarker1;
         private System.Windows.Forms.TextBox txtMarkerIconFilePath;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -502,6 +552,11 @@ namespace MapControlUse
         private System.Windows.Forms.Button btntxtSetMapLevel;
         private System.Windows.Forms.Button btntxtSetMapPointInfo;
         private System.Windows.Forms.Button btnSogouOfflineMap2;
+        private System.Windows.Forms.Button btnSetMarker2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 右键点击1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 右键点击3ToolStripMenuItem;
     }
 }
 

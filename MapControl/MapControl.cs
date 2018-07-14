@@ -66,7 +66,9 @@ namespace MapControl
         }
         #endregion
         public event MapControlLoadEndDelegate MapControlLoadEndEvent;
-        
+        public event MarkerRightClickDelegate MarkerRightClickEvent;
+        public event MapControlRightClick MapControlRightClickEvent;
+
         #endregion
 
         #region 自定义属性
@@ -100,6 +102,11 @@ namespace MapControl
                     {
                         mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
                         mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
+                    }
+                    if (MapControlRightClickEvent !=null)
+                    {
+                        mapControl.MapControlRightClickEvent -= MapControlRightClickEvent;
+                        mapControl.MapControlRightClickEvent += MapControlRightClickEvent;
                     }
                     currentMapType = value;
                 }
@@ -140,6 +147,11 @@ namespace MapControl
             {
                 mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
                 mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
+            }
+            if (MapControlRightClickEvent != null)
+            {
+                mapControl.MapControlRightClickEvent -= MapControlRightClickEvent;
+                mapControl.MapControlRightClickEvent += MapControlRightClickEvent;
             }
             switch (currentMapType)
             {
@@ -201,7 +213,7 @@ namespace MapControl
 
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
-            throw new NotImplementedException();
+            return mapControl.SetMapMarker(marker);
         }
     }
 }

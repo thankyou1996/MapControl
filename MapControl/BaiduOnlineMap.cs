@@ -23,6 +23,8 @@ namespace MapControl
         /// </summary>
         public string strMapIconPath = "\\OnlineMapFile\\ImageFile";
 
+        List<MapMarkerPointInfo> lMarker = new List<MapMarkerPointInfo>();
+
         #region 地图实时信息
 
         /// <summary>
@@ -93,13 +95,25 @@ namespace MapControl
         }
 
         #region  页面调用后台事件
+
+        /// <summary>
+        /// 地图输出日志
+        /// </summary>
+        /// <param name="strLog"></param>
+        public void MapConsoleLog(string strLog)
+        {
+            StringBuilder sbConsoleInfo = new StringBuilder();
+            sbConsoleInfo.Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "_");
+            sbConsoleInfo.Append(strLog);
+            Console.WriteLine(sbConsoleInfo.ToString());
+        }
+
         /// <summary>
         /// 地图加载完成返回
         /// </summary>
         public void MapLoadEnd()
         {
             Maploaded = true;
-            OnlineMapLoadEnd();
             MapControlLoadEnd(null);
         }
 
@@ -111,7 +125,12 @@ namespace MapControl
 
         }
 
-        //JS脚本调用用于显示标注的经纬度 160728
+        /// <summary>
+        /// JS脚本调用用于显示标注的经纬度 160728
+        /// </summary>
+        /// <param name="lng"></param>
+        /// <param name="lat"></param>
+        /// <param name="level"></param>
         public void Setlnglat(string lng, string lat, string level)
         {
             MapPointInfo mappointInfo = new MapPointInfo();
@@ -122,10 +141,14 @@ namespace MapControl
             SelectedMapPoint(mappointInfo);
         }
 
+
+
         public void MapLaodError()
         {
             //bolOnlineMapLoad = false;
         }
+
+
 
         public void FormHtml_DisplayPrompt(string strPrompt)
         {
@@ -140,6 +163,35 @@ namespace MapControl
         {
             //strlevel = srMapLevel;
         }
+
+        public void MapControlRightClick()
+        {
+            MapConsoleLog("MapControlRight");
+            MapControlRightClick(null);
+        }
+
+        /// <summary>
+        /// 标注点右键事件
+        /// </summary>
+        /// <param name="sender"></param>
+        public void MarkerRightClick(object objMarkerRightClickValue)
+        {
+            
+            MapConsoleLog(objMarkerRightClickValue.ToString());
+            //1.获取鼠标当前位置信息
+            //2.触发回调事件
+            //3.调用控件/窗体根据回调信息进行操作
+            int Temp_intMarkerRightClickValue = Convert.ToInt32(objMarkerRightClickValue);
+            if (lMarker.Count > Temp_intMarkerRightClickValue)
+            {
+                if (lMarker[Temp_intMarkerRightClickValue].ExistMarkerRightClickEvent())
+                {
+                    lMarker[Temp_intMarkerRightClickValue].MarkerRightClick(null);
+                }
+            }
+        }
+
+
 
         #endregion
 
@@ -538,38 +590,12 @@ namespace MapControl
 
 
         #endregion
-        
+
         #region 委托及事件
 
-        #region 地图加载完成
-        /// <summary>
-        /// 地图加载完成委托
-        /// </summary>
-        public delegate void OnlineMapLoadEndDeleagte();
-
-        /// <summary>
-        /// 地图加载完成事件
-        /// </summary>
-        public event OnlineMapLoadEndDeleagte OnlineMapLoadEndEvent;
-
-        /// <summary>
-        /// 地图加载完成
-        /// </summary>
-        private void OnlineMapLoadEnd()
-        {
-            if (OnlineMapLoadEndEvent != null)
-            {
-                OnlineMapLoadEndEvent();
-            }
-        }
-        #endregion
-
-        #region 地图选中事件
-        public delegate void SelectedMapPointDelegate(object sender, MapPointInfo SelectedMapPointValue);
-
-        public event SelectedMapPointDelegate SelectedMapPointEvent;
-
+        #region 地图加载完成事件
         public event MapControlLoadEndDelegate MapControlLoadEndEvent;
+
         private void MapControlLoadEnd(object MapControlLoadEndValue)
         {
             if (MapControlLoadEndEvent != null)
@@ -577,6 +603,14 @@ namespace MapControl
                 MapControlLoadEndEvent(this, MapControlLoadEndValue);
             }
         }
+        #endregion
+
+        #region 地图选中事件
+
+
+
+        public event SelectedMapPointDelegate SelectedMapPointEvent;
+
         private void SelectedMapPoint(MapPointInfo SelectedMapPointValue)
         {
             if (SelectedMapPointEvent != null)
@@ -584,6 +618,24 @@ namespace MapControl
                 SelectedMapPointEvent(this, SelectedMapPointValue);
             }
         }
+
+
+
+        #endregion
+
+        #region 地图控件右键事件
+        public event MapControlRightClick MapControlRightClickEvent;
+
+        public bool MapControlRightClick(object MapControlRightClickValue)
+        {
+            bool bolResule = false;
+            if (MapControlRightClickEvent != null)
+            {
+                bolResule = MapControlRightClickEvent(this, MapControlRightClickValue);
+            }
+            return bolResule;
+        }
+        
         #endregion
 
         #endregion
@@ -721,7 +773,27 @@ namespace MapControl
 
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
-            throw new NotImplementedException();
+            bool bolResult = false;
+            marker.MarkerPoint = marker.MarkerPoint.ToBD_09();
+            lMarker.Add(marker);
+            int Temp_intIndex = lMarker.Count - 1;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("DisplayMarker1", new object[] { marker.MarkerPoint.dblLon, marker.MarkerPoint.dblLat, marker.MarkerDisplayValue, marker.MarkerIconFilePath, Temp_intIndex });
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
         }
     }
 }

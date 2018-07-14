@@ -189,7 +189,7 @@ namespace OffLineMapUse
         }
 
         #region　地图控件事件
-        public void SelectedMapPoint(object sender, MapPointInfo MapPointInfo)
+        public void SelectedMapPoint(object sender, MapPointInfo1 MapPointInfo)
         {
             txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
             txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
@@ -204,7 +204,7 @@ namespace OffLineMapUse
 
         private void btnSetCenter_Click(object sender, EventArgs e)
         {
-            MapPointInfo point = new MapPointInfo();
+            MapPointInfo1 point = new MapPointInfo1();
             point.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text.Trim());
             point.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text.Trim());
             offlineMap1.SetCenterPoint(point);
@@ -214,12 +214,12 @@ namespace OffLineMapUse
         {
             int intMapLevel = Convert.ToInt32(txtSetMapInfo_MapLevel.Text.ToString());
             //offlineMap1.DisplayMap_SetMapLevel(intMapLevel);
-            offlineMap1.SetMapLevel(new MapPointInfo { intMapLevel = intMapLevel });
+            offlineMap1.SetMapLevel(new MapPointInfo1 { intMapLevel = intMapLevel });
         }
 
         private void btnSetMarker_Click(object sender, EventArgs e)
         {
-            MapPointInfo m = new MapPointInfo();
+            MapPointInfo1 m = new MapPointInfo1();
             m.dblLon = Convert.ToDouble(txtSetMapInfo_MapLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapInfo_MapLat.Text);
             string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
