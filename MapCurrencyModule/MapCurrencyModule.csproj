@@ -44,8 +44,12 @@
     <Compile Include="Delegate\MapControlLoadEndDelegate.cs" />
     <Compile Include="Enum\Enum_CordinateSystem.cs" />
     <Compile Include="IMapControl.cs" />
+    <Compile Include="MapIcon.cs" />
     <Compile Include="MapMarkerPointInfo.cs" />
+    <Compile Include="MapMarker.cs" />
+    <Compile Include="MapPoint.cs" />
     <Compile Include="MapPointInfo.cs" />
+    <Compile Include="MapSize.cs" />
     <Compile Include="MapType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
