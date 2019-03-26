@@ -26,13 +26,15 @@ namespace MapCurrencyModule
             set;
         }
 
+        private MapSize size = new MapSize { Width = 0, Height = 0 };
+
         /// <summary>
         /// 尺寸
         /// </summary>
         public MapSize Size
         {
-            get;
-            set;
+            get { return size; }
+            set { size = value; }
         }
     }
 }

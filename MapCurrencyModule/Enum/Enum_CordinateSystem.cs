@@ -7,7 +7,7 @@ namespace MapCurrencyModule.Enum
     /// <summary>
     /// 坐标系统枚举
     /// </summary>
-    public enum Enum_CordinateSystem
+    public enum Enum_Coordinate
     {
         /// <summary>
         /// 大地坐标系统

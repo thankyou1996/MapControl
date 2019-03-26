@@ -26,21 +26,21 @@ namespace MapCurrencyModule
         /// <summary>
         /// 坐标系统
         /// </summary>
-        public Enum_CordinateSystem cordinateSyatem = Enum_CordinateSystem.WGS_84;
+        public Enum_Coordinate cordinateSyatem = Enum_Coordinate.WGS_84;
         #region　事件
 
         public MapPointInfo ToWGS_84()
         {
             MapPointInfo result = new MapPointInfo();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.WGS_84;
+            result.cordinateSyatem = Enum_Coordinate.WGS_84;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            if (cordinateSyatem == Enum_Coordinate.GCJ_02)
             {
                 GCJToWGS_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (cordinateSyatem == Enum_Coordinate.BD_09)
             {
                 BDToWGS_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -53,14 +53,14 @@ namespace MapCurrencyModule
         {
             MapPointInfo result = new MapPointInfo();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.GCJ_02;
+            result.cordinateSyatem = Enum_Coordinate.GCJ_02;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (cordinateSyatem == Enum_Coordinate.WGS_84)
             {
                 WGSToGCJ_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (cordinateSyatem == Enum_Coordinate.BD_09)
             {
                 BDToGCJ_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -73,14 +73,14 @@ namespace MapCurrencyModule
         {
             MapPointInfo result = new MapPointInfo();
             result.intMapLevel = intMapLevel;
-            result.cordinateSyatem = Enum_CordinateSystem.BD_09;
+            result.cordinateSyatem = Enum_Coordinate.BD_09;
             double Temp_dblLon = dblLon;
             double Temp_dblLat = dblLat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (cordinateSyatem == Enum_Coordinate.WGS_84)
             {
                 WGSToBD_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            else if (cordinateSyatem == Enum_Coordinate.GCJ_02)
             {
                 GCJToBD_encrypt(dblLon, dblLat, out Temp_dblLon, out Temp_dblLat);
             }

@@ -11,6 +11,7 @@ namespace MapCurrencyModule
     {
         /// <summary>
         /// 名称
+        /// （实际业务应用中可作为id 或者关联信息存储）
         /// </summary>
         public string Name
         {
@@ -30,7 +31,7 @@ namespace MapCurrencyModule
         /// <summary>
         /// 旋转角度
         /// </summary>
-        public int Rotation
+        public double Rotation
         {
             get;
             set;
@@ -62,6 +63,41 @@ namespace MapCurrencyModule
             get;
             set;
         }
-            
+
+
+        private MapLabel label = new MapLabel();
+
+        /// <summary>
+        /// Label
+        /// </summary>
+        public MapLabel Label
+        {
+            get;
+            set;
+        }
+
+        private int intMaxZoom = 19;
+        /// <summary>
+        /// 最大地图显示等级
+        /// 当地图缩放到大于此zoom的时候，marker不会加载到地图上
+        /// </summary>
+        public int MaxZoom
+        {
+            get { return intMaxZoom; }
+            set { intMaxZoom = value; }
+        }
+
+
+        private int intMinZoom = 1;
+
+        /// <summary>
+        /// 最小显示等级
+        /// 当地图缩放到小于此zoom的时候，marker不会加载到地图上
+        /// </summary>
+        public int MinZoom
+        {
+            get { return intMinZoom; }
+            set { intMinZoom = value; }
+        }
     }
 }

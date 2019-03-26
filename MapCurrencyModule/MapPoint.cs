@@ -30,20 +30,30 @@ namespace MapCurrencyModule
         /// <summary>
         /// 坐标系统
         /// </summary>
-        public Enum_CordinateSystem cordinateSyatem = Enum_CordinateSystem.WGS_84;
+        private Enum_Coordinate coordinate = Enum_Coordinate.WGS_84;
+
+        /// <summary>
+        /// 坐标系统
+        /// </summary>
+        public Enum_Coordinate Coordinate
+        {
+            get { return coordinate; }
+            set { coordinate = value; }
+        }
+
         #region　事件
 
         public MapPoint ToWGS_84()
         {
             MapPoint result = new MapPoint();
-            result.cordinateSyatem = Enum_CordinateSystem.WGS_84;
+            result.Coordinate = Enum_Coordinate.WGS_84;
             double Temp_dblLon = Lon;
             double Temp_dblLat = Lat;
-            if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            if (Coordinate == Enum_Coordinate.GCJ_02)
             {
                 GCJToWGS_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (Coordinate == Enum_Coordinate.BD_09)
             {
                 BDToWGS_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -55,14 +65,14 @@ namespace MapCurrencyModule
         public MapPoint ToGCJ_02()
         {
             MapPoint result = new MapPoint();
-            result.cordinateSyatem = Enum_CordinateSystem.GCJ_02;
+            result.Coordinate = Enum_Coordinate.GCJ_02;
             double Temp_dblLon = Lon;
             double Temp_dblLat = Lat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (Coordinate == Enum_Coordinate.WGS_84)
             {
                 WGSToGCJ_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.BD_09)
+            else if (Coordinate == Enum_Coordinate.BD_09)
             {
                 BDToGCJ_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
@@ -74,14 +84,14 @@ namespace MapCurrencyModule
         public MapPoint ToBD_09()
         {
             MapPoint result = new MapPoint();
-            result.cordinateSyatem = Enum_CordinateSystem.BD_09;
+            result.Coordinate = Enum_Coordinate.BD_09;
             double Temp_dblLon = Lon;
             double Temp_dblLat = Lat;
-            if (cordinateSyatem == Enum_CordinateSystem.WGS_84)
+            if (Coordinate == Enum_Coordinate.WGS_84)
             {
                 WGSToBD_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
-            else if (cordinateSyatem == Enum_CordinateSystem.GCJ_02)
+            else if (Coordinate == Enum_Coordinate.GCJ_02)
             {
                 GCJToBD_encrypt(Lon, Lat, out Temp_dblLon, out Temp_dblLat);
             }
