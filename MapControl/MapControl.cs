@@ -36,6 +36,18 @@ namespace MapControl
         public string g_strBaiduOnlieMapFilePath = "";
 
         IMapControl mapControl;
+
+        public bool LoadEnd
+        {
+            get
+            {
+                if (mapControl != null)
+                {
+                    return mapControl.LoadEnd;
+                }
+                return false;
+            }
+        }
         #endregion
 
         #region 回调与事件

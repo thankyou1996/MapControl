@@ -247,6 +247,7 @@ namespace MapControl
 
         private void MapControlLoadEnd(object MapControlLoadEndValue)
         {
+            bolLoadEnd = true;
             if (MapControlLoadEndEvent != null)
             {
                 MapControlLoadEndEvent(this, MapControlLoadEndValue);
@@ -258,6 +259,14 @@ namespace MapControl
         #endregion
 
         #endregion
+
+
+        private bool bolLoadEnd = false;
+
+        public bool LoadEnd
+        {
+            get { return bolLoadEnd; }
+        }
         public SogouOfflineMap()
         {
             InitializeComponent();

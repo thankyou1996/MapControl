@@ -37,6 +37,17 @@ namespace MapControl
             set;
         }
 
+
+        /// <summary>
+        /// 是否加载完成 
+        /// true 加载 完成
+        /// false 未加载完成
+        /// </summary>
+        bool LoadEnd
+        {
+            get;
+        }
+
         /// <summary>
         /// 地图加载完成事件
         /// </summary>

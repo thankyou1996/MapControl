@@ -60,6 +60,13 @@ namespace MapControl
             InitializeComponent();
         }
 
+        private bool bolLoadEnd = false;
+
+        public bool LoadEnd
+        {
+            get { return bolLoadEnd; }
+        }
+
         #region 百度图接口
         /// <summary>
         /// 地址信息
@@ -598,6 +605,7 @@ namespace MapControl
 
         private void MapControlLoadEnd(object MapControlLoadEndValue)
         {
+            bolLoadEnd = true;
             if (MapControlLoadEndEvent != null)
             {
                 MapControlLoadEndEvent(this, MapControlLoadEndValue);
