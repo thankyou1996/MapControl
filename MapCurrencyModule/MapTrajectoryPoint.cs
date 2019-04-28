@@ -19,15 +19,15 @@ namespace MapCurrencyModule
             get { return name; }
             set { name = value; }
         }
-        private int intSpeed = 0;
+        private double dblSpeed = 0.0;
 
         /// <summary>
         /// 速度 m
         /// </summary>
-        public int Speed
+        public double Speed
         {
-            get { return intSpeed; }
-            set { intSpeed = value; }
+            get { return dblSpeed; }
+            set { dblSpeed = value; }
         }
         /// <summary>
         /// GPS定位方向
