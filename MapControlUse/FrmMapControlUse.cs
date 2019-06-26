@@ -21,17 +21,40 @@ namespace MapControlUse
 
             mapControl1.MapControlLoadEndEvent += MapControl1_MapControlLoadEndEvent;
             mapControl1.MapControlRightClickEvent += MapControl1_MapControlRightClickEvent;
+            mapControl1.MapMarkerClickEvent += MapControl1_MapMarkerClickEvent;
+            mapControl1.MapMarkerRightClickEvent += MapControl1_MapMarkerRightClickEvent;
+            mapControl1.MapMarkerDoubleClickEvent += MapControl1_MapMarkerDoubleClickEvent;
             Init();
             Test();
 
             mapControl1.Init();
         }
 
+        private bool MapControl1_MapMarkerDoubleClickEvent(object sender, object MapMarkerClickValue)
+        {
+            Console.WriteLine("Double Click:" + MapMarkerClickValue);
+            return true;
+        }
+
+        private bool MapControl1_MapMarkerRightClickEvent(object sender, object MapMarkerClickValue)
+        {
+            Console.WriteLine("Right Click:" + MapMarkerClickValue);
+            return true;
+            //throw new NotImplementedException();
+        }
+
+        private bool MapControl1_MapMarkerClickEvent(object sender, object MapMarkerClickValue)
+        {
+            Console.WriteLine("Click:" + MapMarkerClickValue);
+            return true;
+        }
+
         private bool MapControl1_MapControlRightClickEvent(object sender, object MapControlRightClickValue)
         {
+            Console.WriteLine("MapControlRightClick:");
             bool bolResult = false;
-            Point p = this.PointToClient(Control.MousePosition);
-            contextMenuStrip1.Show(this, p);
+            //Point p = this.PointToClient(Control.MousePosition);
+            //contextMenuStrip1.Show(this, p);
             return bolResult;
         }
 
@@ -52,6 +75,8 @@ namespace MapControlUse
         public void Test()
         {
             mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
+            //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\Branch\SK3000CU_SK9301\CUCode\接警客户端\bin\Release\MapFile\OnlineMapFile\BaiduOnlineMap\Map_Basic.html";
+            //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\CU_Html\html\map\baidu\map_basic.html";
             mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath+ "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
@@ -192,8 +217,9 @@ namespace MapControlUse
                 m.MarkerRightClickEvent += MarkerRightClick;
                 mapControl1.SetMapMarker(m);
             }
-            catch
+            catch(Exception ex)
             {
+                string x = ex.ToString();
                 //取值异常不做处理
             }
             
@@ -242,6 +268,91 @@ namespace MapControlUse
         private void 右键点击3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("右键点击3");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<MapMarkerPointInfo> lst = new List<MapMarkerPointInfo>();
+            string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName ="设备1",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 118.663395460268,
+                    dblLat = 24.8702832694795
+                },
+                MarkerDisplayValue = DateTime.Now.ToString(),
+                MarkerDisplayTag = "设备1",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue="0001",
+            });
+
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName = "设备2",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 118.95936869691,
+                    dblLat = 24.8848535906569
+                },
+                MarkerDisplayValue = DateTime.Now.ToString(),
+                MarkerDisplayTag = "设备2",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue = "0002",
+            });
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName = "设备3",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 118.58986311357,
+                    dblLat = 24.7949416109346
+                },
+                MarkerDisplayValue = DateTime.Now.ToString(),
+                MarkerDisplayTag = "设备3",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue = "0003",
+            });
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName = "设备4",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 118.500474917019,
+                    dblLat = 24.8983688406796
+                },
+                MarkerDisplayValue = DateTime.Now.ToString(),
+                MarkerDisplayTag = "设备4",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue = "0004",
+            });
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName = "设备5",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 118.596130844151,
+                    dblLat = 24.8653438696144
+                },
+                MarkerDisplayTag = "设备5",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue = "0005",
+            });
+
+            lst.Add(new MapMarkerPointInfo
+            {
+                MarkerName = "设备6",
+                MarkerPoint = new MapPointInfo
+                {
+                    dblLon = 106.432934,
+                    dblLat = 26.755622
+                },
+                MarkerDisplayTag = "设备5",
+                MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
+                CallbackValue = "0006",
+            });
+            mapControl1.SetMapMarkerList(lst);
         }
     }
 }

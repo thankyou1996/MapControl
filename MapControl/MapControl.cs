@@ -78,8 +78,22 @@ namespace MapControl
         }
         #endregion
         public event MapControlLoadEndDelegate MapControlLoadEndEvent;
-        public event MarkerRightClickDelegate MarkerRightClickEvent;
         public event MapControlRightClick MapControlRightClickEvent;
+        /// <summary>
+        /// 标注点点击事件
+        /// </summary>
+        public event MapMarkerClickDelegate MapMarkerClickEvent;
+
+        /// <summary>
+        /// 标注点右键点击事件
+        /// </summary>
+        public event MapMarkerClickDelegate MapMarkerRightClickEvent;
+
+
+        /// <summary>
+        /// 标注点双击事件
+        /// </summary>
+        public event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
 
         #endregion
 
@@ -110,16 +124,7 @@ namespace MapControl
                             mapControl = sogouOfflineMap1;
                             break;
                     }
-                    if (MapControlLoadEndEvent != null)
-                    {
-                        mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
-                        mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
-                    }
-                    if (MapControlRightClickEvent !=null)
-                    {
-                        mapControl.MapControlRightClickEvent -= MapControlRightClickEvent;
-                        mapControl.MapControlRightClickEvent += MapControlRightClickEvent;
-                    }
+                    Init_EventRegister();
                     currentMapType = value;
                 }
 
@@ -155,16 +160,7 @@ namespace MapControl
                     mapControl = sogouOfflineMap1;
                     break;
             }
-            if (MapControlLoadEndEvent != null)
-            {
-                mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
-                mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
-            }
-            if (MapControlRightClickEvent != null)
-            {
-                mapControl.MapControlRightClickEvent -= MapControlRightClickEvent;
-                mapControl.MapControlRightClickEvent += MapControlRightClickEvent;
-            }
+            Init_EventRegister();
             switch (currentMapType)
             {
                 case MapType.BaiduOnlineMap:
@@ -185,7 +181,36 @@ namespace MapControl
         {
             baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
         }
+        public void Init_EventRegister()
+        {
 
+            if (MapControlLoadEndEvent != null)
+            {
+                mapControl.MapControlLoadEndEvent -= MapControlLoadEndEvent;
+                mapControl.MapControlLoadEndEvent += MapControlLoadEndEvent;
+            }
+            if (MapControlRightClickEvent != null)
+            {
+                mapControl.MapControlRightClickEvent -= MapControlRightClickEvent;
+                mapControl.MapControlRightClickEvent += MapControlRightClickEvent;
+            }
+            if (MapMarkerRightClickEvent != null)
+            {
+                mapControl.MapMarkerRightClickEvent -= MapMarkerRightClickEvent;
+                mapControl.MapMarkerRightClickEvent += MapMarkerRightClickEvent;
+            }
+            if (MapMarkerClickEvent != null)
+            {
+                mapControl.MapMarkerClickEvent -= MapMarkerClickEvent;
+                mapControl.MapMarkerClickEvent += MapMarkerClickEvent;
+            }
+
+            if (MapMarkerDoubleClickEvent != null)
+            {
+                mapControl.MapMarkerDoubleClickEvent -= MapMarkerDoubleClickEvent;
+                mapControl.MapMarkerDoubleClickEvent += MapMarkerDoubleClickEvent;
+            }
+        }
         #region 百度地图事件
         public void BaiduOnlineMap_SelectedMapPointEvent(object sender, MapPointInfo mappointInfo)
         {
@@ -226,6 +251,11 @@ namespace MapControl
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
             return mapControl.SetMapMarker(marker);
+        }
+
+        public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
+        {
+            return mapControl.SetMapMarkerList(markers);
         }
     }
 }

@@ -258,6 +258,45 @@ namespace MapControl
 
         #endregion
 
+
+        #region 标注点点击事件
+
+        public event MapMarkerClickDelegate MapMarkerClickEvent;
+
+        private void MapMarkerClick(object MapMarkerClickValue)
+        {
+            if (MapMarkerClickEvent != null)
+            {
+                MapMarkerClickEvent(this, MapMarkerClickEvent);
+            }
+        }
+
+        #endregion
+
+        #region 标注点双击事件
+        public event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
+
+        private void MapMarkerDoubleClick(object MapMarkerClickValue)
+        {
+            if (MapMarkerDoubleClickEvent != null)
+            {
+                MapMarkerDoubleClickEvent(this, MapMarkerClickValue);
+            }
+        }
+
+        #endregion
+
+        #region 标注点右击事件
+
+        public event MapMarkerClickDelegate MapMarkerRightClickEvent;
+        private void MapMarkerRightClick(object MapMarkerClickValue)
+        {
+            if (MapMarkerRightClickEvent != null)
+            {
+                MapMarkerRightClickEvent(this, MapMarkerClickEvent);
+            }
+        }
+        #endregion
         #endregion
 
 
@@ -961,6 +1000,11 @@ namespace MapControl
         {
             //bool 
             //throw new NotImplementedException();
+            return false;
+        }
+
+        public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
+        {
             return false;
         }
         #endregion

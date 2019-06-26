@@ -70,11 +70,12 @@ namespace MapControlUse
             this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.mapControl1 = new MapControl.MapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapControl1 = new MapControl.MapControl();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -198,6 +199,7 @@ namespace MapControlUse
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.btnSetMarker2);
             this.groupBox3.Controls.Add(this.btnSetMarker1);
             this.groupBox3.Controls.Add(this.txtMarkerIconFilePath);
@@ -447,22 +449,6 @@ namespace MapControlUse
             this.pnlMain.Size = new System.Drawing.Size(671, 468);
             this.pnlMain.TabIndex = 2;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.右键点击1ToolStripMenuItem,
-            this.右键点击3ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "右键点击1";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
             // mapControl1
             // 
             this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
@@ -473,19 +459,45 @@ namespace MapControlUse
             this.mapControl1.Size = new System.Drawing.Size(671, 468);
             this.mapControl1.TabIndex = 0;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.右键点击1ToolStripMenuItem,
+            this.右键点击3ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(132, 70);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItem1.Text = "右键点击1";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // 右键点击1ToolStripMenuItem
             // 
             this.右键点击1ToolStripMenuItem.Name = "右键点击1ToolStripMenuItem";
-            this.右键点击1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.右键点击1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.右键点击1ToolStripMenuItem.Text = "右键点击2";
             this.右键点击1ToolStripMenuItem.Click += new System.EventHandler(this.右键点击1ToolStripMenuItem_Click);
             // 
             // 右键点击3ToolStripMenuItem
             // 
             this.右键点击3ToolStripMenuItem.Name = "右键点击3ToolStripMenuItem";
-            this.右键点击3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.右键点击3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(141, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "多标注点";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrmMapControlUse
             // 
@@ -557,6 +569,7 @@ namespace MapControlUse
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 右键点击1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 右键点击3ToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 

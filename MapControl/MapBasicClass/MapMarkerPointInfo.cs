@@ -24,6 +24,12 @@ namespace MapControl
             set { intMarkerID = value; }
         }
 
+
+        /// <summary>
+        /// Html 回调参数
+        /// </summary>
+        public string CallbackValue;
+
         /// <summary>
         /// 标注点名称
         /// </summary>
@@ -58,6 +64,7 @@ namespace MapControl
         /// 0表示未设置
         /// </summary>
         public int MarkerFirstDisplayMapLevel = 0;
+
 
         /// <summary>
         /// 地图点信息

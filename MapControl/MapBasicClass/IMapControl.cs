@@ -26,6 +26,11 @@ namespace MapControl
     /// <returns></returns>
     public delegate bool MapControlRightClick(object sender, object MapControlRightClickValue);
 
+
+    public delegate bool MapMarkerClickDelegate(object sender ,object MapMarkerClickValue);
+
+
+
     public interface IMapControl
     {
         /// <summary>
@@ -59,6 +64,18 @@ namespace MapControl
         event MapControlRightClick MapControlRightClickEvent;
 
         /// <summary>
+        /// 标注点点击事件
+        /// </summary>
+        event MapMarkerClickDelegate MapMarkerClickEvent;
+
+        /// <summary>
+        /// 标注点右键点击事件
+        /// </summary>
+        event MapMarkerClickDelegate MapMarkerRightClickEvent;
+
+
+        event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
+        /// <summary>
         /// 设置中心点
         /// </summary>
         /// <param name="point"></param>
@@ -89,5 +106,11 @@ namespace MapControl
         /// <returns></returns>
         bool SetMapMarker(MapMarkerPointInfo marker);
 
+        /// <summary>
+        /// 显示标注电信
+        /// </summary>
+        /// <param name="markers"></param>
+        /// <returns></returns>
+        bool SetMapMarkerList(List<MapMarkerPointInfo> markers);
     }
 }

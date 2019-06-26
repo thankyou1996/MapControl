@@ -23,7 +23,7 @@ namespace MapControl
         /// </summary>
         public string strMapIconPath = "\\OnlineMapFile\\ImageFile";
 
-        List<MapMarkerPointInfo> lMarker = new List<MapMarkerPointInfo>();
+        //List<MapMarkerPointInfo> lMarker = new List<MapMarkerPointInfo>();
 
         #region 地图实时信息
 
@@ -173,8 +173,16 @@ namespace MapControl
 
         public void MapControlRightClick()
         {
-            MapConsoleLog("MapControlRight");
             MapControlRightClick(null);
+        }
+
+        /// <summary>
+        /// 标注点点击事件
+        /// </summary>
+        /// <param name="objMarkerRightClickValue"></param>
+        public void MarkerClick(object objMarkerRightClickValue)
+        {
+            MapMarkerClick(objMarkerRightClickValue);
         }
 
         /// <summary>
@@ -183,23 +191,14 @@ namespace MapControl
         /// <param name="sender"></param>
         public void MarkerRightClick(object objMarkerRightClickValue)
         {
+            MapMarkerRightClick(objMarkerRightClickValue);
             
-            MapConsoleLog(objMarkerRightClickValue.ToString());
-            //1.获取鼠标当前位置信息
-            //2.触发回调事件
-            //3.调用控件/窗体根据回调信息进行操作
-            int Temp_intMarkerRightClickValue = Convert.ToInt32(objMarkerRightClickValue);
-            if (lMarker.Count > Temp_intMarkerRightClickValue)
-            {
-                if (lMarker[Temp_intMarkerRightClickValue].ExistMarkerRightClickEvent())
-                {
-                    lMarker[Temp_intMarkerRightClickValue].MarkerRightClick(null);
-                }
-            }
         }
 
-
-
+        public void MarkerDoubleClick(object objMarkerRightClickValue)
+        {
+            MapMarkerDoubleClick(objMarkerRightClickValue);
+        }
         #endregion
 
         #region 后台调用页面事件
@@ -593,6 +592,27 @@ namespace MapControl
             //}
         }
 
+        /// <summary>
+        /// 移除地图选中信息标注点
+        /// </summary>
+        public void RemoveMapSelectInfoMarker()
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("removeMapSelectInfoMarker");
+                        }));
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+        }
         #endregion
 
 
@@ -643,7 +663,50 @@ namespace MapControl
             }
             return bolResule;
         }
-        
+
+        #endregion
+
+
+        #region 标注点点击事件
+
+        public event MapMarkerClickDelegate MapMarkerClickEvent;
+
+        private void MapMarkerClick(object MapMarkerClickValue)
+        {
+            RemoveMapSelectInfoMarker();
+            if (MapMarkerClickEvent != null)
+            {
+                MapMarkerClickEvent(this, MapMarkerClickValue);
+            }
+        }
+
+        #endregion
+
+
+        #region 标注点右击事件
+
+        public event MapMarkerClickDelegate MapMarkerRightClickEvent;
+        private void MapMarkerRightClick(object MapMarkerClickValue)
+        {
+            RemoveMapSelectInfoMarker();
+            if (MapMarkerRightClickEvent != null)
+            {
+                MapMarkerRightClickEvent(this, MapMarkerClickValue);
+            }
+        }
+        #endregion
+
+        #region 标注点双击事件
+        public event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
+
+        private void MapMarkerDoubleClick(object MapMarkerClickValue) 
+        {
+            if (MapMarkerDoubleClickEvent != null)
+            {
+                MapMarkerDoubleClickEvent(this, MapMarkerClickValue);
+            }
+        }
+
         #endregion
 
         #endregion
@@ -783,8 +846,6 @@ namespace MapControl
         {
             bool bolResult = false;
             marker.MarkerPoint = marker.MarkerPoint.ToBD_09();
-            lMarker.Add(marker);
-            int Temp_intIndex = lMarker.Count - 1;
             if (Maploaded)
             {
                 while (!this.IsDisposed)
@@ -793,7 +854,36 @@ namespace MapControl
                     {
                         BeginInvoke(new EventHandler(delegate
                         {
-                            wbMain.Document.InvokeScript("DisplayMarker1", new object[] { marker.MarkerPoint.dblLon, marker.MarkerPoint.dblLat, marker.MarkerDisplayValue, marker.MarkerIconFilePath, Temp_intIndex });
+                            wbMain.Document.InvokeScript("DisplayMarker1", new object[] { marker.MarkerPoint.dblLon, marker.MarkerPoint.dblLat, marker.MarkerDisplayValue, marker.MarkerIconFilePath, marker.CallbackValue });
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
+
+
+        public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
+        {
+            foreach (MapMarkerPointInfo item in markers)
+            {
+                item.MarkerPoint = item.MarkerPoint.ToBD_09();
+            }
+
+            bool bolResult = false;
+            string msg= Newtonsoft.Json.JsonConvert.SerializeObject(markers);
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("setMapMarkerList", new object[] { msg });
                         }));
                         bolResult = true;
                         break;
