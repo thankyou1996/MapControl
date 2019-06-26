@@ -223,11 +223,29 @@ namespace MapControl
             set => CurrentMapType = value;
         }
 
+        /// <summary>
+        /// 双击地图方法 是否启用设置
+        /// 默认启用
+        /// </summary>
+        /// <param name="bolSetValue"></param>
+        public void SetEnableDoubleClickZoom(bool bolSetValue)
+        {
+            mapControl.SetEnableDoubleClickZoom(bolSetValue);
+        }
+
         public void SelectedMapPoint(object sender, MapPointInfo mappointInfo)
         {
             SelectedMapPoint(mappointInfo);
         }
 
+        /// <summary>
+        /// 设置标注点跳动效果
+        /// </summary>
+        /// <param name="strMarkerID"></param>
+        public void SetMarkerANIMATION_BOUNCE(string strMarkerID)
+        {
+            mapControl.SetMarkerANIMATION_BOUNCE(strMarkerID);
+        }
         public bool SetCenterPoint(MapPointInfo point)
         {
             return mapControl.SetCenterPoint(point);

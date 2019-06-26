@@ -1,5 +1,14 @@
-﻿//设置地图等级
-
+﻿
+//170407 设置双击是否启用放大缩小功能
+function SetEnableDoubleClickZoom(bolSetValue) {
+    if (bolSetValue) {
+        map.enableDoubleClickZoom();
+    }
+    else {
+        map.disableDoubleClickZoom();
+    }
+}
+//设置地图等级
 function SetMapLevel(intLevel)
 {
     map.setZoom(intLevel);
@@ -13,12 +22,20 @@ function DisplayMarker(lon, lat, strIconFilePath) {
     mgr.showMarkers();
 }
 
+function SetMarkerANIMATION_BOUNCE(id) {
+    var vv = mgr.getMarker(id);
+    if (vv != undefined) {
+        mgr.resetAnimation();
+        vv.setAnimation(BMAP_ANIMATION_BOUNCE);
+    }
+}
 
 
 //设置中心点 180103
 function SetMapCenter(lon, lat) {
     var point = new BMap.Point(lon, lat);
     map.setCenter(point);
+    mgr._showMarkers();
 }
 
 
@@ -33,6 +50,7 @@ function MarkerRightClick(m, e) {
 function DisplayMarker1(lon, lat, strTitle, strIconFilePath, strclickInfo) {
     var p = new BMap.Point(lon, lat);
     var m = new BMap.Marker(p);
+    m.id = strclickInfo;
     m.addEventListener("click", function (){ 
         //console.log(strclickInfo);
         //map.removeOverlay(marker2);
@@ -61,6 +79,12 @@ function setMapMarkerList(msg){
 
 function removeMapSelectInfoMarker() {
     map.removeOverlay(marker2);
+}
+
+function tesss(id) {
+    mgr.resetAnimation();
+    var vv = mgr.getMarker(id);
+    vv.setAnimation(BMAP_ANIMATION_BOUNCE);
 }
 function test()
 {

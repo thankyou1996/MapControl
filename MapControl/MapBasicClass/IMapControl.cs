@@ -75,6 +75,16 @@ namespace MapControl
 
 
         event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
+
+
+        /// <summary>
+        /// 双击地图方法 是否启用设置
+        /// 默认启用
+        /// </summary>
+        /// <param name="bolSetValue"></param>
+        /// <returns></returns>
+        void SetEnableDoubleClickZoom(bool bolSetValue);
+        
         /// <summary>
         /// 设置中心点
         /// </summary>
@@ -90,6 +100,13 @@ namespace MapControl
         bool SetMapLevel(MapPointInfo point);
 
         bool SetMapPointInfo(MapPointInfo point);
+
+        /// <summary>
+        /// 设置标注表跳动效果
+        /// </summary>
+        /// <param name="strMarkerID"></param>
+        void SetMarkerANIMATION_BOUNCE(string strMarkerID);
+
 
         /// <summary>
         /// 设置标注点信息

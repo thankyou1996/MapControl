@@ -31,7 +31,6 @@
     <DocumentationFile>bin\Release\MapControl.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="Ini">
       <HintPath>..\OffLineMap\bin\Debug\Ini.dll</HintPath>
     </Reference>

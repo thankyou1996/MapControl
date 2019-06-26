@@ -354,5 +354,21 @@ namespace MapControlUse
             });
             mapControl1.SetMapMarkerList(lst);
         }
+
+        private void btnDoubleClickZoon_True_Click(object sender, EventArgs e)
+        {
+            mapControl1.SetEnableDoubleClickZoom(true);
+        }
+
+        private void btnDoubleClickZoon_False_Click(object sender, EventArgs e)
+        {
+            mapControl1.SetEnableDoubleClickZoom(false);
+        }
+
+        private void btnSetMarkerANIMATION_BOUNCE_Click(object sender, EventArgs e)
+        {
+            string strId = textBox1.Text;
+            mapControl1.SetMarkerANIMATION_BOUNCE(strId);
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.IO;
 namespace MapControl
 {
     [System.Runtime.InteropServices.ComVisible(true)]   //窗体与脚本交互设置
-    public partial class BaiduOnlineMap : UserControl , IMapControl
+    public partial class BaiduOnlineMap : UserControl, IMapControl
     {
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace MapControl
             set { intCurrentMapLevel = value; }
         }
 
-        
+
         #endregion
         public BaiduOnlineMap()
         {
@@ -192,7 +192,7 @@ namespace MapControl
         public void MarkerRightClick(object objMarkerRightClickValue)
         {
             MapMarkerRightClick(objMarkerRightClickValue);
-            
+
         }
 
         public void MarkerDoubleClick(object objMarkerRightClickValue)
@@ -253,7 +253,7 @@ namespace MapControl
         /// </summary>
         /// <param name="point"></param>
         /// <param name="strIconFilePath"></param>
-        private void ToHtml_DisplayMarker(MapPointInfo point,string strIconFilePath)
+        private void ToHtml_DisplayMarker(MapPointInfo point, string strIconFilePath)
         {
             if (Maploaded)
             {
@@ -271,7 +271,7 @@ namespace MapControl
                 }
             }
         }
-        
+
         /// <summary>
         /// Html页面事件_显示主机位置信息
         /// </summary>
@@ -421,7 +421,7 @@ namespace MapControl
 
         }
 
-        
+
         /// <summary>
         /// Html页面事件_设置双击放大是否启用
         /// </summary>
@@ -699,7 +699,7 @@ namespace MapControl
         #region 标注点双击事件
         public event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
 
-        private void MapMarkerDoubleClick(object MapMarkerClickValue) 
+        private void MapMarkerDoubleClick(object MapMarkerClickValue)
         {
             if (MapMarkerDoubleClickEvent != null)
             {
@@ -720,7 +720,7 @@ namespace MapControl
         /// <summary>
         /// 初始化
         /// </summary>
-        public void Init(string  strMapFilePath)
+        public void Init(string strMapFilePath)
         {
             this.strMapFilePath = strMapFilePath;
             wbMain.Navigate(this.strMapFilePath);
@@ -754,7 +754,7 @@ namespace MapControl
         public void DisplayMap_SetMarker(MapPointInfo point, string strImageFileName)
         {
             ToHtml_DisplayMarker(point, strMapIconPath + "\\" + strImageFileName);
-            
+
         }
         #endregion
 
@@ -763,6 +763,30 @@ namespace MapControl
         {
             get => MapType.BaiduOnlineMap;
             set => throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 双击地图方法 是否启用设置
+        /// 默认启用
+        /// </summary>
+        /// <param name="bolSetValue"></param>
+        public void SetEnableDoubleClickZoom(bool bolSetValue)
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetEnableDoubleClickZoom", new object[] { bolSetValue });
+                        }));
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
         }
 
         public bool SetCenterPoint(MapPointInfo point)
@@ -787,7 +811,28 @@ namespace MapControl
             }
             return bolResult;
         }
-
+        /// <summary>
+        /// 设置标注点跳动效果
+        /// </summary>
+        /// <param name="strMarkerID"></param>
+        public void SetMarkerANIMATION_BOUNCE(string strMarkerID)
+        {
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("SetMarkerANIMATION_BOUNCE", new object[] { strMarkerID });
+                        }));
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+        }
         public bool SetMapLevel(MapPointInfo point)
         {
             point = point.ToBD_09();

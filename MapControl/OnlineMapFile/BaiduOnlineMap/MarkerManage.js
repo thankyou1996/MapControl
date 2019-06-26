@@ -213,6 +213,13 @@ var BMapLib = window.BMapLib = BMapLib || {};
         }
         this._numMarkers.length = 0;
     }
+    MarkerManager.prototype.getMarker = function (id) {
+        return this.getMarker(id);
+    }
+    //重置动画效果
+    MarkerManager.prototype.resetAnimation = function () {
+        this.resetAnimation();
+    }
     baidu.object.extend(MarkerManager.prototype, {
         _showMarkers: function () {
             var num = this._numMarkers.length,
@@ -312,6 +319,19 @@ var BMapLib = window.BMapLib = BMapLib || {};
             this.addMarker(h[f], x[f], y[f])
         }
     };
+    c.prototype.getMarker = function (id) {
+
+        for (var i = 0; i < this._numMarkers.length; i++)  {
+            if (this._numMarkers[i].id == id) {
+                return this._numMarkers[i];
+            }
+        }
+    };
+    c.prototype.resetAnimation = function () {
+        for (var i = 0; i < this._numMarkers.length; i++) {
+            this._numMarkers[i].setAnimation(null);
+        }
+    }
     c.prototype.removeMarker = function (d) {
         if (d instanceof BMap.Marker) {
             this._map.removeOverlay(d);

@@ -33,6 +33,8 @@ namespace MapControlUse
         {
             this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.btnDoubleClickZoon_False = new System.Windows.Forms.Button();
+            this.btnDoubleClickZoon_True = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtSetMapLevel = new System.Windows.Forms.TextBox();
             this.txtSetMapPointLat = new System.Windows.Forms.TextBox();
@@ -44,6 +46,7 @@ namespace MapControlUse
             this.btntxtSetMapPointInfo = new System.Windows.Forms.Button();
             this.btntxtSetMapPoint = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnSetMarker2 = new System.Windows.Forms.Button();
             this.btnSetMarker1 = new System.Windows.Forms.Button();
             this.txtMarkerIconFilePath = new System.Windows.Forms.TextBox();
@@ -70,12 +73,13 @@ namespace MapControlUse
             this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.mapControl1 = new MapControl.MapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.mapControl1 = new MapControl.MapControl();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnSetMarkerANIMATION_BOUNCE = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,6 +91,10 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.btnSetMarkerANIMATION_BOUNCE);
+            this.pnlLeft.Controls.Add(this.textBox1);
+            this.pnlLeft.Controls.Add(this.btnDoubleClickZoon_False);
+            this.pnlLeft.Controls.Add(this.btnDoubleClickZoon_True);
             this.pnlLeft.Controls.Add(this.groupBox4);
             this.pnlLeft.Controls.Add(this.groupBox3);
             this.pnlLeft.Controls.Add(this.groupBox1);
@@ -97,9 +105,29 @@ namespace MapControlUse
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(234, 468);
+            this.pnlLeft.Size = new System.Drawing.Size(325, 468);
             this.pnlLeft.TabIndex = 1;
             this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
+            // 
+            // btnDoubleClickZoon_False
+            // 
+            this.btnDoubleClickZoon_False.Location = new System.Drawing.Point(227, 41);
+            this.btnDoubleClickZoon_False.Name = "btnDoubleClickZoon_False";
+            this.btnDoubleClickZoon_False.Size = new System.Drawing.Size(91, 23);
+            this.btnDoubleClickZoon_False.TabIndex = 9;
+            this.btnDoubleClickZoon_False.Text = "关闭双击放大";
+            this.btnDoubleClickZoon_False.UseVisualStyleBackColor = true;
+            this.btnDoubleClickZoon_False.Click += new System.EventHandler(this.btnDoubleClickZoon_False_Click);
+            // 
+            // btnDoubleClickZoon_True
+            // 
+            this.btnDoubleClickZoon_True.Location = new System.Drawing.Point(227, 12);
+            this.btnDoubleClickZoon_True.Name = "btnDoubleClickZoon_True";
+            this.btnDoubleClickZoon_True.Size = new System.Drawing.Size(91, 23);
+            this.btnDoubleClickZoon_True.TabIndex = 8;
+            this.btnDoubleClickZoon_True.Text = "打开双击放大";
+            this.btnDoubleClickZoon_True.UseVisualStyleBackColor = true;
+            this.btnDoubleClickZoon_True.Click += new System.EventHandler(this.btnDoubleClickZoon_True_Click);
             // 
             // groupBox4
             // 
@@ -210,6 +238,16 @@ namespace MapControlUse
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "添加标注点";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(141, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "多标注点";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnSetMarker2
             // 
@@ -444,20 +482,10 @@ namespace MapControlUse
             // 
             this.pnlMain.Controls.Add(this.mapControl1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(234, 0);
+            this.pnlMain.Location = new System.Drawing.Point(325, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(671, 468);
+            this.pnlMain.Size = new System.Drawing.Size(580, 468);
             this.pnlMain.TabIndex = 2;
-            // 
-            // mapControl1
-            // 
-            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Name = "mapControl1";
-            this.mapControl1.Size = new System.Drawing.Size(671, 468);
-            this.mapControl1.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -489,15 +517,33 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
-            // button1
+            // mapControl1
             // 
-            this.button1.Location = new System.Drawing.Point(141, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "多标注点";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Name = "mapControl1";
+            this.mapControl1.Size = new System.Drawing.Size(580, 468);
+            this.mapControl1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(227, 70);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(91, 21);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "0001";
+            // 
+            // btnSetMarkerANIMATION_BOUNCE
+            // 
+            this.btnSetMarkerANIMATION_BOUNCE.Location = new System.Drawing.Point(227, 92);
+            this.btnSetMarkerANIMATION_BOUNCE.Name = "btnSetMarkerANIMATION_BOUNCE";
+            this.btnSetMarkerANIMATION_BOUNCE.Size = new System.Drawing.Size(91, 23);
+            this.btnSetMarkerANIMATION_BOUNCE.TabIndex = 11;
+            this.btnSetMarkerANIMATION_BOUNCE.Text = "设置跳动";
+            this.btnSetMarkerANIMATION_BOUNCE.UseVisualStyleBackColor = true;
+            this.btnSetMarkerANIMATION_BOUNCE.Click += new System.EventHandler(this.btnSetMarkerANIMATION_BOUNCE_Click);
             // 
             // FrmMapControlUse
             // 
@@ -510,6 +556,7 @@ namespace MapControlUse
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmMapControlUse_Load);
             this.pnlLeft.ResumeLayout(false);
+            this.pnlLeft.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -570,6 +617,10 @@ namespace MapControlUse
         private System.Windows.Forms.ToolStripMenuItem 右键点击1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 右键点击3ToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDoubleClickZoon_True;
+        private System.Windows.Forms.Button btnDoubleClickZoon_False;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnSetMarkerANIMATION_BOUNCE;
     }
 }
 

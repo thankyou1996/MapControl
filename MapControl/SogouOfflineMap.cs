@@ -925,6 +925,17 @@ namespace MapControl
         }
 
         #region 接口事件
+
+        /// <summary>
+        /// 双击地图方法 是否启用设置
+        /// 默认启用
+        /// </summary>
+        /// <param name="bolSetValue"></param>
+        public void SetEnableDoubleClickZoom(bool bolSetValue)
+        {
+            return;
+        }
+
         public bool SetCenterPoint(MapPointInfo point)
         {
             point = point.ToWGS_84();
@@ -939,6 +950,14 @@ namespace MapControl
             return bolResult;
         }
 
+        /// <summary>
+        /// 设置标注点跳动效果
+        /// </summary>
+        /// <param name="strMarkerID"></param>
+        public void SetMarkerANIMATION_BOUNCE(string strMarkerID)
+        {
+
+        }
         public bool SetMapLevel(MapPointInfo point)
         {
             bool bolResult = false;
