@@ -77,9 +77,16 @@ function setMapMarkerList(msg){
     }
 }
 
+function clearMapMarkerList() {
+    mgr.clearMarkers();
+}
+
 function removeMapSelectInfoMarker() {
     map.removeOverlay(marker2);
 }
+
+
+
 
 function tesss(id) {
     mgr.resetAnimation();

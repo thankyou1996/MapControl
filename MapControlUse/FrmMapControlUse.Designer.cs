@@ -33,6 +33,8 @@ namespace MapControlUse
         {
             this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.btnSetMarkerANIMATION_BOUNCE = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnDoubleClickZoon_False = new System.Windows.Forms.Button();
             this.btnDoubleClickZoon_True = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -73,13 +75,12 @@ namespace MapControlUse
             this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.mapControl1 = new MapControl.MapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapControl1 = new MapControl.MapControl();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnSetMarkerANIMATION_BOUNCE = new System.Windows.Forms.Button();
+            this.btnClearMarkerList = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,6 +92,7 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.btnClearMarkerList);
             this.pnlLeft.Controls.Add(this.btnSetMarkerANIMATION_BOUNCE);
             this.pnlLeft.Controls.Add(this.textBox1);
             this.pnlLeft.Controls.Add(this.btnDoubleClickZoon_False);
@@ -108,6 +110,24 @@ namespace MapControlUse
             this.pnlLeft.Size = new System.Drawing.Size(325, 468);
             this.pnlLeft.TabIndex = 1;
             this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
+            // 
+            // btnSetMarkerANIMATION_BOUNCE
+            // 
+            this.btnSetMarkerANIMATION_BOUNCE.Location = new System.Drawing.Point(227, 92);
+            this.btnSetMarkerANIMATION_BOUNCE.Name = "btnSetMarkerANIMATION_BOUNCE";
+            this.btnSetMarkerANIMATION_BOUNCE.Size = new System.Drawing.Size(91, 23);
+            this.btnSetMarkerANIMATION_BOUNCE.TabIndex = 11;
+            this.btnSetMarkerANIMATION_BOUNCE.Text = "设置跳动";
+            this.btnSetMarkerANIMATION_BOUNCE.UseVisualStyleBackColor = true;
+            this.btnSetMarkerANIMATION_BOUNCE.Click += new System.EventHandler(this.btnSetMarkerANIMATION_BOUNCE_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(227, 70);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(91, 21);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "0001";
             // 
             // btnDoubleClickZoon_False
             // 
@@ -487,6 +507,16 @@ namespace MapControlUse
             this.pnlMain.Size = new System.Drawing.Size(580, 468);
             this.pnlMain.TabIndex = 2;
             // 
+            // mapControl1
+            // 
+            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Name = "mapControl1";
+            this.mapControl1.Size = new System.Drawing.Size(580, 468);
+            this.mapControl1.TabIndex = 0;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -517,33 +547,15 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
-            // mapControl1
+            // btnClearMarkerList
             // 
-            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Name = "mapControl1";
-            this.mapControl1.Size = new System.Drawing.Size(580, 468);
-            this.mapControl1.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(227, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(91, 21);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = "0001";
-            // 
-            // btnSetMarkerANIMATION_BOUNCE
-            // 
-            this.btnSetMarkerANIMATION_BOUNCE.Location = new System.Drawing.Point(227, 92);
-            this.btnSetMarkerANIMATION_BOUNCE.Name = "btnSetMarkerANIMATION_BOUNCE";
-            this.btnSetMarkerANIMATION_BOUNCE.Size = new System.Drawing.Size(91, 23);
-            this.btnSetMarkerANIMATION_BOUNCE.TabIndex = 11;
-            this.btnSetMarkerANIMATION_BOUNCE.Text = "设置跳动";
-            this.btnSetMarkerANIMATION_BOUNCE.UseVisualStyleBackColor = true;
-            this.btnSetMarkerANIMATION_BOUNCE.Click += new System.EventHandler(this.btnSetMarkerANIMATION_BOUNCE_Click);
+            this.btnClearMarkerList.Location = new System.Drawing.Point(227, 119);
+            this.btnClearMarkerList.Name = "btnClearMarkerList";
+            this.btnClearMarkerList.Size = new System.Drawing.Size(91, 35);
+            this.btnClearMarkerList.TabIndex = 12;
+            this.btnClearMarkerList.Text = "清除标注点信息";
+            this.btnClearMarkerList.UseVisualStyleBackColor = true;
+            this.btnClearMarkerList.Click += new System.EventHandler(this.btnClearMarkerList_Click);
             // 
             // FrmMapControlUse
             // 
@@ -621,6 +633,7 @@ namespace MapControlUse
         private System.Windows.Forms.Button btnDoubleClickZoon_False;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnSetMarkerANIMATION_BOUNCE;
+        private System.Windows.Forms.Button btnClearMarkerList;
     }
 }
 

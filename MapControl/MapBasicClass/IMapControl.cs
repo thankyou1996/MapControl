@@ -129,5 +129,11 @@ namespace MapControl
         /// <param name="markers"></param>
         /// <returns></returns>
         bool SetMapMarkerList(List<MapMarkerPointInfo> markers);
+
+        /// <summary>
+        /// 清楚地图点信息
+        /// </summary>
+        /// <returns></returns>
+        bool ClearMapMarkerList();
     }
 }

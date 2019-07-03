@@ -370,5 +370,10 @@ namespace MapControlUse
             string strId = textBox1.Text;
             mapControl1.SetMarkerANIMATION_BOUNCE(strId);
         }
+
+        private void btnClearMarkerList_Click(object sender, EventArgs e)
+        {
+            mapControl1.ClearMapMarkerList();
+        }
     }
 }

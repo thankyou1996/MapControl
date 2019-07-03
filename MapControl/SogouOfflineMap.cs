@@ -1026,6 +1026,15 @@ namespace MapControl
         {
             return false;
         }
+
+        /// <summary>
+        /// 清除地图所有点信息
+        /// </summary>
+        /// <returns></returns>
+        public bool ClearMapMarkerList()
+        {
+            return false;
+        }
         #endregion
 
     }

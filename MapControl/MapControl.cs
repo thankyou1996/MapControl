@@ -275,5 +275,10 @@ namespace MapControl
         {
             return mapControl.SetMapMarkerList(markers);
         }
+
+        public bool ClearMapMarkerList()
+        {
+            return mapControl.ClearMapMarkerList();
+        }
     }
 }

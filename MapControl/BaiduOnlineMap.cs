@@ -938,5 +938,33 @@ namespace MapControl
             }
             return bolResult;
         }
+
+
+        /// <summary>
+        /// 地图点信息
+        /// </summary>
+        /// <returns></returns>
+        public bool ClearMapMarkerList()
+        {
+
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("clearMapMarkerList");
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
     }
 }
