@@ -38,6 +38,7 @@ namespace MapControl
 
         int intPicValueKey = 1;
         Dictionary<object, PictureBox> dicPicValue = new Dictionary<object, PictureBox>();
+        Dictionary<object, Label> dicLabel = new Dictionary<object, Label>();
 
         #region 地图文件基本信息
         /// <summary>
@@ -482,6 +483,20 @@ namespace MapControl
                             PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
                             PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
                             pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width/2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                        }
+                    }
+                }
+
+                if (dicLabel != null && dicLabel.Count > 0)
+                {
+                    foreach (Label pic in dicLabel.Values)
+                    {
+                        if (pic != null && pic.Visible == true && pic.Parent == picMap)
+                        {
+                            MapPointInfo point = (MapPointInfo)pic.Tag;
+                            PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+                            PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
+                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height)+32);
                         }
                     }
                 }
@@ -1007,6 +1022,16 @@ namespace MapControl
                         dicPicValue[intPicValueKey].Dispose();
                     }
                     dicPicValue[intPicValueKey] = pic;
+
+                    Label label = new Label();
+                    label.AutoSize = true;
+                    label.Location = new System.Drawing.Point(152, 65);
+                    label.Name = "lbl"+ intPicValueKey;
+                    label.Size = new System.Drawing.Size(41, 12);
+                    label.TabIndex = 1;
+                    label.Tag = point;
+                    label.Text = "label1";
+
                     intPicValueKey++;
                     picMap.Controls.Add(pic);
                     bolResult = true;
@@ -1015,8 +1040,57 @@ namespace MapControl
             return bolResult;
         }
 
+        public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath, string strDisplay)
+        {
+            bool bolResult = false;
+            point = point.ToWGS_84();
+            if (mapMain != null)
+            {
+                if (File.Exists(strMarkerPicFilePath))
+                {
+                    //设置图片位置，将状态置为显示
+                    PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+                    PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
+                    PictureBox pic = new PictureBox();
+                    pic.Image = Image.FromFile(strMarkerPicFilePath);
+                    pic.Size = new Size(32, 32);
+                    pic.BackColor = Color.Transparent;
+                    pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                    pic.Tag = point;
+                    if (dicPicValue.ContainsKey(intPicValueKey))
+                    {
+                        dicPicValue[intPicValueKey].Dispose();
+                    }
+                    dicPicValue[intPicValueKey] = pic;
+
+                    Label label = new Label();
+                    label.AutoSize = true;
+                    label.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height) + 32);
+                    label.Name = "lbl" + intPicValueKey;
+                    label.Size = new System.Drawing.Size(41, 12);
+                    label.TabIndex = 1;
+                    label.Text = strDisplay;
+                    label.Tag = point;
+                    label.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                    if (dicLabel.ContainsKey(intPicValueKey))
+                    {
+                        dicLabel[intPicValueKey].Dispose();
+                    }
+                    dicLabel[intPicValueKey] = label;
+
+                    intPicValueKey++;
+                    picMap.Controls.Add(pic);
+                    picMap.Controls.Add(label);
+                    bolResult = true;
+                }
+            }
+            return bolResult;
+        }
+
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
+            //SetMapMarker(marker.MarkerPoint, marker.MarkerIconFilePath, marker.MarkerDisplayValue);
+            SetMapMarker(marker.MarkerPoint, marker.MarkerIconFilePath, marker.MarkerDisplayValue);
             //bool 
             //throw new NotImplementedException();
             return false;
@@ -1033,6 +1107,19 @@ namespace MapControl
         /// <returns></returns>
         public bool ClearMapMarkerList()
         {
+            foreach (PictureBox pic in dicPicValue.Values)
+            {
+                picMap.Controls.Remove(pic);
+                pic.Dispose();
+            }
+            dicPicValue.Clear();
+            foreach (Label lbl in dicLabel.Values)
+            {
+                picMap.Controls.Remove(lbl);
+                lbl.Dispose();
+
+            }
+            dicLabel.Clear();
             return false;
         }
         #endregion
