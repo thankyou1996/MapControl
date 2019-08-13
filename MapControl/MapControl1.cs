@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace MapControl
 {
-    public partial class MapControl : UserControl, IMapControl
+    public partial class MapControl1 : UserControl, IMapControl
     {
-        public MapControl()
+        public MapControl1()
         {
             InitializeComponent();
         }
@@ -34,6 +34,10 @@ namespace MapControl
 
 
         public string g_strBaiduOnlieMapFilePath = "";
+
+
+        public string g_strGoogleMapFilePath = "";
+
 
         IMapControl mapControl;
 
@@ -113,6 +117,7 @@ namespace MapControl
                         case MapType.BaiduOnlineMap:
                             baiduOnlineMap1.Visible = true;
                             sogouOfflineMap1.Visible = false;
+                            googleOnlineMap1.Visible = false;
                             baiduOnlineMap1.Dock = DockStyle.Fill;
                             mapControl = baiduOnlineMap1;
                             break;
@@ -120,8 +125,17 @@ namespace MapControl
                         case MapType.SogouOffLineMap:
                             baiduOnlineMap1.Visible = false;
                             sogouOfflineMap1.Visible = true;
+                            googleOnlineMap1.Visible = false;
                             sogouOfflineMap1.Dock = DockStyle.Fill;
                             mapControl = sogouOfflineMap1;
+                            break;
+                        case MapType.GoogleOnlineMap:
+
+                            baiduOnlineMap1.Visible = false;
+                            sogouOfflineMap1.Visible = false;
+                            googleOnlineMap1.Visible = true;
+                            googleOnlineMap1.Dock = DockStyle.Fill;
+                            mapControl = googleOnlineMap1;
                             break;
                     }
                     Init_EventRegister();
@@ -141,7 +155,7 @@ namespace MapControl
         {
             sogouOfflineMap1.OfflineMapDisplay += SogouMapDisplay;
             baiduOnlineMap1.SelectedMapPointEvent += SelectedMapPoint;
-            sogouOfflineMap1.SelectedMapPointEvent += SelectedMapPoint;
+            googleOnlineMap1.SelectedMapPointEvent += SelectedMapPoint;
         }
         public void SogouMapDisplay(double dblLon, double dblLat, int intMapLevel, string strTag = "")
         {
@@ -159,6 +173,10 @@ namespace MapControl
                 case MapType.SogouOffLineMap:
                     mapControl = sogouOfflineMap1;
                     break;
+                case MapType.GoogleOnlineMap:
+                    mapControl = googleOnlineMap1;
+                    break;
+
             }
             Init_EventRegister();
             switch (currentMapType)
@@ -169,6 +187,9 @@ namespace MapControl
                     break;
                 case MapType.SogouOffLineMap:
                     Init_SogouMapOfflineMap();
+                    break;
+                case MapType.GoogleOnlineMap:
+                    Init_Google();
                     break;
             }
         }
@@ -181,6 +202,12 @@ namespace MapControl
         {
             baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
         }
+
+        public void Init_Google()
+        {
+            googleOnlineMap1.Init(g_strGoogleMapFilePath);
+        }
+
         public void Init_EventRegister()
         {
 

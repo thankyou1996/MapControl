@@ -99,6 +99,11 @@ namespace MapControl
         /// <returns></returns>
         bool SetMapLevel(MapPointInfo point);
 
+        /// <summary>
+        /// 设置地图位置信息以及等级
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         bool SetMapPointInfo(MapPointInfo point);
 
         /// <summary>
@@ -124,7 +129,7 @@ namespace MapControl
         bool SetMapMarker(MapMarkerPointInfo marker);
 
         /// <summary>
-        /// 显示标注电信
+        /// 显示标注d
         /// </summary>
         /// <param name="markers"></param>
         /// <returns></returns>

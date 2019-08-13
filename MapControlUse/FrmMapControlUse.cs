@@ -80,6 +80,8 @@ namespace MapControlUse
             mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath+ "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
+
+            mapControl1.g_strGoogleMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\GoogleOnlineMap\\Map_Basic.html";
         }
 
 
@@ -175,9 +177,9 @@ namespace MapControlUse
         }
         private void btnSogouOfflineMap_Click(object sender, EventArgs e)
         {
-            mapControl1.g_strSougouOffLineMapFileBin = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.bin";
-            mapControl1.g_strSougouOffLineMapFileInfo = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.info";
-            mapControl1.g_strSougouOffLineMapFileIni = @"G:\上班汇总\Working\维护项目\SK3000_Client\SK3000CU\Trunk\接警客户端\bin\Release\VectorMap\湖南岳阳.ini";
+            mapControl1.g_strSougouOffLineMapFileBin = Environment.CurrentDirectory + "\\MapFile\\Map.bin";
+            mapControl1.g_strSougouOffLineMapFileInfo = Environment.CurrentDirectory + "\\MapFile\\Map.info";
+            mapControl1.g_strSougouOffLineMapFileIni = Environment.CurrentDirectory + "\\MapFile\\Map.ini";
             mapControl1.CurrentMapType = MapType.SogouOffLineMap;
             mapControl1.Init();
         }
@@ -375,5 +377,12 @@ namespace MapControlUse
         {
             mapControl1.ClearMapMarkerList();
         }
+
+        private void BtnGoogleOnlineMap_Click(object sender, EventArgs e)
+        {
+            mapControl1.CurrentMapType = MapType.GoogleOnlineMap;
+            mapControl1.Init();
+        }
+
     }
 }

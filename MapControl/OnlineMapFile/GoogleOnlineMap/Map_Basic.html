@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .f {
+            position: absolute;
+            z-index: 999;
+        }
+
+        #mouselnglat {
+            right: 0px;
+            bottom: 0px;
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <p id="mouselnglat" class="f">N/A</p>
+    <div id="map"></div>
+    <script>
+        var map;//地图对象
+        var mgr;//标注管理器
+        var marker;//全局变量报警标注
+        var marker2;//全局变量点击标注
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 24.8, lng: 118.8 },
+                zoom: 8,
+                disableDoubleClickZoom: false
+            });
+            map.addListener("click", showInfo);//将点击的标注添加到地图中
+            //map.addListener("mousemove", GetlngAndlat);//鼠标移动事件——用于设置经纬度
+            map.addListener("zoom_changed", MapZoomChanged);
+            mgr = new MarkerClusterer(map, [],
+                { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+            map.addListener("rightclick", function () {
+                window.external.MapControlRightClick();
+            });
+            setTimeout(function () {
+                window.external.MapLoadEnd();   //短暂延时后上传状态至后台
+            }, 300)
+        }
+        //鼠标地图上单击显示点信息
+        function showInfo(e) {
+            try {
+                console.log(e.latLng.lng());
+                //移除所以标注点
+                //map.removeOverlay(marker2);
+                if (marker2) {
+                    marker2.setMap(null);
+                }
+                marker2 = new google.maps.Marker({
+                    position: e.latLng,
+                    //icon: "http://api.map.baidu.com/library/MarkerTool/1.2/src/images/us_mk_icon.png",
+                    map: map
+                });
+                //调用后台设置经纬度方法
+                window.external.Setlnglat(e.latLng.lng(), e.latLng.lat(), map.getZoom());
+            }
+            catch (err) {
+            }
+        }
+        //设置地图右下角经纬度信息
+        function GetlngAndlat(e) {
+            try {
+                document.getElementById("mouselnglat").innerHTML = e.latLng.lng() + "," + e.latLng.lat();
+            }
+            catch (err) { }
+        }
+        //地图等级改变
+        function MapZoomChanged() {
+            window.external.FromHtml_MapZoomChanged(map.getZoom());
+        }
+        //设置地图中心
+        function SetMapCenter(lng, lat) {
+            var point = new google.maps.LatLng(lat, lng);
+            map.setCenter(point);
+        }
+        //设置地图中心
+        function SetMapLevel(intLevel) {
+            map.setZoom(intLevel)
+        }
+        //启用双击修改等级
+        function SetEnableDoubleClickZoom(bolSetValue) {
+            //map.set('disableDoubleClickZoom', bolSetValue);
+            //map.setOptions({ disableDoubleClickZoom: bolSetValue });
+            if (bolSetValue) {
+                map.setOptions({ gestureHandling: 'auto' });
+            }
+            else {
+                map.setOptions({ gestureHandling: 'none' });
+            }
+        }
+
+
+        function SetMarkerANIMATION_BOUNCE(id) {
+            var list = mgr.getMarkers();
+            for (var i in list) {
+                if (list[i].id == id) {
+                    list[i].setAnimation(google.maps.Animation.BOUNCE);
+                }
+                else {
+                    list[i].setAnimation(null);
+                }
+            }
+        }
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        function DisplayMarker(lon, lat, strIconFilePath) {
+            var myLatLng = { lat: lat, lng: lon };
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                icon: strIconFilePath,
+            });
+            mgr.addMarker(marker);
+        }
+        //显示设备标注点
+        function DisplayMarker1(lon, lat, strTitle, strIconFilePath, strclickInfo) {
+            var myLatLng = { lat: lat, lng: lon };
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                title: strTitle,
+                label: strTitle,
+                icon: {
+                    url: strIconFilePath,
+                    labelOrigin: { x: 50, y: 10 }
+                },
+                id: strclickInfo,
+            });
+            marker.addListener('click', function () { window.external.MarkerClick(strclickInfo); });
+            marker.addListener('rightclick', function () { window.external.MarkerClick(strclickInfo); });
+            marker.addListener('dblclick', function () { window.external.MarkerClick(strclickInfo); });
+            mgr.addMarker(marker);
+        }
+        //设置标注列表
+        function setMapMarkerList(msg) {
+            var data = eval(msg);
+            for (var i = 0; i < data.length; i++) {
+                DisplayMarker1(data[i].MarkerPoint.dblLon, data[i].MarkerPoint.dblLat, data[i].MarkerDisplayTag, data[i].MarkerIconFilePath, data[i].CallbackValue);
+            }
+        }
+        //清空标注管理器
+        function clearMapMarkerList() {
+            mgr.clearMarkers();
+        }
+        //清除点击出来的标注
+        function removeMapSelectInfoMarker() {
+            if (marker2) {
+                marker2.setMap(null);
+            }
+        }
+        //清空标注管理器
+        function clearMapMarkerList() {
+            mgr.clearMarkers();
+        }
+
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTkHbQcI07PIXD3t6xx4FjwqnvJTJC5tI&callback=initMap"
+            async defer></script>
+</body>
+</html>

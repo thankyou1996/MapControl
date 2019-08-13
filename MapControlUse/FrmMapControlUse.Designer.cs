@@ -33,6 +33,7 @@ namespace MapControlUse
         {
             this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.btnClearMarkerList = new System.Windows.Forms.Button();
             this.btnSetMarkerANIMATION_BOUNCE = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnDoubleClickZoon_False = new System.Windows.Forms.Button();
@@ -75,12 +76,12 @@ namespace MapControlUse
             this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.mapControl1 = new MapControl.MapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClearMarkerList = new System.Windows.Forms.Button();
+            this.btnGoogleOnlineMap = new System.Windows.Forms.Button();
+            this.mapControl1 = new MapControl.MapControl1();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -92,6 +93,7 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.btnGoogleOnlineMap);
             this.pnlLeft.Controls.Add(this.btnClearMarkerList);
             this.pnlLeft.Controls.Add(this.btnSetMarkerANIMATION_BOUNCE);
             this.pnlLeft.Controls.Add(this.textBox1);
@@ -110,6 +112,16 @@ namespace MapControlUse
             this.pnlLeft.Size = new System.Drawing.Size(325, 468);
             this.pnlLeft.TabIndex = 1;
             this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
+            // 
+            // btnClearMarkerList
+            // 
+            this.btnClearMarkerList.Location = new System.Drawing.Point(227, 119);
+            this.btnClearMarkerList.Name = "btnClearMarkerList";
+            this.btnClearMarkerList.Size = new System.Drawing.Size(91, 35);
+            this.btnClearMarkerList.TabIndex = 12;
+            this.btnClearMarkerList.Text = "清除标注点信息";
+            this.btnClearMarkerList.UseVisualStyleBackColor = true;
+            this.btnClearMarkerList.Click += new System.EventHandler(this.btnClearMarkerList_Click);
             // 
             // btnSetMarkerANIMATION_BOUNCE
             // 
@@ -470,7 +482,7 @@ namespace MapControlUse
             // 
             // btnBaiduOnlineMap
             // 
-            this.btnBaiduOnlineMap.Location = new System.Drawing.Point(146, 3);
+            this.btnBaiduOnlineMap.Location = new System.Drawing.Point(83, 3);
             this.btnBaiduOnlineMap.Name = "btnBaiduOnlineMap";
             this.btnBaiduOnlineMap.Size = new System.Drawing.Size(75, 25);
             this.btnBaiduOnlineMap.TabIndex = 0;
@@ -507,16 +519,6 @@ namespace MapControlUse
             this.pnlMain.Size = new System.Drawing.Size(580, 468);
             this.pnlMain.TabIndex = 2;
             // 
-            // mapControl1
-            // 
-            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Name = "mapControl1";
-            this.mapControl1.Size = new System.Drawing.Size(580, 468);
-            this.mapControl1.TabIndex = 0;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -547,15 +549,25 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
-            // btnClearMarkerList
+            // btnGoogleOnlineMap
             // 
-            this.btnClearMarkerList.Location = new System.Drawing.Point(227, 119);
-            this.btnClearMarkerList.Name = "btnClearMarkerList";
-            this.btnClearMarkerList.Size = new System.Drawing.Size(91, 35);
-            this.btnClearMarkerList.TabIndex = 12;
-            this.btnClearMarkerList.Text = "清除标注点信息";
-            this.btnClearMarkerList.UseVisualStyleBackColor = true;
-            this.btnClearMarkerList.Click += new System.EventHandler(this.btnClearMarkerList_Click);
+            this.btnGoogleOnlineMap.Location = new System.Drawing.Point(164, 5);
+            this.btnGoogleOnlineMap.Name = "btnGoogleOnlineMap";
+            this.btnGoogleOnlineMap.Size = new System.Drawing.Size(59, 23);
+            this.btnGoogleOnlineMap.TabIndex = 13;
+            this.btnGoogleOnlineMap.Text = "Google";
+            this.btnGoogleOnlineMap.UseVisualStyleBackColor = true;
+            this.btnGoogleOnlineMap.Click += new System.EventHandler(this.BtnGoogleOnlineMap_Click);
+            // 
+            // mapControl1
+            // 
+            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Name = "mapControl1";
+            this.mapControl1.Size = new System.Drawing.Size(580, 468);
+            this.mapControl1.TabIndex = 0;
             // 
             // FrmMapControlUse
             // 
@@ -585,7 +597,7 @@ namespace MapControlUse
 
         #endregion
 
-        private MapControl.MapControl mapControl1;
+        private MapControl.MapControl1 mapControl1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Button btnBaiduOnlineMap;
@@ -634,6 +646,7 @@ namespace MapControlUse
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnSetMarkerANIMATION_BOUNCE;
         private System.Windows.Forms.Button btnClearMarkerList;
+        private System.Windows.Forms.Button btnGoogleOnlineMap;
     }
 }
 

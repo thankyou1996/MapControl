@@ -53,17 +53,23 @@
     <Compile Include="BaiduOnlineMap.Designer.cs">
       <DependentUpon>BaiduOnlineMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="GoogleOnlineMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GoogleOnlineMap.Designer.cs">
+      <DependentUpon>GoogleOnlineMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapBasicClass\Enum_CordinateSystem.cs" />
     <Compile Include="MapBasicClass\Enum_MapStatus.cs" />
     <Compile Include="MapBasicClass\Enum_MapType.cs" />
     <Compile Include="MapBasicClass\IMapControl.cs" />
     <Compile Include="MapBasicClass\MapMarkerPointInfo.cs" />
     <Compile Include="MapBasicClass\MapPointInfo.cs" />
-    <Compile Include="MapControl.cs">
+    <Compile Include="MapControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MapControl.Designer.cs">
-      <DependentUpon>MapControl.cs</DependentUpon>
+    <Compile Include="MapControl1.Designer.cs">
+      <DependentUpon>MapControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OfflineMapFile\SogouMap.cs" />
@@ -78,8 +84,11 @@
     <EmbeddedResource Include="BaiduOnlineMap.resx">
       <DependentUpon>BaiduOnlineMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapControl.resx">
-      <DependentUpon>MapControl.cs</DependentUpon>
+    <EmbeddedResource Include="GoogleOnlineMap.resx">
+      <DependentUpon>GoogleOnlineMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapControl1.resx">
+      <DependentUpon>MapControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SogouOfflineMap.resx">
       <DependentUpon>SogouOfflineMap.cs</DependentUpon>
@@ -94,6 +103,9 @@
     </Content>
     <Content Include="OnlineMapFile\BaiduOnlineMap\MarkerManage.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="OnlineMapFile\GoogleOnlineMap\Map_Basic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="OnlineMapFile\ImageFile\MapIcon_PositionLabel1_Red.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

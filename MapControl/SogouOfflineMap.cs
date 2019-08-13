@@ -918,7 +918,10 @@ namespace MapControl
         public MapType mapType
         {
             get => MapType.SogouOffLineMap;
-            set => throw new NotImplementedException();
+            set
+            {
+                ;
+            }
         }
 
         private void picMap_MouseClick(object sender, MouseEventArgs e)

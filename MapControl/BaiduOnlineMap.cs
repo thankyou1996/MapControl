@@ -762,7 +762,10 @@ namespace MapControl
         public MapType mapType
         {
             get => MapType.BaiduOnlineMap;
-            set => throw new NotImplementedException();
+            set
+            {
+                ;
+            }
         }
 
         /// <summary>
