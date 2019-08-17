@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace MapControl
 {
-    public partial class MapControl1 : UserControl, IMapControl
+    public partial class MapControl : UserControl, IMapControl
     {
-        public MapControl1()
+        public MapControl()
         {
             InitializeComponent();
         }

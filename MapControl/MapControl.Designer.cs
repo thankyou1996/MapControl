@@ -1,6 +1,6 @@
 ﻿namespace MapControl
 {
-    partial class MapControl1
+    partial class MapControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sogouOfflineMap1 = new MapControl.SogouOfflineMap();
-            this.baiduOnlineMap1 = new MapControl.BaiduOnlineMap();
-            this.googleOnlineMap1 = new MapControl.GoogleOnlineMap();
+            this.sogouOfflineMap1 = new global::MapControl.SogouOfflineMap();
+            this.baiduOnlineMap1 = new global::MapControl.BaiduOnlineMap();
+            this.googleOnlineMap1 = new global::MapControl.GoogleOnlineMap();
             this.SuspendLayout();
             // 
             // sogouOfflineMap1
@@ -42,7 +42,7 @@
             this.sogouOfflineMap1.DisplayPointList = null;
             this.sogouOfflineMap1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sogouOfflineMap1.Location = new System.Drawing.Point(0, 0);
-            this.sogouOfflineMap1.mapType = MapControl.MapType.SogouOffLineMap;
+            this.sogouOfflineMap1.mapType = global::MapControl.MapType.SogouOffLineMap;
             this.sogouOfflineMap1.Name = "sogouOfflineMap1";
             this.sogouOfflineMap1.Size = new System.Drawing.Size(433, 305);
             this.sogouOfflineMap1.TabIndex = 0;
@@ -52,7 +52,7 @@
             this.baiduOnlineMap1.CurrentMapLevel = 0;
             this.baiduOnlineMap1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.baiduOnlineMap1.Location = new System.Drawing.Point(0, 0);
-            this.baiduOnlineMap1.mapType = MapControl.MapType.BaiduOnlineMap;
+            this.baiduOnlineMap1.mapType = global::MapControl.MapType.BaiduOnlineMap;
             this.baiduOnlineMap1.Name = "baiduOnlineMap1";
             this.baiduOnlineMap1.Size = new System.Drawing.Size(433, 305);
             this.baiduOnlineMap1.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             this.googleOnlineMap1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.googleOnlineMap1.Location = new System.Drawing.Point(0, 0);
-            this.googleOnlineMap1.mapType = MapControl.MapType.GoogleOnlineMap;
+            this.googleOnlineMap1.mapType = global::MapControl.MapType.GoogleOnlineMap;
             this.googleOnlineMap1.Name = "googleOnlineMap1";
             this.googleOnlineMap1.Size = new System.Drawing.Size(433, 305);
             this.googleOnlineMap1.TabIndex = 2;

@@ -277,7 +277,7 @@ namespace MapControl
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
             bool bolResult = false;
-            marker.MarkerPoint = marker.MarkerPoint.ToBD_09();
+            marker.MarkerPoint = marker.MarkerPoint.ToGCJ_02();
             if (Maploaded)
             {
                 while (!this.IsDisposed)

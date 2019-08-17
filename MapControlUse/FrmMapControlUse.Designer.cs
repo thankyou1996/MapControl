@@ -81,7 +81,7 @@ namespace MapControlUse
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGoogleOnlineMap = new System.Windows.Forms.Button();
-            this.mapControl1 = new MapControl.MapControl1();
+            this.mapControl1 = new MapControl.MapControl();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -597,7 +597,7 @@ namespace MapControlUse
 
         #endregion
 
-        private MapControl.MapControl1 mapControl1;
+        private MapControl.MapControl mapControl1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Button btnBaiduOnlineMap;
