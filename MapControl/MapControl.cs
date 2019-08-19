@@ -154,6 +154,7 @@ namespace MapControl
         private void MapControl_Load(object sender, EventArgs e)
         {
             sogouOfflineMap1.OfflineMapDisplay += SogouMapDisplay;
+            sogouOfflineMap1.SelectedMapPointEvent += SelectedMapPoint;
             baiduOnlineMap1.SelectedMapPointEvent += SelectedMapPoint;
             googleOnlineMap1.SelectedMapPointEvent += SelectedMapPoint;
         }
