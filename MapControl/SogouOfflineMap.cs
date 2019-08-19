@@ -932,6 +932,8 @@ namespace MapControl
                 intLastX = e.X; intLastY = e.Y;
                 int intCurX = intLastX - this.picMap.Width / 2;
                 int intCurY = intLastY - this.picMap.Height / 2;
+                pictureBox1.Location = new Point { X = e.X - (pictureBox1.Size.Width / 2), Y = e.Y - pictureBox1.Size.Height };
+                pictureBox1.Visible = true;
                 PointD p = mapMain.MoveMap(pointCurrentMapCenter, new Point(intCurX, intCurY), intCurrentMapLevel);
                 MapPointInfo m = new MapPointInfo();
                 m.dblLon = p.X;

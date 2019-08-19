@@ -73,6 +73,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OfflineMapFile\SogouMap.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SogouOfflineMap.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,11 +95,19 @@
     <EmbeddedResource Include="MapControl.resx">
       <DependentUpon>MapControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SogouOfflineMap.resx">
       <DependentUpon>SogouOfflineMap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MarkerFile\icon.txt" />
+    <Content Include="MarkerFile\MapIcon_PositionLabel1_Green.png" />
+    <Content Include="MarkerFile\MapIcon_PositionLabel1_Red.png" />
+    <Content Include="MarkerFile\MapIcon_PositionLabel1_Yellow.png" />
     <Content Include="OnlineMapFile\BaiduOnlineMap\bridge.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
