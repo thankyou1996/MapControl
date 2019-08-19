@@ -278,66 +278,66 @@ namespace MapControlUse
             string strMapIconFilePath = txtMarkerIconFilePath.Text.Trim();
             lst.Add(new MapMarkerPointInfo
             {
-                MarkerName ="设备1",
+                MarkerName ="设备11111111111111",
                 MarkerPoint = new MapPointInfo
                 {
                     dblLon = 118.663395460268,
                     dblLat = 24.8702832694795
                 },
                 MarkerDisplayValue = DateTime.Now.ToString(),
-                MarkerDisplayTag = "设备1",
+                MarkerDisplayTag = "设备11111111111111",
                 MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
                 CallbackValue="0001",
             });
 
             lst.Add(new MapMarkerPointInfo
             {
-                MarkerName = "设备2",
+                MarkerName = "设备222222222222222222222",
                 MarkerPoint = new MapPointInfo
                 {
                     dblLon = 118.95936869691,
                     dblLat = 24.8848535906569
                 },
                 MarkerDisplayValue = DateTime.Now.ToString(),
-                MarkerDisplayTag = "设备2",
+                MarkerDisplayTag = "设备222222222222222222222",
                 MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
                 CallbackValue = "0002",
             });
             lst.Add(new MapMarkerPointInfo
             {
-                MarkerName = "设备3",
+                MarkerName = "设备33333333333333333",
                 MarkerPoint = new MapPointInfo
                 {
                     dblLon = 118.58986311357,
                     dblLat = 24.7949416109346
                 },
                 MarkerDisplayValue = DateTime.Now.ToString(),
-                MarkerDisplayTag = "设备3",
+                MarkerDisplayTag = "设备33333333333333333",
                 MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
                 CallbackValue = "0003",
             });
             lst.Add(new MapMarkerPointInfo
             {
-                MarkerName = "设备4",
+                MarkerName = "设备4444444444444444",
                 MarkerPoint = new MapPointInfo
                 {
                     dblLon = 118.500474917019,
                     dblLat = 24.8983688406796
                 },
                 MarkerDisplayValue = DateTime.Now.ToString(),
-                MarkerDisplayTag = "设备4",
+                MarkerDisplayTag = "设备4444444444444444",
                 MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
                 CallbackValue = "0004",
             });
             lst.Add(new MapMarkerPointInfo
             {
-                MarkerName = "设备5",
+                MarkerName = "设备5555555555555555555",
                 MarkerPoint = new MapPointInfo
                 {
                     dblLon = 118.596130844151,
                     dblLat = 24.8653438696144
                 },
-                MarkerDisplayTag = "设备5",
+                MarkerDisplayTag = "设备5555555555555555555",
                 MarkerIconFilePath = Environment.CurrentDirectory + "\\MapFile\\MarkerFile\\" + strMapIconFilePath,
                 CallbackValue = "0005",
             });

@@ -101,7 +101,7 @@
             //map.set('disableDoubleClickZoom', bolSetValue);
             //map.setOptions({ disableDoubleClickZoom: bolSetValue });
             if (bolSetValue) {
-                map.setOptions({ gestureHandling: 'auto' });
+                map.setOptions({ gestureHandling: 'cooperative' });
             }
             else {
                 map.setOptions({ gestureHandling: 'none' });
@@ -139,7 +139,7 @@
                 label: strTitle,
                 icon: {
                     url: strIconFilePath,
-                    labelOrigin: { x: 50, y: 10 }
+                    labelOrigin: { x: 20, y: -15 }
                 },
                 id: strclickInfo,
             });
