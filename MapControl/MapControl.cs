@@ -129,8 +129,8 @@ namespace MapControl
                             sogouOfflineMap1.Dock = DockStyle.Fill;
                             mapControl = sogouOfflineMap1;
                             break;
-                        case MapType.GoogleOnlineMap:
 
+                        case MapType.GoogleOnlineMap:
                             baiduOnlineMap1.Visible = false;
                             sogouOfflineMap1.Visible = false;
                             googleOnlineMap1.Visible = true;
