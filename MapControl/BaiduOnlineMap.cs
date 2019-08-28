@@ -14,7 +14,7 @@ namespace MapControl
     {
 
         /// <summary>
-        /// 地图Html文件位置
+        /// 地图Html文件位置test
         /// </summary>
         string strMapFilePath = "";
 
