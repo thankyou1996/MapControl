@@ -198,7 +198,7 @@ namespace MapControl
         {
             sogouOfflineMap1.Init(g_strSougouOffLineMapFileBin, g_strSougouOffLineMapFileInfo, g_strSougouOffLineMapFileIni);
         }
-
+        
         public void Init_BaiduOnlineMap()
         {
             baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);

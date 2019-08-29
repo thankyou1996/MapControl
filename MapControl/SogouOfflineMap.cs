@@ -1027,7 +1027,6 @@ namespace MapControl
                         dicPicValue[intPicValueKey].Dispose();
                     }
                     dicPicValue[intPicValueKey] = pic;
-
                     Label label = new Label();
                     label.AutoSize = true;
                     label.Location = new System.Drawing.Point(152, 65);
@@ -1036,7 +1035,6 @@ namespace MapControl
                     label.TabIndex = 1;
                     label.Tag = point;
                     label.Text = "label1";
-
                     intPicValueKey++;
                     picMap.Controls.Add(pic);
                     bolResult = true;
@@ -1067,7 +1065,6 @@ namespace MapControl
                         dicPicValue[intPicValueKey].Dispose();
                     }
                     dicPicValue[intPicValueKey] = pic;
-
                     Label label = new Label();
                     label.AutoSize = true;
                     label.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height) + 32);
@@ -1122,15 +1119,10 @@ namespace MapControl
             {
                 picMap.Controls.Remove(lbl);
                 lbl.Dispose();
-
             }
             dicLabel.Clear();
             return false;
         }
         #endregion
-
     }
-
-
-
 }
