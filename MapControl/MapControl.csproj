@@ -45,6 +45,9 @@
     <Reference Include="ZYB_GIS_Base">
       <HintPath>..\dll_Libary\ZYB_GIS_Base.dll</HintPath>
     </Reference>
+    <Reference Include="Zyb_MapData">
+      <HintPath>..\File_Libary\dll_Libary\Zyb_MapData.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaiduOnlineMap.cs">

@@ -78,7 +78,6 @@
         }
 
         #endregion
-
         private System.Windows.Forms.PictureBox picMap;
         private System.Windows.Forms.PictureBox pictureBox1;
     }

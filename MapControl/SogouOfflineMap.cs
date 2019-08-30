@@ -1100,7 +1100,13 @@ namespace MapControl
 
         public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
         {
-            return false;
+            foreach (MapMarkerPointInfo item in markers)
+            {
+                item.MarkerPoint = item.MarkerPoint.ToWGS_84();
+                SetMapMarker(item.MarkerPoint, item.MarkerIconFilePath, item.MarkerDisplayTag.ToString());
+            }            
+            bool bolResult = false;           
+            return bolResult;
         }
 
         /// <summary>
