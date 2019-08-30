@@ -1130,5 +1130,26 @@ namespace MapControl
             return false;
         }
         #endregion
+
+
+        public bool SetCircel(MapPointInfo point, int intSize)
+        {
+            //e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), Convert.ToInt32(this.pictureBox_Map.Width / 2 + p1.X) - intScale100M, Convert.ToInt32(this.pictureBox_Map.Height / 2 + p1.Y - intScale100M), 2 * intScale100M, 2 * intScale100M);
+            return false;
+            //throw new NotImplementedException();
+        }
+
+        private void PicMap_Paint(object sender, PaintEventArgs e)
+        {
+            //Convert.ToInt32(this.pictureBox_Map.Width / 2 + p1.X) - intScale100M
+            //    Convert.ToInt32(this.pictureBox_Map.Height / 2 + p1.Y - intScale100M)
+            //    2 * intScale100M
+            //    2 * intScale100M
+                int x1 = 100;
+            int x2 = 100;
+            int x3 = 100;
+            int x4 = 100;
+            e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
+        }
     }
 }

@@ -140,5 +140,15 @@ namespace MapControl
         /// </summary>
         /// <returns></returns>
         bool ClearMapMarkerList();
+
+
+        /// <summary>
+        /// 设置原型区域
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="intSize"></param>
+        /// <returns></returns>
+
+        bool SetCircel(MapPointInfo point, int intSize);
     }
 }

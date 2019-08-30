@@ -384,5 +384,12 @@ namespace MapControlUse
             mapControl1.Init();
         }
 
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            MapPointInfo m = new MapPointInfo();
+            m.dblLon = Convert.ToDouble(txtSetMapPointLon.Text);
+            m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
+            mapControl1.SetCircel(m, 5000);
+        }
     }
 }

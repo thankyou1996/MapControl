@@ -308,5 +308,10 @@ namespace MapControl
         {
             return mapControl.ClearMapMarkerList();
         }
+
+        public bool SetCircel(MapPointInfo point, int intSize)
+        {
+            return mapControl.SetCircel(point, intSize);
+        }
     }
 }

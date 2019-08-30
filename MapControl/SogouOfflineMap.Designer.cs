@@ -32,12 +32,14 @@
             this.picMap = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picMap)).BeginInit();
+            this.picMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // picMap
             // 
             this.picMap.BackColor = System.Drawing.Color.White;
+            this.picMap.Controls.Add(this.pictureBox1);
             this.picMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picMap.Location = new System.Drawing.Point(0, 0);
             this.picMap.Name = "picMap";
@@ -45,6 +47,7 @@
             this.picMap.TabIndex = 0;
             this.picMap.TabStop = false;
             this.picMap.SizeChanged += new System.EventHandler(this.picMap_SizeChanged);
+            this.picMap.Paint += new System.Windows.Forms.PaintEventHandler(this.PicMap_Paint);
             this.picMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseClick);
             this.picMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseDown);
             this.picMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseMove);
@@ -66,12 +69,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.picMap.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.picMap);
             this.Name = "SogouOfflineMap";
             this.Size = new System.Drawing.Size(400, 300);
             this.Load += new System.EventHandler(this.OfflineMap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picMap)).EndInit();
+            this.picMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

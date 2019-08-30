@@ -969,5 +969,28 @@ namespace MapControl
             }
             return bolResult;
         }
+
+        public bool SetCircel(MapPointInfo point, int intSize)
+        {
+            bool bolResult = false;
+            object[] para = new object[] { point.dblLon, point.dblLat, intSize, 1 };
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("DispalayLocationArea", para);
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
+        }
     }
 }

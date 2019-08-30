@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace MapControl
 {
     [System.Runtime.InteropServices.ComVisible(true)]   //窗体与脚本交互设置
-    public partial class GoogleOnlineMap : UserControl,IMapControl
+    public partial class GoogleOnlineMap : UserControl, IMapControl
     {
         /// <summary>
         /// 地图Html文件位置
@@ -449,6 +449,13 @@ namespace MapControl
                     Delay(50);  //系统延迟50毫秒
                 }
             }
+        }
+
+
+        public bool SetCircel(MapPointInfo point, int intSize)
+        {
+            return false;
+            //throw new NotImplementedException();
         }
     }
 }
