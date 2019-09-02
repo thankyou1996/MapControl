@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using ZYB.GIS;
 
@@ -401,7 +402,6 @@ namespace MapControl
                 bolIsMouseDown = true;
                 bmpMapImageBuff = picMap.Image as Bitmap;
             }
-            picMap.Refresh();
         }
 
         /// <summary>
@@ -424,10 +424,10 @@ namespace MapControl
                         MoveMap(-MoveX, -MoveY);
                         //picMap.Image = mapMain.GetMapImage(pointMapCenter, picMap.Size, intMapLevel);
                         DisplayMap();
-                        if (x1 != 0 || x2 != 0)
+                        if (x != 0 || y != 0)
                         {
-                            x1 = x1 + MoveX;
-                            x2 = x2 + MoveY;
+                            x = x + MoveX;
+                            y = y + MoveY;
                         }
                     }                    
                 }                
@@ -945,6 +945,7 @@ namespace MapControl
                 m.intMapLevel = intCurrentMapLevel;
                 m.cordinateSyatem = Enum_CordinateSystem.WGS_84;
                 SelectedMapPoint(m);
+                picMap.Refresh();
             }
         }
 
@@ -1134,51 +1135,29 @@ namespace MapControl
             return false;
         }
         #endregion
-
-        private float x1; 
-        public float  X1
+        /// <summary>
+        ///标记点的平面坐标 x、y
+        /// </summary>
+        private float x; 
+        public float  X
         {
-            get { return this.x1; }
-            set { this.x1 = value; }
+            get { return this.x; }
+            set { this.x = value; }
         }
 
-        private float x2;
-        public float X2
+        private float y;
+        public float Y
         {
-            get { return this.x2; }
-            set { this.x2 = value; }
+            get { return this.y; }
+            set { this.y = value; }
         }
-        
+     
+        double dblSize = 100.0;
+
         public bool SetCircel(MapPointInfo point, int intSize)
         {
-            //e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), Convert.ToInt32(this.pictureBox_Map.Width / 2 + p1.X) - intScale100M, Convert.ToInt32(this.pictureBox_Map.Height / 2 + p1.Y - intScale100M), 2 * intScale100M, 2 * intScale100M);
-            Graphics g = picMap.CreateGraphics();
-            PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
-            PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);
-            PictureBox pic = new PictureBox();
-            x1= Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2);
-            x2 = Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height);           
-            int x3 = 100;
-            int x4 = 100;
-            g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
-            return false;
-            //throw new NotImplementedException();
-        }
-
-        private void PicMap_Paint(object sender, PaintEventArgs e)
-        {
-            if (x1 != 0 || x2 != 0)
-            {
-                Graphics g = picMap.CreateGraphics();
-                int x3 = 100;
-                int x4 = 100;
-                g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
-            }
-        }
-        double _dGPSX, _dGPSY;
-        double dblSize = 100.0;
-        public void Test()
-        {
+            double _dGPSX = point.dblLon;
+            double _dGPSY = point.dblLat;
             int intScale100M = 0;
             switch (CurrentMapLevel)
             {
@@ -1217,11 +1196,64 @@ namespace MapControl
                     intScale100M = Convert.ToInt32(dblSize / 25 * MillimetersToPixelsWidth(16));
                     break;
             }
-            Graphics g = picMap.CreateGraphics();
             PointD pointGPS1 = new PointD(_dGPSX, _dGPSY);
             PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
-            g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), Convert.ToInt32(this.picMap.Width / 2 + p1.X) - intScale100M, Convert.ToInt32(this.picMap.Height / 2 + p1.Y - intScale100M), 2 * intScale100M, 2 * intScale100M);
+            Graphics g = picMap.CreateGraphics();
+            x = Convert.ToInt32(this.picMap.Width / 2 + p1.X) - intScale100M;
+            y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - intScale100M;
+            g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x, y, 2 * intScale100M, 2 * intScale100M);
+            return false;
+            //throw new NotImplementedException();
         }
+
+        private void PicMap_Paint(object sender, PaintEventArgs e)
+        {
+            if (x != 0 || y != 0)
+            {
+                int intScale100M = 0;
+                switch (CurrentMapLevel)
+                {
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        intScale100M = 1;
+                        break;
+                    case 11:
+                        intScale100M = Convert.ToInt32(dblSize / 5000 * MillimetersToPixelsWidth(13));
+                        break;
+                    case 12:
+                        intScale100M = Convert.ToInt32(dblSize / 2000 * MillimetersToPixelsWidth(10));
+                        break;
+                    case 13:
+                        intScale100M = Convert.ToInt32(dblSize / 1000 * MillimetersToPixelsWidth(10));
+                        break;
+                    case 14:
+                        intScale100M = Convert.ToInt32(dblSize / 800 * MillimetersToPixelsWidth(16));
+                        break;
+                    case 15:
+                        intScale100M = Convert.ToInt32(dblSize / 400 * MillimetersToPixelsWidth(16));
+                        break;
+                    case 16:
+                        intScale100M = Convert.ToInt32(dblSize / 200 * MillimetersToPixelsWidth(16));
+                        break;
+                    case 17:
+                        intScale100M = Convert.ToInt32(dblSize / 90 * MillimetersToPixelsWidth(15));
+                        break;
+                    case 18:
+                        intScale100M = Convert.ToInt32(dblSize / 50 * MillimetersToPixelsWidth(16));
+                        break;
+                    case 19:
+                        intScale100M = Convert.ToInt32(dblSize / 25 * MillimetersToPixelsWidth(16));
+                        break;
+                }
+                Graphics g = picMap.CreateGraphics();
+                g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x, y, 2 * intScale100M, 2 * intScale100M);
+            }
+
+        }      
+
         public static double MillimetersToPixelsWidth(double length) //length是毫米，1厘米=10毫米
         {
             System.Windows.Forms.Panel p = new System.Windows.Forms.Panel();
