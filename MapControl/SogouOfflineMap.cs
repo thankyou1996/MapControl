@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using ZYB.GIS;
-using System.IO;
+using MapControl;
 
 namespace MapControl
 {
@@ -312,7 +311,7 @@ namespace MapControl
             InitializeComponent();
         }
 
-        public SogouOfflineMap(string strMapFilePath_Bin, string strMapFilePath_Info,string strMapFilePath_Ini)
+        public SogouOfflineMap(string strMapFilePath_Bin, string strMapFilePath_Info, string strMapFilePath_Ini)
         {
             InitializeComponent();
             strMapFileBin = strMapFilePath_Bin;
@@ -368,13 +367,13 @@ namespace MapControl
                 //地图显示等级
                 CurrentMapLevel = intMapInitLevel;
             }
-            catch(Exception ex )
+            catch (Exception ex)
             {
                 Error(ex, "Init_ReadMapInfo");
             }
         }
 
-        
+
         #region 控件方法事件
 
         /// <summary>
@@ -425,7 +424,9 @@ namespace MapControl
                         MoveMap(-MoveX, -MoveY);
                         //picMap.Image = mapMain.GetMapImage(pointMapCenter, picMap.Size, intMapLevel);
                         DisplayMap();
-                    }
+                        x1 = x1 + MoveX;
+                        x2 = x2 + MoveY;                       
+                    }                    
                 }
             }
         }
@@ -443,10 +444,10 @@ namespace MapControl
                 {
                     if (e.Button == MouseButtons.Left && (e.X + e.Y) % 2 == 0)
                     {
-                        
+
                         //m.
                         //PointMove();
-                    
+
                         int MoveX = e.X - pointMouseBeginMovePoint.X;
                         int MoveY = e.Y - pointMouseBeginMovePoint.Y;
                         picMap.Image = MoveImage(bmpMapImageBuff, -MoveX, -MoveY);
@@ -460,7 +461,7 @@ namespace MapControl
         }
 
         #endregion
-        
+
         #region 公用事件
 
         #region 地图显示
@@ -482,7 +483,7 @@ namespace MapControl
                             MapPointInfo point = (MapPointInfo)pic.Tag;
                             PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
                             PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
-                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width/2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
                         }
                     }
                 }
@@ -496,7 +497,7 @@ namespace MapControl
                             MapPointInfo point = (MapPointInfo)pic.Tag;
                             PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
                             PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
-                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height)+32);
+                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
                         }
                     }
                 }
@@ -515,7 +516,7 @@ namespace MapControl
                     }
                 }
 
-                if (picsDisplayMulchList != null && picsDisplayMulchList.Length>0)
+                if (picsDisplayMulchList != null && picsDisplayMulchList.Length > 0)
                 {
                     //存在显示区域
                     foreach (PictureBox pic in picsDisplayMulchList)
@@ -568,7 +569,7 @@ namespace MapControl
             }
         }
 
-        
+
 
         /// <summary>
         /// 显示地图
@@ -583,7 +584,7 @@ namespace MapControl
             }
         }
 
-        
+
 
         /// <summary>
         /// 显示地图
@@ -612,7 +613,7 @@ namespace MapControl
         }
 
         #endregion
-        
+
         /// <summary>
         /// 移动地图 
         /// </summary>
@@ -819,7 +820,7 @@ namespace MapControl
         /// <param name="dblLon">经度</param>
         /// <param name="dblLat">纬度</param>
         /// <param name="intMapLevel">地图显示等级</param>
-        public void DisplayMulchImage(int intIndex, double dblLon, double dblLat,int intMapLevel)
+        public void DisplayMulchImage(int intIndex, double dblLon, double dblLat, int intMapLevel)
         {
             if (picsDisplayMulchList != null)
             {
@@ -856,9 +857,9 @@ namespace MapControl
             }
             else
                 if (e.Delta < 0)
-                {
-                    ZoomOut();
-                }
+            {
+                ZoomOut();
+            }
 
             base.OnMouseWheel(e);
         }
@@ -890,8 +891,8 @@ namespace MapControl
         public PictureBox[] DisplayPointList
         {
             get { return picsDisplayPointList; }
-            set 
-            { 
+            set
+            {
                 picsDisplayPointList = value;
                 if (picsDisplayPointList != null)
                 {
@@ -904,7 +905,7 @@ namespace MapControl
             }
         }
 
-       
+
 
 
         #endregion
@@ -1030,7 +1031,7 @@ namespace MapControl
                     Label label = new Label();
                     label.AutoSize = true;
                     label.Location = new System.Drawing.Point(152, 65);
-                    label.Name = "lbl"+ intPicValueKey;
+                    label.Name = "lbl" + intPicValueKey;
                     label.Size = new System.Drawing.Size(41, 12);
                     label.TabIndex = 1;
                     label.Tag = point;
@@ -1104,8 +1105,8 @@ namespace MapControl
             {
                 item.MarkerPoint = item.MarkerPoint.ToWGS_84();
                 SetMapMarker(item.MarkerPoint, item.MarkerIconFilePath, item.MarkerDisplayTag.ToString());
-            }            
-            bool bolResult = false;           
+            }
+            bool bolResult = false;
             return bolResult;
         }
 
@@ -1131,13 +1132,19 @@ namespace MapControl
         }
         #endregion
 
+        public float x1 { get; set; }
 
+        public float x2 { get; set; }
+        
         public bool SetCircel(MapPointInfo point, int intSize)
         {
             //e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), Convert.ToInt32(this.pictureBox_Map.Width / 2 + p1.X) - intScale100M, Convert.ToInt32(this.pictureBox_Map.Height / 2 + p1.Y - intScale100M), 2 * intScale100M, 2 * intScale100M);
             Graphics g = picMap.CreateGraphics();
-            int x1 = 100;
-            int x2 = 100;
+            PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
+            PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);
+            PictureBox pic = new PictureBox();
+            x1= Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2);
+            x2 = Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height);           
             int x3 = 100;
             int x4 = 100;
             g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
@@ -1146,8 +1153,24 @@ namespace MapControl
         }
 
         private void PicMap_Paint(object sender, PaintEventArgs e)
-        {   
-
+        {
+            if (x1 != 0 || x2 != 0)
+            {
+                //    if (x1 != x1 || x2 != x2)
+                //    {
+                //        Graphics g = picMap.CreateGraphics();
+                //        int x3 = 100;
+                //        int x4 = 100;
+                //        g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
+                //    }
+                //    else
+                {
+                    Graphics g = picMap.CreateGraphics();
+                    int x3 = 100;
+                    int x4 = 100;
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
+                }
+            }
         }
     }
 }

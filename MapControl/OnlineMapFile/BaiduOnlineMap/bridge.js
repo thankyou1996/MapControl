@@ -12,7 +12,7 @@ function SetEnableDoubleClickZoom(bolSetValue) {
 function SetMapLevel(intLevel)
 {
     map.setZoom(intLevel);
-}
+}setMapMarkerList
 
 //设置标注点
 function DisplayMarker(lon, lat, strIconFilePath) {
