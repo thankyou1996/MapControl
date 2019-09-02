@@ -1188,5 +1188,64 @@ namespace MapControl
                 }
             }
         }
+        double _dGPSX, _dGPSY;
+        double dblSize = 100.0;
+        public void Test()
+        {
+            int intScale100M = 0;
+            switch (CurrentMapLevel)
+            {
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    intScale100M = 1;
+                    break;
+                case 11:
+                    intScale100M = Convert.ToInt32(dblSize / 5000 * MillimetersToPixelsWidth(13));
+                    break;
+                case 12:
+                    intScale100M = Convert.ToInt32(dblSize / 2000 * MillimetersToPixelsWidth(10));
+                    break;
+                case 13:
+                    intScale100M = Convert.ToInt32(dblSize / 1000 * MillimetersToPixelsWidth(10));
+                    break;
+                case 14:
+                    intScale100M = Convert.ToInt32(dblSize / 800 * MillimetersToPixelsWidth(16));
+                    break;
+                case 15:
+                    intScale100M = Convert.ToInt32(dblSize / 400 * MillimetersToPixelsWidth(16));
+                    break;
+                case 16:
+                    intScale100M = Convert.ToInt32(dblSize / 200 * MillimetersToPixelsWidth(16));
+                    break;
+                case 17:
+                    intScale100M = Convert.ToInt32(dblSize / 90 * MillimetersToPixelsWidth(15));
+                    break;
+                case 18:
+                    intScale100M = Convert.ToInt32(dblSize / 50 * MillimetersToPixelsWidth(16));
+                    break;
+                case 19:
+                    intScale100M = Convert.ToInt32(dblSize / 25 * MillimetersToPixelsWidth(16));
+                    break;
+            }
+            Graphics g = picMap.CreateGraphics();
+            PointD pointGPS1 = new PointD(_dGPSX, _dGPSY);
+            PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
+            g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), Convert.ToInt32(this.picMap.Width / 2 + p1.X) - intScale100M, Convert.ToInt32(this.picMap.Height / 2 + p1.Y - intScale100M), 2 * intScale100M, 2 * intScale100M);
+        }
+        public static double MillimetersToPixelsWidth(double length) //length是毫米，1厘米=10毫米
+        {
+            System.Windows.Forms.Panel p = new System.Windows.Forms.Panel();
+            System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(p.Handle);
+            IntPtr hdc = g.GetHdc();
+            int width = GetDeviceCaps(hdc, 4);     // HORZRES 
+            int pixels = GetDeviceCaps(hdc, 8);     // BITSPIXEL
+            g.ReleaseHdc(hdc);
+            return (((double)pixels / (double)width) * (double)length);
+        }
+        [DllImport("gdi32.dll")]
+        private static extern int GetDeviceCaps(IntPtr hdc, int Index);
     }
 }
