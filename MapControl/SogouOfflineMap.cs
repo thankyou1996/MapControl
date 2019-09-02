@@ -401,6 +401,7 @@ namespace MapControl
                 bolIsMouseDown = true;
                 bmpMapImageBuff = picMap.Image as Bitmap;
             }
+            picMap.Refresh();
         }
 
         /// <summary>
@@ -425,11 +426,8 @@ namespace MapControl
                         DisplayMap();
                         if (x1 != 0 || x2 != 0)
                         {
-                            if (x1 != x1 || x2 != x2)
-                            {
-                                x1 = x1 + MoveX;
-                                x2 = x2 + MoveY;
-                            }
+                            x1 = x1 + MoveX;
+                            x2 = x2 + MoveY;
                         }
                     }                    
                 }                
@@ -1171,21 +1169,10 @@ namespace MapControl
         {
             if (x1 != 0 || x2 != 0)
             {
-                if (x1 != x1 || x2 != x2)
-                {
-                    Graphics g = picMap.CreateGraphics();
-                    int x3 = 100;
-                    int x4 = 100;
-                    g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
-                }
-                else
-                {
-                    Graphics g = picMap.CreateGraphics();
-                    int x3 = 100;
-                    int x4 = 100;
-                    g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
-                    return;
-                }
+                Graphics g = picMap.CreateGraphics();
+                int x3 = 100;
+                int x4 = 100;
+                g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
             }
         }
         double _dGPSX, _dGPSY;
