@@ -5,7 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using ZYB.GIS;
-using MapControl;
 
 namespace MapControl
 {
@@ -424,10 +423,16 @@ namespace MapControl
                         MoveMap(-MoveX, -MoveY);
                         //picMap.Image = mapMain.GetMapImage(pointMapCenter, picMap.Size, intMapLevel);
                         DisplayMap();
-                        x1 = x1 + MoveX;
-                        x2 = x2 + MoveY;                       
+                        if (x1 != 0 || x2 != 0)
+                        {
+                            if (x1 != x1 || x2 != x2)
+                            {
+                                x1 = x1 + MoveX;
+                                x2 = x2 + MoveY;
+                            }
+                        }
                     }                    
-                }
+                }                
             }
         }
 
@@ -497,7 +502,7 @@ namespace MapControl
                             MapPointInfo point = (MapPointInfo)pic.Tag;
                             PointD pointDisplatPos = new PointD(point.dblLon, point.dblLat);
                             PointD p = mapMain.WorldToImage(pointCurrentMapCenter, pointDisplatPos, CurrentMapLevel);  //计算点在地图上的位置
-                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height));
+                            pic.Location = new Point(Convert.ToInt32(picMap.Width / 2 + p.X - pic.Width / 2), Convert.ToInt32(picMap.Height / 2 + p.Y - pic.Height) + 32);
                         }
                     }
                 }
@@ -1132,9 +1137,19 @@ namespace MapControl
         }
         #endregion
 
-        public float x1 { get; set; }
+        private float x1; 
+        public float  X1
+        {
+            get { return this.x1; }
+            set { this.x1 = value; }
+        }
 
-        public float x2 { get; set; }
+        private float x2;
+        public float X2
+        {
+            get { return this.x2; }
+            set { this.x2 = value; }
+        }
         
         public bool SetCircel(MapPointInfo point, int intSize)
         {
@@ -1156,19 +1171,20 @@ namespace MapControl
         {
             if (x1 != 0 || x2 != 0)
             {
-                //    if (x1 != x1 || x2 != x2)
-                //    {
-                //        Graphics g = picMap.CreateGraphics();
-                //        int x3 = 100;
-                //        int x4 = 100;
-                //        g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
-                //    }
-                //    else
+                if (x1 != x1 || x2 != x2)
                 {
                     Graphics g = picMap.CreateGraphics();
                     int x3 = 100;
                     int x4 = 100;
                     g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
+                }
+                else
+                {
+                    Graphics g = picMap.CreateGraphics();
+                    int x3 = 100;
+                    int x4 = 100;
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x1, x2, x3, x4);
+                    return;
                 }
             }
         }
