@@ -76,12 +76,12 @@ namespace MapControlUse
             dt.Columns.Add("Value");
             dt.Columns.Add("Dsiplay");
             DataRow dr = dt.NewRow();
-            dr["Value"] = "Red";
+            dr["Value"] = "#ff4020";
             dt.Rows.Add(dr);
             cmbcolor.ValueMember = "Value";
-            cmbcolor.DataSource = dt;
+            cmbcolor.DataSource = dt; 
         }
-
+       
         public void Test()
         {
             mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
