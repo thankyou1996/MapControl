@@ -85,6 +85,7 @@ namespace MapControlUse
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnfuzhi = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -96,6 +97,7 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.btnfuzhi);
             this.pnlLeft.Controls.Add(this.cmbcolor);
             this.pnlLeft.Controls.Add(this.btncleancircle);
             this.pnlLeft.Controls.Add(this.btnGoogleOnlineMap);
@@ -603,6 +605,16 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
+            // btnfuzhi
+            // 
+            this.btnfuzhi.Location = new System.Drawing.Point(227, 215);
+            this.btnfuzhi.Name = "btnfuzhi";
+            this.btnfuzhi.Size = new System.Drawing.Size(91, 23);
+            this.btnfuzhi.TabIndex = 16;
+            this.btnfuzhi.Text = "经纬度赋值";
+            this.btnfuzhi.UseVisualStyleBackColor = true;
+            this.btnfuzhi.Click += new System.EventHandler(this.Btnfuzhi_Click);
+            // 
             // FrmMapControlUse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -684,6 +696,7 @@ namespace MapControlUse
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btncleancircle;
         private System.Windows.Forms.ComboBox cmbcolor;
+        private System.Windows.Forms.Button btnfuzhi;
     }
 }
 

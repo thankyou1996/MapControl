@@ -406,6 +406,12 @@ namespace MapControlUse
         private void Button3_Click(object sender, EventArgs e)
         {
             mapControl1.Cleancircle();
-        }       
+        }
+
+        private void Btnfuzhi_Click(object sender, EventArgs e)
+        {
+            txtSetMapPointLon.Text = txtSelectedMapPointLon.Text;
+            txtSetMapPointLat.Text = txtSelectedMapPointLat.Text;
+        }
     }
 }
