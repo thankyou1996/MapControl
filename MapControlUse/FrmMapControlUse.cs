@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -71,13 +72,22 @@ namespace MapControlUse
             mapControl1.MapDisplayEvent += MapDisplay;
             mapControl1.SelectedMapPointEvent += SelectedMapPoint;
 
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value");
+            dt.Columns.Add("Dsiplay");
+            DataRow dr = dt.NewRow();
+            dr["Value"] = "Red";
+            dt.Rows.Add(dr);
+            cmbcolor.ValueMember = "Value";
+            cmbcolor.DataSource = dt;
         }
+
         public void Test()
         {
             mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
             //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\Branch\SK3000CU_SK9301\CUCode\接警客户端\bin\Release\MapFile\OnlineMapFile\BaiduOnlineMap\Map_Basic.html";
             //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\CU_Html\html\map\baidu\map_basic.html";
-            mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath+ "//Map.bin";
+            mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
 
@@ -97,7 +107,7 @@ namespace MapControlUse
 
 
 
-        
+
 
         private void btnBaiduOnlineMap_Click(object sender, EventArgs e)
         {
@@ -106,17 +116,17 @@ namespace MapControlUse
         }
 
         #region　地图控件事件
-        public void SelectedMapPoint(object sender,MapPointInfo MapPointInfo)
+        public void SelectedMapPoint(object sender, MapPointInfo MapPointInfo)
         {
             txtSelectedMapPointType.Text = MapPointInfo.cordinateSyatem.ToString();
             txtSelectedMapPointLevel.Text = MapPointInfo.intMapLevel.ToString();
-            txtSelectedMapPointLon.Text= MapPointInfo.dblLon.ToString();
+            txtSelectedMapPointLon.Text = MapPointInfo.dblLon.ToString();
             txtSelectedMapPointLat.Text = MapPointInfo.dblLat.ToString();
         }
 
         #endregion
 
-        
+
         private void btntxtSetMapPoint_Click(object sender, EventArgs e)
         {
             MapPointInfo m = new MapPointInfo();
@@ -219,12 +229,12 @@ namespace MapControlUse
                 m.MarkerRightClickEvent += MarkerRightClick;
                 mapControl1.SetMapMarker(m);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string x = ex.ToString();
                 //取值异常不做处理
             }
-            
+
         }
 
         public bool MarkerRightClick(object sender, object MarkerRightClickValue)
@@ -389,7 +399,13 @@ namespace MapControlUse
             MapPointInfo m = new MapPointInfo();
             m.dblLon = Convert.ToDouble(txtSetMapPointLon.Text);
             m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
-            mapControl1.SetCircel(m, 5000);
+            string color =cmbcolor.Text;
+            mapControl1.SetCircel(m, 5000, color);
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            mapControl1.Cleancircle();
+        }       
     }
 }

@@ -33,6 +33,8 @@ namespace MapControlUse
         {
             this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.cmbcolor = new System.Windows.Forms.ComboBox();
+            this.btncleancircle = new System.Windows.Forms.Button();
             this.btnGoogleOnlineMap = new System.Windows.Forms.Button();
             this.btnClearMarkerList = new System.Windows.Forms.Button();
             this.btnSetMarkerANIMATION_BOUNCE = new System.Windows.Forms.Button();
@@ -40,6 +42,7 @@ namespace MapControlUse
             this.btnDoubleClickZoon_False = new System.Windows.Forms.Button();
             this.btnDoubleClickZoon_True = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.txtSetMapLevel = new System.Windows.Forms.TextBox();
             this.txtSetMapPointLat = new System.Windows.Forms.TextBox();
             this.txtSetMapPointLon = new System.Windows.Forms.TextBox();
@@ -77,12 +80,11 @@ namespace MapControlUse
             this.btnSogouOfflineMap2 = new System.Windows.Forms.Button();
             this.btnSogouOfflineMap1 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.mapControl1 = new MapControl.MapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mapControl1 = new MapControl.MapControl();
-            this.button2 = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,6 +96,8 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.cmbcolor);
+            this.pnlLeft.Controls.Add(this.btncleancircle);
             this.pnlLeft.Controls.Add(this.btnGoogleOnlineMap);
             this.pnlLeft.Controls.Add(this.btnClearMarkerList);
             this.pnlLeft.Controls.Add(this.btnSetMarkerANIMATION_BOUNCE);
@@ -113,6 +117,24 @@ namespace MapControlUse
             this.pnlLeft.Size = new System.Drawing.Size(325, 468);
             this.pnlLeft.TabIndex = 1;
             this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
+            // 
+            // cmbcolor
+            // 
+            this.cmbcolor.FormattingEnabled = true;
+            this.cmbcolor.Location = new System.Drawing.Point(227, 189);
+            this.cmbcolor.Name = "cmbcolor";
+            this.cmbcolor.Size = new System.Drawing.Size(91, 20);
+            this.cmbcolor.TabIndex = 15;
+            // 
+            // btncleancircle
+            // 
+            this.btncleancircle.Location = new System.Drawing.Point(227, 160);
+            this.btncleancircle.Name = "btncleancircle";
+            this.btncleancircle.Size = new System.Drawing.Size(91, 23);
+            this.btncleancircle.TabIndex = 14;
+            this.btncleancircle.Text = "清除圆形区域";
+            this.btncleancircle.UseVisualStyleBackColor = true;
+            this.btncleancircle.Click += new System.EventHandler(this.Button3_Click);
             // 
             // btnGoogleOnlineMap
             // 
@@ -190,6 +212,16 @@ namespace MapControlUse
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "设置地图点";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 94);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(52, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "圆形";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // txtSetMapLevel
             // 
@@ -531,6 +563,16 @@ namespace MapControlUse
             this.pnlMain.Size = new System.Drawing.Size(580, 468);
             this.pnlMain.TabIndex = 2;
             // 
+            // mapControl1
+            // 
+            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
+            this.mapControl1.Name = "mapControl1";
+            this.mapControl1.Size = new System.Drawing.Size(580, 468);
+            this.mapControl1.TabIndex = 0;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -560,26 +602,6 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
-            // 
-            // mapControl1
-            // 
-            this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl1.Location = new System.Drawing.Point(0, 0);
-            this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
-            this.mapControl1.Name = "mapControl1";
-            this.mapControl1.Size = new System.Drawing.Size(580, 468);
-            this.mapControl1.TabIndex = 0;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(0, 92);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(52, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "圆形";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // FrmMapControlUse
             // 
@@ -660,6 +682,8 @@ namespace MapControlUse
         private System.Windows.Forms.Button btnClearMarkerList;
         private System.Windows.Forms.Button btnGoogleOnlineMap;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btncleancircle;
+        private System.Windows.Forms.ComboBox cmbcolor;
     }
 }
 

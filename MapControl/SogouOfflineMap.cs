@@ -301,6 +301,7 @@ namespace MapControl
 
 
         private bool bolLoadEnd = false;
+        int type;
 
         public bool LoadEnd
         {
@@ -427,10 +428,11 @@ namespace MapControl
                         if (x != 0 || y != 0)
                         {
                             x = x + MoveX;
-                            y = y + MoveY;
+                            y = y + MoveY;                           
                         }
-                    }                    
-                }                
+                    }
+                   
+                }
             }
         }
 
@@ -1138,8 +1140,8 @@ namespace MapControl
         /// <summary>
         ///标记点的平面坐标 x、y
         /// </summary>
-        private float x; 
-        public float  X
+        private float x;
+        public float X
         {
             get { return this.x; }
             set { this.x = value; }
@@ -1151,13 +1153,47 @@ namespace MapControl
             get { return this.y; }
             set { this.y = value; }
         }
-     
-        double dblSize = 100.0;
 
-        public bool SetCircel(MapPointInfo point, int intSize)
+        double dblSize = 100.0;
+        Color returnColor;
+
+        public bool SetCircel(MapPointInfo point, int intSize,string color)
         {
             double _dGPSX = point.dblLon;
             double _dGPSY = point.dblLat;
+            var size = Circelsizi();
+            PointD pointGPS1 = new PointD(_dGPSX, _dGPSY);
+            PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
+            Graphics g = picMap.CreateGraphics();
+            x = Convert.ToInt32(this.picMap.Width / 2 + p1.X) - size;
+            y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - size;
+            intSize = 2 * size;
+            returnColor = ColorTranslator.FromHtml(color);
+            g.FillEllipse(new SolidBrush(Color.FromArgb(125,returnColor)), x, y, intSize, intSize);
+            return false;
+            //throw new NotImplementedException();
+        }
+
+        private void PicMap_Paint(object sender, PaintEventArgs e)
+        {
+            if (x==0||y==0)
+            {
+                return;
+            }
+           else 
+            { 
+                if (x != 0 || y != 0)
+                {
+                    Graphics g = picMap.CreateGraphics();
+                    var size = Circelsizi();
+                    int siziCircel = 2 * size;
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(125, returnColor)), x, y, siziCircel, siziCircel);
+                }
+            }          
+        }
+
+        public int Circelsizi()
+        {
             int intScale100M = 0;
             switch (CurrentMapLevel)
             {
@@ -1196,63 +1232,8 @@ namespace MapControl
                     intScale100M = Convert.ToInt32(dblSize / 25 * MillimetersToPixelsWidth(16));
                     break;
             }
-            PointD pointGPS1 = new PointD(_dGPSX, _dGPSY);
-            PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
-            Graphics g = picMap.CreateGraphics();
-            x = Convert.ToInt32(this.picMap.Width / 2 + p1.X) - intScale100M;
-            y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - intScale100M;
-            g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x, y, 2 * intScale100M, 2 * intScale100M);
-            return false;
-            //throw new NotImplementedException();
+            return intScale100M;
         }
-
-        private void PicMap_Paint(object sender, PaintEventArgs e)
-        {
-            if (x != 0 || y != 0)
-            {
-                int intScale100M = 0;
-                switch (CurrentMapLevel)
-                {
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                        intScale100M = 1;
-                        break;
-                    case 11:
-                        intScale100M = Convert.ToInt32(dblSize / 5000 * MillimetersToPixelsWidth(13));
-                        break;
-                    case 12:
-                        intScale100M = Convert.ToInt32(dblSize / 2000 * MillimetersToPixelsWidth(10));
-                        break;
-                    case 13:
-                        intScale100M = Convert.ToInt32(dblSize / 1000 * MillimetersToPixelsWidth(10));
-                        break;
-                    case 14:
-                        intScale100M = Convert.ToInt32(dblSize / 800 * MillimetersToPixelsWidth(16));
-                        break;
-                    case 15:
-                        intScale100M = Convert.ToInt32(dblSize / 400 * MillimetersToPixelsWidth(16));
-                        break;
-                    case 16:
-                        intScale100M = Convert.ToInt32(dblSize / 200 * MillimetersToPixelsWidth(16));
-                        break;
-                    case 17:
-                        intScale100M = Convert.ToInt32(dblSize / 90 * MillimetersToPixelsWidth(15));
-                        break;
-                    case 18:
-                        intScale100M = Convert.ToInt32(dblSize / 50 * MillimetersToPixelsWidth(16));
-                        break;
-                    case 19:
-                        intScale100M = Convert.ToInt32(dblSize / 25 * MillimetersToPixelsWidth(16));
-                        break;
-                }
-                Graphics g = picMap.CreateGraphics();
-                g.FillEllipse(new SolidBrush(Color.FromArgb(125, Color.Pink)), x, y, 2 * intScale100M, 2 * intScale100M);
-            }
-
-        }      
 
         public static double MillimetersToPixelsWidth(double length) //length是毫米，1厘米=10毫米
         {
@@ -1266,5 +1247,14 @@ namespace MapControl
         }
         [DllImport("gdi32.dll")]
         private static extern int GetDeviceCaps(IntPtr hdc, int Index);
+
+        public bool Cleancircle()
+        {
+            x = 0;
+            y = 0;
+            picMap.Refresh();
+            return false;
+            //throw new NotImplementedException();
+        }            
     }
 }
