@@ -309,9 +309,9 @@ namespace MapControl
             return mapControl.ClearMapMarkerList();
         }
 
-        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent)
+        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent,int circlesize)
         {
-            return mapControl.SetCircel(point, intSize, color, Transparent);
+            return mapControl.SetCircel(point, intSize, color, Transparent, circlesize);
         }
         public bool Cleancircle()
         {

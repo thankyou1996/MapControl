@@ -89,6 +89,8 @@ namespace MapControlUse
             this.mapControl1 = new MapControl.MapControl();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.cmbsize = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,6 +102,8 @@ namespace MapControlUse
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.label15);
+            this.pnlLeft.Controls.Add(this.cmbsize);
             this.pnlLeft.Controls.Add(this.label14);
             this.pnlLeft.Controls.Add(this.label13);
             this.pnlLeft.Controls.Add(this.button2);
@@ -139,7 +143,7 @@ namespace MapControlUse
             // cmbcolor
             // 
             this.cmbcolor.FormattingEnabled = true;
-            this.cmbcolor.Location = new System.Drawing.Point(257, 187);
+            this.cmbcolor.Location = new System.Drawing.Point(258, 187);
             this.cmbcolor.MaxLength = 8;
             this.cmbcolor.Name = "cmbcolor";
             this.cmbcolor.Size = new System.Drawing.Size(64, 20);
@@ -234,7 +238,7 @@ namespace MapControlUse
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(228, 241);
+            this.button2.Location = new System.Drawing.Point(231, 269);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(90, 23);
             this.button2.TabIndex = 18;
@@ -649,6 +653,23 @@ namespace MapControlUse
             this.label14.TabIndex = 20;
             this.label14.Text = "透明";
             // 
+            // cmbsize
+            // 
+            this.cmbsize.FormattingEnabled = true;
+            this.cmbsize.Location = new System.Drawing.Point(258, 239);
+            this.cmbsize.Name = "cmbsize";
+            this.cmbsize.Size = new System.Drawing.Size(64, 20);
+            this.cmbsize.TabIndex = 21;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(227, 242);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "大小";
+            // 
             // FrmMapControlUse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -734,6 +755,8 @@ namespace MapControlUse
         private System.Windows.Forms.ComboBox cmbTransparent;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cmbsize;
     }
 }
 

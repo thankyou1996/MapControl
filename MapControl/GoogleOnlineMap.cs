@@ -452,7 +452,7 @@ namespace MapControl
         }
 
 
-        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent)
+        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent, int circlesize)
         {
             return false;
             //throw new NotImplementedException();

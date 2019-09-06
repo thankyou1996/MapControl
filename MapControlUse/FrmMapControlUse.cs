@@ -72,33 +72,38 @@ namespace MapControlUse
             mapControl1.MapDisplayEvent += MapDisplay;
             mapControl1.SelectedMapPointEvent += SelectedMapPoint;
 
-            //DataTable da = new DataTable();
-            //da.Columns.Add("颜色");
-            //int j;
-            //for (j = 10000000; j <= 99999999;j++)
-            //{
-            //    DataRow dr = da.NewRow();
-            //    dr["颜色"] = j;
-            //    j +=5000000;
-            //    da.Rows.Add(dr);
-            //}
-            //cmbcolor.ValueMember = "颜色";
-            //cmbcolor.DataSource = da;
-
-            cmbcolor.Text="#ff0000";
+            DataTable da = new DataTable();
+            da.Columns.Add("颜色");
+            for (int i = 10000000; i <= 99999999; i += 2000000)
+            {
+                DataRow dr = da.NewRow();
+                dr["颜色"] = i;               
+                da.Rows.Add(dr);
+            }
+            cmbcolor.ValueMember = "颜色";
+            cmbcolor.DataSource = da;
 
             DataTable dt = new DataTable();
-            dt.Columns.Add("透明度");          
-            int i;
-            for(i=60;i<=255;i++)
+            dt.Columns.Add("透明度"); 
+            for(int i=50;i<=255; i += 25)
             {
                 DataRow dr = dt.NewRow();
-                dr["透明度"] = i;
-                i += 20;
+                dr["透明度"] = i;             
                 dt.Rows.Add(dr);
             }
             cmbTransparent.ValueMember = "透明度";
             cmbTransparent.DataSource = dt;
+
+            DataTable db= new DataTable();
+            db.Columns.Add("大小");
+            for (int i = 100; i <= 1000; i += 100)
+            {
+                DataRow dr = db.NewRow();
+                dr["大小"] = i;
+                db.Rows.Add(dr);
+            }
+            cmbsize.ValueMember = "大小";
+            cmbsize.DataSource = db;
         }
        
         public void Test()
@@ -420,7 +425,8 @@ namespace MapControlUse
             m.dblLat = Convert.ToDouble(txtSetMapPointLat.Text);
             string color =cmbcolor.Text;
             int Transparent = int.Parse(cmbTransparent.Text);
-            mapControl1.SetCircel(m, 5000, color, Transparent);
+            int circlesize  = int.Parse (cmbsize.Text);
+            mapControl1.SetCircel(m, 5000, color, Transparent, circlesize);
         }
 
         private void Button3_Click(object sender, EventArgs e)

@@ -149,7 +149,7 @@ namespace MapControl
         /// <param name="intSize"></param>
         /// <returns></returns>
 
-        bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent);
+        bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent,int circlesize);
 
         bool Cleancircle();
     }

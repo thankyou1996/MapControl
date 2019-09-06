@@ -970,7 +970,7 @@ namespace MapControl
             return bolResult;
         }
 
-        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent)
+        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent, int circlesize)
         {
             bool bolResult = false;
             object[] para = new object[] { point.dblLon, point.dblLat, intSize, 1 };

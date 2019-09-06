@@ -1154,14 +1154,15 @@ namespace MapControl
             set { this.y = value; }
         }
 
-        double dblSize = 100.0;
         Color returnColor;
         int transparent;
+        double dblSize;
 
-        public bool SetCircel(MapPointInfo point, int intSize,string color,int Transparent)
+        public bool SetCircel(MapPointInfo point, int intSize,string color,int Transparent, int circlesize)
         {
             double _dGPSX = point.dblLon;
             double _dGPSY = point.dblLat;
+            dblSize = circlesize;
             var size = Circelsizi();
             PointD pointGPS1 = new PointD(_dGPSX, _dGPSY);
             PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
