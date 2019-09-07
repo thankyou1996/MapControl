@@ -969,11 +969,11 @@ namespace MapControl
             }
             return bolResult;
         }
-
+        int type;
         public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent, int circlesize)
         {
             bool bolResult = false;
-            object[] para = new object[] { point.dblLon, point.dblLat, intSize, 1 };
+            object[] para = new object[] { point.dblLon, point.dblLat, circlesize, 1};   
             if (Maploaded)
             {
                 while (!this.IsDisposed)
@@ -995,6 +995,7 @@ namespace MapControl
 
         public bool Cleancircle()
         {
+            Init(strMapFilePath); 
             return false;
             //throw new NotImplementedException();
         }       
