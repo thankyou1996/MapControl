@@ -1158,7 +1158,7 @@ namespace MapControl
         int transparent;
         double dblSize;
 
-        public bool SetCircel(MapPointInfo point, int intSize,string color,int Transparent, int circlesize)
+        public bool SetCircle(MapPointInfo point,string color,int Transparent, int circlesize)
         {
             double _dGPSX = point.dblLon;
             double _dGPSY = point.dblLat;
@@ -1169,10 +1169,9 @@ namespace MapControl
             Graphics g = picMap.CreateGraphics();
             x = Convert.ToInt32(this.picMap.Width / 2 + p1.X) - size;
             y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - size;
-            intSize = 2 * size;
             returnColor = ColorTranslator.FromHtml(color);
             transparent = Transparent;
-            g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, intSize, intSize);
+            g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, 2 * size, 2 * size);
             return false;
             //throw new NotImplementedException();
         }
@@ -1189,8 +1188,7 @@ namespace MapControl
                 {
                     Graphics g = picMap.CreateGraphics();
                     var size = Circelsizi();
-                    int siziCircel = 2 * size;
-                    g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, siziCircel, siziCircel);
+                    g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, 2 * size, 2 * size);
                 }
             }          
         }

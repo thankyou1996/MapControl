@@ -969,11 +969,11 @@ namespace MapControl
             }
             return bolResult;
         }
-        int type;
-        public bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent, int circlesize)
+
+        public bool SetCircle(MapPointInfo point,string color, int Transparent, int circlesize)
         {
             bool bolResult = false;
-            object[] para = new object[] { point.dblLon, point.dblLat, circlesize, 1};   
+            object[] para = new object[] { point.dblLon, point.dblLat, color, Transparent, circlesize, 1 };
             if (Maploaded)
             {
                 while (!this.IsDisposed)
@@ -995,8 +995,24 @@ namespace MapControl
 
         public bool Cleancircle()
         {
-            Init(strMapFilePath); 
-            return false;
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("Cleancircle");
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;          
             //throw new NotImplementedException();
         }       
     }

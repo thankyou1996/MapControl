@@ -87,13 +87,19 @@ function removeMapSelectInfoMarker() {
 
 
 var circleLocationArea;
-function DispalayLocationArea(dlbLon, dblLat, intAreaSize, intRegionType) {
-    map.removeOverlay(circleLocationArea);
+function DispalayLocationArea(dlbLon, dblLat,color, Transparent, intAreaSize, intRegionType) {
+	map.removeOverlay(circleLocationArea);
     var pointAreaCenter = new BMap.Point(dlbLon, dblLat);
-    circleLocationArea = new BMap.Circle(pointAreaCenter, intAreaSize, { strokeColor: "red", strokeWeight: 0.1, strokeOpacity: 0.1 });
-    circleLocationArea.setFillColor("red");
-    circleLocationArea.setFillOpacity(0.3);    //多边形内透明度
+	var str="#"+color;
+    circleLocationArea = new BMap.Circle(pointAreaCenter, intAreaSize, { strokeColor: "white", strokeWeight: 0.1, strokeOpacity:  0.1 });
+    circleLocationArea.setFillColor(str);
+    circleLocationArea.setFillOpacity( Transparent/255);    //多边形内透明度
     map.addOverlay(circleLocationArea);
+}
+
+function Cleancircle()
+{
+    map.removeOverlay(circleLocationArea);
 }
 
 

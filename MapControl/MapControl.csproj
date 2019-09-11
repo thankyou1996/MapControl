@@ -116,7 +116,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="OnlineMapFile\BaiduOnlineMap\Map_Basic.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="OnlineMapFile\BaiduOnlineMap\MarkerManage.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -143,13 +143,11 @@ namespace MapControl
 
 
         /// <summary>
-        /// 设置原型区域
+        /// 设置圆形区域
         /// </summary>
-        /// <param name="point"></param>
-        /// <param name="intSize"></param>
         /// <returns></returns>
 
-        bool SetCircel(MapPointInfo point, int intSize,string color, int Transparent,int circlesize);
+        bool SetCircle(MapPointInfo point,string color, int Transparent,int circlesize);
 
         bool Cleancircle();
     }

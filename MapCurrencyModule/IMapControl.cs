@@ -58,10 +58,8 @@ namespace MapCurrencyModule
         /// <param name="intSize"></param>
         /// <returns></returns>
 
-        bool SetCircel(MapPointInfo point, int intSize);
+        bool SetCircel(MapPointInfo point,string color, int Transparent, int circlesize);
 
-        bool Cleancircle(MapPointInfo point, int intSize,string color,int Transparent);
-
-        bool Colorcircle();        
+        bool Cleancircle();  
     }
 }

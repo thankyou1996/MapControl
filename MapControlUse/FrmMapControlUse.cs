@@ -74,7 +74,7 @@ namespace MapControlUse
 
             DataTable da = new DataTable();
             da.Columns.Add("颜色");
-            for (int i = 10000000; i <= 99999999; i += 2000000)
+            for (int i = 15000; i <= 999999; i +=4075 )
             {
                 DataRow dr = da.NewRow();
                 dr["颜色"] = i;               
@@ -426,7 +426,7 @@ namespace MapControlUse
             string color =cmbcolor.Text;
             int Transparent = int.Parse(cmbTransparent.Text);
             int circlesize  = int.Parse (cmbsize.Text);
-            mapControl1.SetCircel(m, 5000, color, Transparent, circlesize);
+            mapControl1.SetCircle(m, color, Transparent, circlesize);
         }
 
         private void Button3_Click(object sender, EventArgs e)

@@ -33,7 +33,12 @@ namespace MapControlUse
         {
             this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.btnfuzhi = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cmbsize = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.cmbTransparent = new System.Windows.Forms.ComboBox();
             this.cmbcolor = new System.Windows.Forms.ComboBox();
             this.btncleancircle = new System.Windows.Forms.Button();
             this.btnGoogleOnlineMap = new System.Windows.Forms.Button();
@@ -43,9 +48,9 @@ namespace MapControlUse
             this.btnDoubleClickZoon_False = new System.Windows.Forms.Button();
             this.btnDoubleClickZoon_True = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.txtSetMapLevel = new System.Windows.Forms.TextBox();
             this.txtSetMapPointLat = new System.Windows.Forms.TextBox();
+            this.btnfuzhi = new System.Windows.Forms.Button();
             this.txtSetMapPointLon = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -85,12 +90,7 @@ namespace MapControlUse
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.右键点击3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmbTransparent = new System.Windows.Forms.ComboBox();
             this.mapControl1 = new MapControl.MapControl();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cmbsize = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.pnlLeft.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -130,15 +130,59 @@ namespace MapControlUse
             this.pnlLeft.TabIndex = 1;
             this.pnlLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlLeft_MouseClick);
             // 
-            // btnfuzhi
+            // label15
             // 
-            this.btnfuzhi.Location = new System.Drawing.Point(0, 93);
-            this.btnfuzhi.Name = "btnfuzhi";
-            this.btnfuzhi.Size = new System.Drawing.Size(52, 23);
-            this.btnfuzhi.TabIndex = 16;
-            this.btnfuzhi.Text = "赋值";
-            this.btnfuzhi.UseVisualStyleBackColor = true;
-            this.btnfuzhi.Click += new System.EventHandler(this.Btnfuzhi_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(227, 242);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 12);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "大小";
+            // 
+            // cmbsize
+            // 
+            this.cmbsize.FormattingEnabled = true;
+            this.cmbsize.Location = new System.Drawing.Point(258, 239);
+            this.cmbsize.Name = "cmbsize";
+            this.cmbsize.Size = new System.Drawing.Size(64, 20);
+            this.cmbsize.TabIndex = 21;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(227, 218);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "透明";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(227, 193);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 12);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "颜色";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(231, 269);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "圆形";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // cmbTransparent
+            // 
+            this.cmbTransparent.FormattingEnabled = true;
+            this.cmbTransparent.Location = new System.Drawing.Point(257, 213);
+            this.cmbTransparent.MaxLength = 3;
+            this.cmbTransparent.Name = "cmbTransparent";
+            this.cmbTransparent.Size = new System.Drawing.Size(65, 20);
+            this.cmbTransparent.TabIndex = 17;
             // 
             // cmbcolor
             // 
@@ -236,16 +280,6 @@ namespace MapControlUse
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "设置地图点";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(231, 269);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "圆形";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
             // txtSetMapLevel
             // 
             this.txtSetMapLevel.Location = new System.Drawing.Point(43, 66);
@@ -259,6 +293,16 @@ namespace MapControlUse
             this.txtSetMapPointLat.Name = "txtSetMapPointLat";
             this.txtSetMapPointLat.Size = new System.Drawing.Size(174, 21);
             this.txtSetMapPointLat.TabIndex = 15;
+            // 
+            // btnfuzhi
+            // 
+            this.btnfuzhi.Location = new System.Drawing.Point(0, 93);
+            this.btnfuzhi.Name = "btnfuzhi";
+            this.btnfuzhi.Size = new System.Drawing.Size(52, 23);
+            this.btnfuzhi.TabIndex = 16;
+            this.btnfuzhi.Text = "赋值";
+            this.btnfuzhi.UseVisualStyleBackColor = true;
+            this.btnfuzhi.Click += new System.EventHandler(this.Btnfuzhi_Click);
             // 
             // txtSetMapPointLon
             // 
@@ -616,15 +660,6 @@ namespace MapControlUse
             this.右键点击3ToolStripMenuItem.Text = "右键点击3";
             this.右键点击3ToolStripMenuItem.Click += new System.EventHandler(this.右键点击3ToolStripMenuItem_Click);
             // 
-            // cmbTransparent
-            // 
-            this.cmbTransparent.FormattingEnabled = true;
-            this.cmbTransparent.Location = new System.Drawing.Point(257, 213);
-            this.cmbTransparent.MaxLength = 3;
-            this.cmbTransparent.Name = "cmbTransparent";
-            this.cmbTransparent.Size = new System.Drawing.Size(65, 20);
-            this.cmbTransparent.TabIndex = 17;
-            // 
             // mapControl1
             // 
             this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
@@ -634,41 +669,6 @@ namespace MapControlUse
             this.mapControl1.Name = "mapControl1";
             this.mapControl1.Size = new System.Drawing.Size(580, 468);
             this.mapControl1.TabIndex = 0;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(227, 193);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 12);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "颜色";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(227, 218);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 12);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "透明";
-            // 
-            // cmbsize
-            // 
-            this.cmbsize.FormattingEnabled = true;
-            this.cmbsize.Location = new System.Drawing.Point(258, 239);
-            this.cmbsize.Name = "cmbsize";
-            this.cmbsize.Size = new System.Drawing.Size(64, 20);
-            this.cmbsize.TabIndex = 21;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(227, 242);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 12);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "大小";
             // 
             // FrmMapControlUse
             // 
