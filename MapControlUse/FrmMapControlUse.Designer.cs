@@ -188,7 +188,7 @@ namespace MapControlUse
             // 
             this.cmbcolor.FormattingEnabled = true;
             this.cmbcolor.Location = new System.Drawing.Point(258, 187);
-            this.cmbcolor.MaxLength = 8;
+            this.cmbcolor.MaxLength = 6;
             this.cmbcolor.Name = "cmbcolor";
             this.cmbcolor.Size = new System.Drawing.Size(64, 20);
             this.cmbcolor.TabIndex = 15;

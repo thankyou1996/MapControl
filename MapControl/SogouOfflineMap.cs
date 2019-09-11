@@ -1168,8 +1168,9 @@ namespace MapControl
             PointD p1 = mapMain.WorldToImage(pointCurrentMapCenter, pointGPS1, CurrentMapLevel);
             Graphics g = picMap.CreateGraphics();
             x = Convert.ToInt32(this.picMap.Width / 2 + p1.X) - size;
-            y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - size;
-            returnColor = ColorTranslator.FromHtml(color);
+            y = Convert.ToInt32(this.picMap.Height / 2 + p1.Y) - size;           
+            string str = "#" + color;           
+            returnColor = ColorTranslator.FromHtml(str);
             transparent = Transparent;
             g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, 2 * size, 2 * size);
             return false;
