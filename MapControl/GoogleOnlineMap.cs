@@ -481,7 +481,7 @@ namespace MapControl
         /// <param name="Transparent"></param>
         /// <param name="circlesize"></param>
         /// <returns></returns>
-        public bool SetCircle(MapPointInfo point,string color, int Transparent, int circlesize)
+        public bool SetCircle(MapPointInfo point, string color, int Transparent, int circlesize)
         {
             return false;
         }
