@@ -343,6 +343,14 @@ namespace MapControl
             MapControlLoadEnd(null);
             bolInit = true;
         }
+        public void Init()
+        {
+            mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
+            Init_ReadMapInfo();
+            DisplayMap();
+            MapControlLoadEnd(null);
+            bolInit = true;
+        }
 
         /// <summary>
         /// 读取地图信息
@@ -1257,6 +1265,6 @@ namespace MapControl
             picMap.Refresh();
             return false;
             //throw new NotImplementedException();
-        }            
+        }       
     }
 }

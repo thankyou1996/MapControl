@@ -77,6 +77,7 @@ namespace MapControl
         event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
 
 
+        void Init();
         /// <summary>
         /// 双击地图方法 是否启用设置
         /// 默认启用
@@ -136,7 +137,7 @@ namespace MapControl
         bool SetMapMarkerList(List<MapMarkerPointInfo> markers);
 
         /// <summary>
-        /// 清楚地图点信息
+        /// 清除地图点信息
         /// </summary>
         /// <returns></returns>
         bool ClearMapMarkerList();
@@ -146,9 +147,12 @@ namespace MapControl
         /// 设置圆形区域
         /// </summary>
         /// <returns></returns>
-
         bool SetCircle(MapPointInfo point,string color, int Transparent,int circlesize);
 
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
         bool Cleancircle();
     }
 }

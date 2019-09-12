@@ -22,21 +22,71 @@ namespace MapControl
         /// <summary>
         /// 地图Bin文件
         /// </summary>
-        public string g_strSougouOffLineMapFileBin = "";
+        public string g_strSougouOffLineMapFileBin
+        {
+            get { return ""; }
+            set
+            {
+                string x = "";
+                sogouOfflineMap1.strMapFileBin = value;
+                ;
+            }
+
+        }
         /// <summary>
         /// 地图Info文件
         /// </summary>
-        public string g_strSougouOffLineMapFileInfo = "";
+        public string g_strSougouOffLineMapFileInfo 
+         {
+            get { return ""; }
+        set
+            {
+                string x = "";
+                sogouOfflineMap1.strMapFileInfo= value;
+                ;
+            }
+           
+        }
         /// <summary>
         /// 地图Ini文件
         /// </summary>
-        public string g_strSougouOffLineMapFileIni = "";
+        public string g_strSougouOffLineMapFileIni 
+        {
+            get { return ""; }
+            set
+            {
+                string x = "";
+                sogouOfflineMap1.strMapFileIni= value;
+                ;
+            }
+           
+        }
 
 
-        public string g_strBaiduOnlieMapFilePath = "";
+        public string g_strBaiduOnlieMapFilePath
+        {
+            get { return ""; }
+            set
+            {
+                string x = "";
+                baiduOnlineMap1.strMapFilePath = value;
+                ;
+            }
+           
+        }
 
 
-        public string g_strGoogleMapFilePath = "";
+        public string g_strGoogleMapFilePath 
+        {
+            get { return ""; }
+        set
+            {
+                string x = "";
+                googleOnlineMap1.strMapFilePath = value;
+                ;
+            }
+           
+        }
 
 
         IMapControl mapControl;
@@ -139,6 +189,7 @@ namespace MapControl
                             break;
                     }
                     Init_EventRegister();
+                    mapControl.Init();
                     currentMapType = value;
                 }
 
@@ -165,49 +216,49 @@ namespace MapControl
 
         public void Init()
         {
+            //switch (currentMapType
+            //{
+            //    case MapType.BaiduOnlineMap:
+            //        mapControl = baiduOnlineMap1;
+
+            //        break;
+            //    case MapType.SogouOffLineMap:
+            //        mapControl = sogouOfflineMap1;
+            //        break;
+            //    case MapType.GoogleOnlineMap:
+            //        mapControl = googleOnlineMap1;
+            //        break;
+
+            //}
+            //Init_EventRegister();
+            //mapControl.Init();
             switch (currentMapType)
             {
                 case MapType.BaiduOnlineMap:
-                    mapControl = baiduOnlineMap1;
-                    
+                    baiduOnlineMap1.Init();
                     break;
                 case MapType.SogouOffLineMap:
-                    mapControl = sogouOfflineMap1;
+                    sogouOfflineMap1.Init();
                     break;
                 case MapType.GoogleOnlineMap:
-                    mapControl = googleOnlineMap1;
-                    break;
-
-            }
-            Init_EventRegister();
-            switch (currentMapType)
-            {
-                case MapType.BaiduOnlineMap:
-                    Init_BaiduOnlineMap();
-
-                    break;
-                case MapType.SogouOffLineMap:
-                    Init_SogouMapOfflineMap();
-                    break;
-                case MapType.GoogleOnlineMap:
-                    Init_Google();
+                    googleOnlineMap1.Init();
                     break;
             }
         }
-        public void Init_SogouMapOfflineMap()
-        {
-            sogouOfflineMap1.Init(g_strSougouOffLineMapFileBin, g_strSougouOffLineMapFileInfo, g_strSougouOffLineMapFileIni);
-        }
+        //    public void Init_SogouMapOfflineMap()
+        //{
+        //    sogouOfflineMap1.Init(g_strSougouOffLineMapFileBin, g_strSougouOffLineMapFileInfo, g_strSougouOffLineMapFileIni);
+        //}
         
-        public void Init_BaiduOnlineMap()
-        {
-            baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
-        }
+        //public void Init_BaiduOnlineMap()
+        //{
+            //baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
+        //}
 
-        public void Init_Google()
-        {
-            googleOnlineMap1.Init(g_strGoogleMapFilePath);
-        }
+        //public void Init_Google()
+        //{
+        //    googleOnlineMap1.Init(g_strGoogleMapFilePath);
+        //}
 
         public void Init_EventRegister()
         {

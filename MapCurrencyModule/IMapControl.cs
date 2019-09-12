@@ -20,6 +20,7 @@ namespace MapCurrencyModule
         /// 地图加载完成事件
         /// </summary>
         event MapControlLoadEndDelegate MapControlLoadEndEvent;
+
         /// <summary>
         /// 设置中心点
         /// </summary>
@@ -52,14 +53,19 @@ namespace MapCurrencyModule
         bool SetMapMarker(MapMarkerPointInfo marker);
 
         /// <summary>
-        /// 设置原型区域
+        /// 设置圆形区域
         /// </summary>
         /// <param name="point"></param>
-        /// <param name="intSize"></param>
-        /// <returns></returns>
-
+        /// <param name="color"></param>
+        /// <param name="Transparent"></param>
+        /// <param name="circlesize"></param>
+        /// <returns></returns>    
         bool SetCircel(MapPointInfo point,string color, int Transparent, int circlesize);
 
-        bool Cleancircle();  
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
+        bool Cleancircle();
     }
 }

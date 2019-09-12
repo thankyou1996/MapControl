@@ -14,7 +14,7 @@ namespace MapControl
         /// <summary>
         /// 地图Html文件位置
         /// </summary>
-        string strMapFilePath = "";
+        public string strMapFilePath = "";
         public GoogleOnlineMap()
         {
             InitializeComponent();
@@ -26,6 +26,11 @@ namespace MapControl
         public void Init(string strMapFilePath)
         {
             this.strMapFilePath = strMapFilePath;
+            wbMain.Navigate(this.strMapFilePath);
+            wbMain.ObjectForScripting = this;
+        }
+        public void Init()
+        {
             wbMain.Navigate(this.strMapFilePath);
             wbMain.ObjectForScripting = this;
         }
@@ -462,6 +467,8 @@ namespace MapControl
         {                     
             return false;
             //throw new NotImplementedException();
-        }       
+        }
+
+       
     }
 }

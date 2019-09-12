@@ -16,7 +16,7 @@ namespace MapControl
         /// <summary>
         /// 地图Html文件位置
         /// </summary>
-        string strMapFilePath = "";
+        public string strMapFilePath = "";
 
         /// <summary>
         /// 地图文件Icon位置
@@ -58,6 +58,11 @@ namespace MapControl
         public BaiduOnlineMap()
         {
             InitializeComponent();
+        }
+
+        public void SetstrMapFilePath(string  str )
+        {
+            strMapFilePath = str;
         }
 
         private bool bolLoadEnd = false;
@@ -717,6 +722,12 @@ namespace MapControl
         }
 
         #region 初始化
+
+        public void Init()
+        {
+            wbMain.Navigate(this.strMapFilePath);
+            wbMain.ObjectForScripting = this;
+        }
         /// <summary>
         /// 初始化
         /// </summary>
@@ -1014,6 +1025,7 @@ namespace MapControl
             }
             return bolResult;          
             //throw new NotImplementedException();
-        }       
+        }
+
     }
 }
