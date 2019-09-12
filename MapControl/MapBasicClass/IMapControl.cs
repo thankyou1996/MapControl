@@ -73,9 +73,7 @@ namespace MapControl
         /// </summary>
         event MapMarkerClickDelegate MapMarkerRightClickEvent;
 
-
         event MapMarkerClickDelegate MapMarkerDoubleClickEvent;
-
 
         void Init();
         /// <summary>
@@ -113,7 +111,6 @@ namespace MapControl
         /// <param name="strMarkerID"></param>
         void SetMarkerANIMATION_BOUNCE(string strMarkerID);
 
-
         /// <summary>
         /// 设置标注点信息
         /// </summary>
@@ -141,7 +138,6 @@ namespace MapControl
         /// </summary>
         /// <returns></returns>
         bool ClearMapMarkerList();
-
 
         /// <summary>
         /// 设置圆形区域

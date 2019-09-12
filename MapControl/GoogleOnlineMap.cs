@@ -22,13 +22,7 @@ namespace MapControl
 
         /// <summary>
         /// 初始化
-        /// </summary>
-        public void Init(string strMapFilePath)
-        {
-            this.strMapFilePath = strMapFilePath;
-            wbMain.Navigate(this.strMapFilePath);
-            wbMain.ObjectForScripting = this;
-        }
+        /// </summary>       
         public void Init()
         {
             wbMain.Navigate(this.strMapFilePath);
@@ -49,11 +43,11 @@ namespace MapControl
         }
 
         private bool bolLoadEnd = false;
-
         public bool LoadEnd
         {
             get { return bolLoadEnd; }
         }
+
         /// <summary>
         /// JS脚本调用用于显示标注的经纬度 160728
         /// </summary>
@@ -69,6 +63,7 @@ namespace MapControl
             mappointInfo.cordinateSyatem = Enum_CordinateSystem.GCJ_02;
             SelectedMapPoint(mappointInfo);
         }
+
         /// <summary>
         /// 控件加载结束
         /// </summary>
@@ -123,6 +118,7 @@ namespace MapControl
                 SelectedMapPointEvent(this, SelectedMapPointValue);
             }
         }
+
         /// <summary>
         /// 移除地图选中信息标注点
         /// </summary>
@@ -144,6 +140,7 @@ namespace MapControl
                 }
             }
         }
+
         /// <summary>
         /// 清空地图标注列表
         /// </summary>
@@ -169,6 +166,7 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
         /// 设置地图中心点
         /// </summary>
@@ -196,6 +194,7 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
         /// 延迟
         /// </summary>
@@ -209,6 +208,7 @@ namespace MapControl
             }
             return;
         }
+
         public void SetEnableDoubleClickZoom(bool bolSetValue)
         {
             if (Maploaded)
@@ -228,6 +228,11 @@ namespace MapControl
             }
         }
 
+        /// <summary>
+        /// 设置地图等级
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool SetMapLevel(MapPointInfo point)
         {
             point = point.ToGCJ_02();
@@ -250,8 +255,9 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
-        /// 添加一个标注
+        ///  设置标注点信息
         /// </summary>
         /// <param name="point"></param>
         /// <param name="strMarkerPicFilePath"></param>
@@ -279,6 +285,11 @@ namespace MapControl
             return bolResult;
         }
 
+        /// <summary>
+        /// 显示标注点信息
+        /// </summary>
+        /// <param name="marker"></param>
+        /// <returns></returns>
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
             bool bolResult = false;
@@ -301,8 +312,9 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
-        /// 设置地图标注列表
+        /// 显示标注列表
         /// </summary>
         /// <param name="markers"></param>
         /// <returns></returns>
@@ -332,6 +344,7 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
         /// 设置地图中心点和等级
         /// </summary>
@@ -344,6 +357,7 @@ namespace MapControl
             ToHtml_SetMapLevel(point.intMapLevel);
             return true;
         }
+
         /// <summary>
         /// 设置标注动画
         /// </summary>
@@ -367,7 +381,6 @@ namespace MapControl
             }
         }
 
-
         /// <summary>
         /// 标注点点击事件
         /// </summary>
@@ -376,6 +389,7 @@ namespace MapControl
         {
             MapMarkerClick(objMarkerRightClickValue);
         }
+
         /// <summary>
         /// 标注点右键事件
         /// </summary>
@@ -390,6 +404,7 @@ namespace MapControl
         {
             MapMarkerDoubleClick(objMarkerRightClickValue);
         }
+
         /// <summary>
         /// 地图加载完成返回
         /// </summary>
@@ -398,6 +413,7 @@ namespace MapControl
             Maploaded = true;
             MapControlLoadEnd(null);
         }
+
         /// <summary>
         /// Html调用事件_地图等级显示改变
         /// </summary>
@@ -433,6 +449,7 @@ namespace MapControl
                 }
             }
         }
+
         /// <summary>
         /// Html页面事件_设置地图等级
         /// </summary>
@@ -456,19 +473,26 @@ namespace MapControl
             }
         }
 
-
+        /// <summary>
+        /// 设置圆形区域
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="color"></param>
+        /// <param name="Transparent"></param>
+        /// <param name="circlesize"></param>
+        /// <returns></returns>
         public bool SetCircle(MapPointInfo point,string color, int Transparent, int circlesize)
         {
             return false;
-            //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
         public bool Cleancircle()
         {                     
             return false;
-            //throw new NotImplementedException();
-        }
-
-       
+        }       
     }
 }

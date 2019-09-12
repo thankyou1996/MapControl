@@ -12,7 +12,6 @@ namespace MapControl
     [System.Runtime.InteropServices.ComVisible(true)]   //窗体与脚本交互设置
     public partial class BaiduOnlineMap : UserControl, IMapControl
     {
-
         /// <summary>
         /// 地图Html文件位置
         /// </summary>
@@ -58,13 +57,7 @@ namespace MapControl
         public BaiduOnlineMap()
         {
             InitializeComponent();
-        }
-
-        public void SetstrMapFilePath(string  str )
-        {
-            strMapFilePath = str;
-        }
-
+        }        
         private bool bolLoadEnd = false;
 
         public bool LoadEnd
@@ -718,25 +711,18 @@ namespace MapControl
 
         private void OnlineMap_Load(object sender, EventArgs e)
         {
-
         }
 
         #region 初始化
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Init()
         {
             wbMain.Navigate(this.strMapFilePath);
             wbMain.ObjectForScripting = this;
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public void Init(string strMapFilePath)
-        {
-            this.strMapFilePath = strMapFilePath;
-            wbMain.Navigate(this.strMapFilePath);
-            wbMain.ObjectForScripting = this;
-        }
+        }       
 
         #endregion
 
@@ -803,6 +789,11 @@ namespace MapControl
             }
         }
 
+        /// <summary>
+        /// 设置中心点
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool SetCenterPoint(MapPointInfo point)
         {
             point = point.ToBD_09();
@@ -825,6 +816,7 @@ namespace MapControl
             }
             return bolResult;
         }
+
         /// <summary>
         /// 设置标注点跳动效果
         /// </summary>
@@ -847,6 +839,12 @@ namespace MapControl
                 }
             }
         }
+
+        /// <summary>
+        /// 设置地图等级
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool SetMapLevel(MapPointInfo point)
         {
             point = point.ToBD_09();
@@ -870,6 +868,12 @@ namespace MapControl
             return bolResult;
         }
 
+        /// <summary>
+        /// 设置标注点信息
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="strMarkerPicFilePath"></param>
+        /// <returns></returns>
         public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
         {
             bool bolResult = false;
@@ -901,6 +905,11 @@ namespace MapControl
             return true;
         }
 
+        /// <summary>
+        /// 显示标注点信息
+        /// </summary>
+        /// <param name="marker"></param>
+        /// <returns></returns>
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
             bool bolResult = false;
@@ -924,14 +933,17 @@ namespace MapControl
             return bolResult;
         }
 
-
+        /// <summary>
+        ///  显示标注列表
+        /// </summary>
+        /// <param name="markers"></param>
+        /// <returns></returns>
         public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
         {
             foreach (MapMarkerPointInfo item in markers)
             {
                 item.MarkerPoint = item.MarkerPoint.ToBD_09();
             }
-
             bool bolResult = false;
             string msg= Newtonsoft.Json.JsonConvert.SerializeObject(markers);
             if (Maploaded)
@@ -953,9 +965,8 @@ namespace MapControl
             return bolResult;
         }
 
-
         /// <summary>
-        /// 地图点信息
+        /// 清除地图点信息
         /// </summary>
         /// <returns></returns>
         public bool ClearMapMarkerList()
@@ -981,6 +992,10 @@ namespace MapControl
             return bolResult;
         }
 
+        /// <summary>
+        /// 设置圆形区域
+        /// </summary>
+        /// <returns></returns>
         public bool SetCircle(MapPointInfo point,string color, int Transparent, int circlesize)
         {
             bool bolResult = false;
@@ -1004,6 +1019,10 @@ namespace MapControl
             return bolResult;
         }
 
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
         public bool Cleancircle()
         {
             bool bolResult = false;
@@ -1024,8 +1043,6 @@ namespace MapControl
                 }
             }
             return bolResult;          
-            //throw new NotImplementedException();
         }
-
     }
 }

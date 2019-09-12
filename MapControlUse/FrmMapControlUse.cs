@@ -27,7 +27,6 @@ namespace MapControlUse
             mapControl1.MapMarkerDoubleClickEvent += MapControl1_MapMarkerDoubleClickEvent;
             Init();
             Test();
-
             mapControl1.Init();
         }
 
@@ -41,7 +40,6 @@ namespace MapControlUse
         {
             Console.WriteLine("Right Click:" + MapMarkerClickValue);
             return true;
-            //throw new NotImplementedException();
         }
 
         private bool MapControl1_MapMarkerClickEvent(object sender, object MapMarkerClickValue)
@@ -54,8 +52,6 @@ namespace MapControlUse
         {
             Console.WriteLine("MapControlRightClick:");
             bool bolResult = false;
-            //Point p = this.PointToClient(Control.MousePosition);
-            //contextMenuStrip1.Show(this, p);
             return bolResult;
         }
 
@@ -67,11 +63,8 @@ namespace MapControlUse
 
         public void Init()
         {
-            //cmbMapType.Items.Add("BaiduOnLineMap");
-            //cmbMapType.Items.Add("SogouOffLineMap");
             mapControl1.MapDisplayEvent += MapDisplay;
             mapControl1.SelectedMapPointEvent += SelectedMapPoint;
-
             DataTable da = new DataTable();
             da.Columns.Add("颜色");
             for (int i = 15000; i <= 999999; i +=4075 )
@@ -82,7 +75,6 @@ namespace MapControlUse
             }
             cmbcolor.ValueMember = "颜色";
             cmbcolor.DataSource = da;
-
             DataTable dt = new DataTable();
             dt.Columns.Add("透明度"); 
             for(int i=50;i<=255; i += 25)
@@ -93,7 +85,6 @@ namespace MapControlUse
             }
             cmbTransparent.ValueMember = "透明度";
             cmbTransparent.DataSource = dt;
-
             DataTable db= new DataTable();
             db.Columns.Add("大小");
             for (int i = 100; i <= 1000; i += 100)
@@ -109,17 +100,11 @@ namespace MapControlUse
         public void Test()
         {
             mapControl1.g_strBaiduOnlieMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\BaiduOnlineMap\\Map_Basic.html";
-            //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\Branch\SK3000CU_SK9301\CUCode\接警客户端\bin\Release\MapFile\OnlineMapFile\BaiduOnlineMap\Map_Basic.html";
-            //mapControl1.g_strBaiduOnlieMapFilePath = @"G:\Working\Maintenance\SK3000\CU\CU_Html\html\map\baidu\map_basic.html";
             mapControl1.g_strSougouOffLineMapFileBin = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.bin";
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
-
             mapControl1.g_strGoogleMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\GoogleOnlineMap\\Map_Basic.html";
         }
-
-
-
 
         public void MapDisplay(MapType mtType, double dblLon, double dblLat, int intMapLevel, string strTag = "")
         {
@@ -128,10 +113,6 @@ namespace MapControlUse
             txtMapCenterLat.Text = dblLat.ToString();
             txtMapCurrentMapLevl.Text = intMapLevel.ToString();
         }
-
-
-
-
 
         private void btnBaiduOnlineMap_Click(object sender, EventArgs e)
         {
@@ -270,15 +251,7 @@ namespace MapControlUse
             sbDisplayInfo.Append("_" + m.MarkerName);
             sbDisplayInfo.Append("_RightClick");
             Console.WriteLine(sbDisplayInfo.ToString());
-
-            //1.获取鼠标位置
-            //2.显示鼠标右键列表
-            //int x = Control.MousePosition.X;
-            //int y = Control.MousePosition.Y;
             Point p = this.PointToClient(Control.MousePosition);
-            //int xx = this.mouser;
-            //int yy = Control.MousePosition.Y;
-
             contextMenuStrip1.Show(this, p);
             return bolResult;
         }

@@ -19,6 +19,7 @@ namespace MapControl
         /// 地图文件 文件夹地址
         /// </summary>
         public string g_strSougouOffLineMapFileFolderPath = Application.StartupPath + "//MapFile";
+
         /// <summary>
         /// 地图Bin文件
         /// </summary>
@@ -31,8 +32,8 @@ namespace MapControl
                 sogouOfflineMap1.strMapFileBin = value;
                 ;
             }
-
         }
+
         /// <summary>
         /// 地图Info文件
         /// </summary>
@@ -47,6 +48,7 @@ namespace MapControl
             }
            
         }
+
         /// <summary>
         /// 地图Ini文件
         /// </summary>
@@ -58,11 +60,9 @@ namespace MapControl
                 string x = "";
                 sogouOfflineMap1.strMapFileIni= value;
                 ;
-            }
-           
+            }           
         }
-
-
+        
         public string g_strBaiduOnlieMapFilePath
         {
             get { return ""; }
@@ -71,10 +71,8 @@ namespace MapControl
                 string x = "";
                 baiduOnlineMap1.strMapFilePath = value;
                 ;
-            }
-           
+            }           
         }
-
 
         public string g_strGoogleMapFilePath 
         {
@@ -84,13 +82,10 @@ namespace MapControl
                 string x = "";
                 googleOnlineMap1.strMapFilePath = value;
                 ;
-            }
-           
+            }           
         }
-
-
+        
         IMapControl mapControl;
-
         public bool LoadEnd
         {
             get
@@ -192,16 +187,11 @@ namespace MapControl
                     mapControl.Init();
                     currentMapType = value;
                 }
-
             }
         }
-
-       
+               
         #endregion
-
-
-
-
+                     
         private void MapControl_Load(object sender, EventArgs e)
         {
             sogouOfflineMap1.OfflineMapDisplay += SogouMapDisplay;
@@ -215,23 +205,7 @@ namespace MapControl
         }
 
         public void Init()
-        {
-            //switch (currentMapType
-            //{
-            //    case MapType.BaiduOnlineMap:
-            //        mapControl = baiduOnlineMap1;
-
-            //        break;
-            //    case MapType.SogouOffLineMap:
-            //        mapControl = sogouOfflineMap1;
-            //        break;
-            //    case MapType.GoogleOnlineMap:
-            //        mapControl = googleOnlineMap1;
-            //        break;
-
-            //}
-            //Init_EventRegister();
-            //mapControl.Init();
+        {           
             switch (currentMapType)
             {
                 case MapType.BaiduOnlineMap:
@@ -245,20 +219,6 @@ namespace MapControl
                     break;
             }
         }
-        //    public void Init_SogouMapOfflineMap()
-        //{
-        //    sogouOfflineMap1.Init(g_strSougouOffLineMapFileBin, g_strSougouOffLineMapFileInfo, g_strSougouOffLineMapFileIni);
-        //}
-        
-        //public void Init_BaiduOnlineMap()
-        //{
-            //baiduOnlineMap1.Init(g_strBaiduOnlieMapFilePath);
-        //}
-
-        //public void Init_Google()
-        //{
-        //    googleOnlineMap1.Init(g_strGoogleMapFilePath);
-        //}
 
         public void Init_EventRegister()
         {
@@ -325,16 +285,34 @@ namespace MapControl
         {
             mapControl.SetMarkerANIMATION_BOUNCE(strMarkerID);
         }
+
+        /// <summary>
+        /// 设置地图中心点
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool SetCenterPoint(MapPointInfo point)
         {
             return mapControl.SetCenterPoint(point);
         }
 
+        /// <summary>
+        /// 设置地图等级
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool SetMapLevel(MapPointInfo point)
         {
             return mapControl.SetMapLevel(point);
         }
 
+
+        /// <summary>
+        /// 设置标注点信息
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="strMarkerPicFilePath"></param>
+        /// <returns></returns>
         public bool SetMapMarker(MapPointInfo point, string strMarkerPicFilePath)
         {
             return mapControl.SetMapMarker(point, strMarkerPicFilePath);
@@ -345,25 +323,52 @@ namespace MapControl
             return mapControl.SetMapPointInfo(point);
         }
 
+        /// <summary>
+        /// 显示标注点信息
+        /// </summary>
+        /// <param name="marker"></param>
+        /// <returns></returns>
         public bool SetMapMarker(MapMarkerPointInfo marker)
         {
             return mapControl.SetMapMarker(marker);
         }
 
+        /// <summary>
+        /// 显示标注d
+        /// </summary>
+        /// <param name="markers"></param>
+        /// <returns></returns>
         public bool SetMapMarkerList(List<MapMarkerPointInfo> markers)
         {
             return mapControl.SetMapMarkerList(markers);
         }
 
+        /// <summary>
+        /// 清除地图点信息
+        /// </summary>
+        /// <returns></returns>
         public bool ClearMapMarkerList()
         {
             return mapControl.ClearMapMarkerList();
         }
 
+        /// <summary>
+        /// 设置圆形区域
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="color"></param>
+        /// <param name="Transparent"></param>
+        /// <param name="circlesize"></param>
+        /// <returns></returns>
         public bool SetCircle(MapPointInfo point,string color, int Transparent,int circlesize)
         {
             return mapControl.SetCircle(point, color, Transparent, circlesize);
         }
+
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
         public bool Cleancircle()
         {
             return mapControl.Cleancircle();

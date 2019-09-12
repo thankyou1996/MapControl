@@ -326,23 +326,11 @@ namespace MapControl
         {
             //Init_ReadMapInfo();
             //picMap.Image=mapMain.
-
         }
 
         /// <summary>
         /// 初始化
-        /// </summary>
-        public void Init(string strMapFilePath_Bin, string strMapFilePath_Info, string strMapFilePath_Ini)
-        {
-            strMapFileBin = strMapFilePath_Bin;
-            strMapFileInfo = strMapFilePath_Info;
-            strMapFileIni = strMapFilePath_Ini;
-            mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
-            Init_ReadMapInfo();
-            DisplayMap();
-            MapControlLoadEnd(null);
-            bolInit = true;
-        }
+        /// </summary>       
         public void Init()
         {
             mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
@@ -1146,7 +1134,7 @@ namespace MapControl
         }
         #endregion
         /// <summary>
-        ///标记点的平面坐标 x、y
+        ///标记点的平面坐标 x
         /// </summary>
         private float x;
         public float X
@@ -1155,6 +1143,9 @@ namespace MapControl
             set { this.x = value; }
         }
 
+        /// <summary>
+        /// 标记点的平面坐标 y
+        /// </summary>
         private float y;
         public float Y
         {
@@ -1166,6 +1157,14 @@ namespace MapControl
         int transparent;
         double dblSize;
 
+        /// <summary>
+        /// 设置圆形区域
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="color"></param>
+        /// <param name="Transparent"></param>
+        /// <param name="circlesize"></param>
+        /// <returns></returns>
         public bool SetCircle(MapPointInfo point,string color,int Transparent, int circlesize)
         {
             double _dGPSX = point.dblLon;
@@ -1182,7 +1181,6 @@ namespace MapControl
             transparent = Transparent;
             g.FillEllipse(new SolidBrush(Color.FromArgb(transparent, returnColor)), x, y, 2 * size, 2 * size);
             return false;
-            //throw new NotImplementedException();
         }
 
         private void PicMap_Paint(object sender, PaintEventArgs e)
@@ -1202,6 +1200,10 @@ namespace MapControl
             }          
         }
 
+        /// <summary>
+        /// 圆形大小方法
+        /// </summary>
+        /// <returns></returns>
         public int Circelsizi()
         {
             int intScale100M = 0;
@@ -1258,13 +1260,16 @@ namespace MapControl
         [DllImport("gdi32.dll")]
         private static extern int GetDeviceCaps(IntPtr hdc, int Index);
 
+        /// <summary>
+        /// 清除圆形区域
+        /// </summary>
+        /// <returns></returns>
         public bool Cleancircle()
         {
             x = 0;
             y = 0;
             picMap.Refresh();
             return false;
-            //throw new NotImplementedException();
         }       
     }
 }
