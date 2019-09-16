@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MapControl
@@ -45,8 +42,7 @@ namespace MapControl
                 string x = "";
                 sogouOfflineMap1.strMapFileInfo= value;
                 ;
-            }
-           
+            }           
         }
 
         /// <summary>
@@ -166,7 +162,6 @@ namespace MapControl
                             baiduOnlineMap1.Dock = DockStyle.Fill;
                             mapControl = baiduOnlineMap1;
                             break;
-
                         case MapType.SogouOffLineMap:
                             baiduOnlineMap1.Visible = false;
                             sogouOfflineMap1.Visible = true;
@@ -174,7 +169,6 @@ namespace MapControl
                             sogouOfflineMap1.Dock = DockStyle.Fill;
                             mapControl = sogouOfflineMap1;
                             break;
-
                         case MapType.GoogleOnlineMap:
                             baiduOnlineMap1.Visible = false;
                             sogouOfflineMap1.Visible = false;
