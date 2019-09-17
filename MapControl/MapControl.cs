@@ -22,12 +22,13 @@ namespace MapControl
         /// </summary>
         public string g_strSougouOffLineMapFileBin
         {
-            get { return ""; }
+            get
+            {
+                return sogouOfflineMap1.strMapFileBin;
+            }
             set
             {
-                string x = "";
                 sogouOfflineMap1.strMapFileBin = value;
-                ;
             }
         }
 
@@ -36,12 +37,13 @@ namespace MapControl
         /// </summary>
         public string g_strSougouOffLineMapFileInfo 
          {
-            get { return ""; }
-        set
+            get
             {
-                string x = "";
+                return sogouOfflineMap1.strMapFileInfo;
+            }
+            set
+            {
                 sogouOfflineMap1.strMapFileInfo= value;
-                ;
             }           
         }
 
@@ -50,34 +52,37 @@ namespace MapControl
         /// </summary>
         public string g_strSougouOffLineMapFileIni 
         {
-            get { return ""; }
+            get
+            {
+                return sogouOfflineMap1.strMapFileIni;
+            }
             set
             {
-                string x = "";
                 sogouOfflineMap1.strMapFileIni= value;
-                ;
             }           
         }
         
         public string g_strBaiduOnlieMapFilePath
         {
-            get { return ""; }
+            get
+            {
+                return baiduOnlineMap1.strMapFilePath;
+            }
             set
             {
-                string x = "";
                 baiduOnlineMap1.strMapFilePath = value;
-                ;
             }           
         }
 
         public string g_strGoogleMapFilePath 
         {
-            get { return ""; }
-        set
+            get
             {
-                string x = "";
+                return googleOnlineMap1.strMapFilePath;
+            }
+            set
+            {
                 googleOnlineMap1.strMapFilePath = value;
-                ;
             }           
         }
         
@@ -151,7 +156,7 @@ namespace MapControl
             get { return currentMapType; }
             set
             {
-                if (currentMapType != value)
+                if (currentMapType != value || mapControl == null)
                 {
                     switch (value)
                     {
@@ -199,19 +204,9 @@ namespace MapControl
         }
 
         public void Init()
-        {           
-            switch (currentMapType)
-            {
-                case MapType.BaiduOnlineMap:
-                    baiduOnlineMap1.Init();
-                    break;
-                case MapType.SogouOffLineMap:
-                    sogouOfflineMap1.Init();
-                    break;
-                case MapType.GoogleOnlineMap:
-                    googleOnlineMap1.Init();
-                    break;
-            }
+        {
+            mapControl.Init();
+            return;
         }
 
         public void Init_EventRegister()

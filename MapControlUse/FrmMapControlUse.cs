@@ -104,6 +104,7 @@ namespace MapControlUse
             mapControl1.g_strSougouOffLineMapFileInfo = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.info";
             mapControl1.g_strSougouOffLineMapFileIni = mapControl1.g_strSougouOffLineMapFileFolderPath + "//Map.ini";
             mapControl1.g_strGoogleMapFilePath = Environment.CurrentDirectory + "\\OnlineMapFile\\GoogleOnlineMap\\Map_Basic.html";
+            mapControl1.Init();
         }
 
         public void MapDisplay(MapType mtType, double dblLon, double dblLat, int intMapLevel, string strTag = "")
