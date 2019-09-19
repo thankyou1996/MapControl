@@ -999,7 +999,7 @@ namespace MapControl
         public bool SetCircle(MapPointInfo point,string color, int Transparent, int circlesize)
         {
             bool bolResult = false;
-            object[] para = new object[] { point.dblLon, point.dblLat, color, Transparent, circlesize, 1 };
+            object[] para = new object[] { point.dblLon, point.dblLat, color, Transparent, circlesize};
             if (Maploaded)
             {
                 while (!this.IsDisposed)
