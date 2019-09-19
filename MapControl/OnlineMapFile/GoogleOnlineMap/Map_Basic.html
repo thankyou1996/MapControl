@@ -167,7 +167,30 @@
         //清空标注管理器
         function clearMapMarkerList() {
             mgr.clearMarkers();
-        }		
+        }	
+		
+//设置圆形区域
+var circleLocationArea;
+function DispalayLocationArea(dlbLon, dblLat,color, Transparent, intAreaSize, intRegionType) { 
+	  var str="#"+color;
+      circleLocationArea = new google.maps.Circle({
+      strokeColor: str,
+      strokeOpacity: 0.1,
+      strokeWeight: 2,
+      fillColor: str,
+      fillOpacity:Transparent/255,
+      map: map,
+      center:{lat: dblLat, lng:dlbLon},
+      radius: intAreaSize 
+    });  
+}
+//清除圆形区域
+function Cleancircle()
+{
+ circleLocationArea.setMap(null);
+}
+
+
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>

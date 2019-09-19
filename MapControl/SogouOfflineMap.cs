@@ -333,11 +333,17 @@ namespace MapControl
         /// </summary>       
         public void Init()
         {
-            mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
-            Init_ReadMapInfo();
-            DisplayMap();
-            MapControlLoadEnd(null);
-            bolInit = true;
+            if (strMapFileBin != null && strMapFileInfo != null && strMapFileBin !="" && strMapFileInfo !="")
+            {
+                if(File.Exists(strMapFileBin)&& File.Exists(strMapFileInfo))
+                {
+                    mapMain = new SogouMap(strMapFileBin, strMapFileInfo);
+                    Init_ReadMapInfo();
+                    DisplayMap();
+                    MapControlLoadEnd(null);
+                    bolInit = true;
+                }               
+            }
         }
 
         /// <summary>

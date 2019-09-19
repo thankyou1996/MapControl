@@ -483,6 +483,25 @@ namespace MapControl
         /// <returns></returns>
         public bool SetCircle(MapPointInfo point, string color, int Transparent, int circlesize)
         {
+            bool bolResult = false;
+            object[] para = new object[] { point.dblLon, point.dblLat, color, Transparent, circlesize, 1 };
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("Cleancircle");
+                            wbMain.Document.InvokeScript("DispalayLocationArea", para);
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
             return false;
         }
 
@@ -491,8 +510,25 @@ namespace MapControl
         /// </summary>
         /// <returns></returns>
         public bool Cleancircle()
-        {                     
-            return false;
+        {
+            bool bolResult = false;
+            if (Maploaded)
+            {
+                while (!this.IsDisposed)
+                {
+                    if (wbMain.ReadyState == WebBrowserReadyState.Complete)
+                    {
+                        BeginInvoke(new EventHandler(delegate
+                        {
+                            wbMain.Document.InvokeScript("Cleancircle");
+                        }));
+                        bolResult = true;
+                        break;
+                    }
+                    Delay(50);  //系统延迟50毫秒
+                }
+            }
+            return bolResult;
         }       
     }
 }

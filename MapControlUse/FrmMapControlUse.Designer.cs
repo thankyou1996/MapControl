@@ -664,6 +664,11 @@ namespace MapControlUse
             // 
             this.mapControl1.CurrentMapType = MapControl.MapType.BaiduOnlineMap;
             this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.g_strBaiduOnlieMapFilePath = "";
+            this.mapControl1.g_strGoogleMapFilePath = "";
+            this.mapControl1.g_strSougouOffLineMapFileBin = "";
+            this.mapControl1.g_strSougouOffLineMapFileInfo = "";
+            this.mapControl1.g_strSougouOffLineMapFileIni = "";
             this.mapControl1.Location = new System.Drawing.Point(0, 0);
             this.mapControl1.mapType = MapControl.MapType.BaiduOnlineMap;
             this.mapControl1.Name = "mapControl1";
