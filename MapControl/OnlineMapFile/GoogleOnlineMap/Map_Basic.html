@@ -169,10 +169,17 @@
             mgr.clearMarkers();
         }	
 		
+//参数圆形是否设置
+ setcircle="";
+function Setcircle(){
+alert(setcircle);
+}
+
 //设置圆形区域
 var circleLocationArea;
 function DispalayLocationArea(dlbLon, dblLat,color, Transparent, intAreaSize, intRegionType) { 
-	  var str="#"+color;
+	  var str="#"+color;	  
+	  setcircle="yes";
       circleLocationArea = new google.maps.Circle({
       strokeColor: str,
       strokeOpacity: 0.1,
@@ -182,12 +189,13 @@ function DispalayLocationArea(dlbLon, dblLat,color, Transparent, intAreaSize, in
       map: map,
       center:{lat: dblLat, lng:dlbLon},
       radius: intAreaSize 
-    });  
+    });  	
 }
 //清除圆形区域
 function Cleancircle()
 {
- circleLocationArea.setMap(null);
+if (setcircle=="yes"){
+ circleLocationArea.setMap(null);}
 }
 
 
